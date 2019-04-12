@@ -1,6 +1,8 @@
 package rudiments;
 
 import com.tobias.rudiment.array.MyArray;
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
 import org.junit.Test;
 
 public class ArrayTest {
@@ -27,6 +29,34 @@ public class ArrayTest {
     System.out.println(array.getSize());
     System.out.println(array.get(0));
 
+
+  }
+
+  class LRUCache<K, V> extends LinkedHashMap {
+
+    @Override
+    protected boolean removeEldestEntry(Entry eldest) {
+      return size() > 4;
+    }
+
+    public LRUCache() {
+      super(16, 0.75f, true);
+    }
+  }
+
+  @Test
+  public void test2() {
+    LRUCache<String, Integer> cache = new LRUCache<>();
+
+    cache.put("a", 1);
+    cache.put("b", 2);
+    cache.put("c", 3);
+    cache.get("a");
+    System.out.println(cache);
+    cache.put("d", 4);
+    cache.put("e", 5);
+
+    System.out.println(cache);
 
   }
 

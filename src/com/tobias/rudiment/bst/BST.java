@@ -355,14 +355,7 @@ public class BST<E extends Comparable<E>> {
     for (int num : nums) {
       bst.add(num);
     }
-//    bst.addForEach(2);
-    /////////////////
-    //      5      //
-    //    /   \    //
-    //   3    6    //
-    //  / \    \   //
-    // 2  4     8  //
-    /////////////////
+
     bst.preOrder();
     bst.preOrderNR();
     bst.inOrder();
