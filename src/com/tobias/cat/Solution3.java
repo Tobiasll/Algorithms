@@ -1,7 +1,5 @@
 package com.tobias.cat;
 
-import java.util.Arrays;
-
 /**
  *
  */
@@ -11,18 +9,33 @@ public class Solution3 {
     rotateString("abcdefg".toCharArray(), 3);
   }
 
-  public static void rotateString(char[] str, int offset) {
+  private static void rotateString(char[] str, int offset) {
     // write your code here
-    int index = str.length - offset;
-    char[] arr = new char[str.length];
-    int j = 0;
-    for (int i = index; i < str.length; i++) {
-      arr[j++] = str[i];
+    if (offset == 0 || str == null || str.length == 0) {
+      return;
     }
-    for (int i = 0; i < index; i++) {
-      arr[j++] = str[i];
+    int order;
+    if (offset > str.length) {
+      order = offset % str.length;
+    } else if (offset == str.length) {
+      return;
+    } else {
+      order = offset;
     }
-    System.out.println(Arrays.toString(arr));
+    for (int i = 0; i < order; i++) {
+      char a = 0;
+      char b;
+      for (int j = 0; j < str.length; j++) {
+        if (j == 0) {
+          a = str[j];
+          str[j] = str[str.length - 1];
+        } else {
+          b = str[j];
+          str[j] = a;
+          a = b;
+        }
+      }
+    }
 
   }
 }
