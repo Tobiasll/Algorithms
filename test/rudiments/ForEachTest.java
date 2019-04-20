@@ -85,4 +85,15 @@ public class ForEachTest {
     System.out.println(i);
   }
 
+  @Test
+  public void test7() {
+    int f = 0; int g = 1;
+    int n = 8;
+    while (0 < n--) {
+      g = g + f;
+      f = g - f;
+    }
+    System.out.println(g);
+  }
+
 }
