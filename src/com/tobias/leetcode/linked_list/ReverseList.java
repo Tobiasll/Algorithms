@@ -1,40 +1,9 @@
 package com.tobias.leetcode.linked_list;
 
-class ListNode {
 
-  int val;
-  ListNode next;
+import java.util.Stack;
 
-  ListNode(int x) {
-    val = x;
-  }
 
-  public ListNode(int[] arr) {
-    if (arr == null || arr.length == 0) {
-      throw new IllegalArgumentException("arr can not be empty");
-    }
-    this.val = arr[0];
-    ListNode current = this;
-    for (int i = 1; i < arr.length; i++) {
-      current.next = new ListNode(arr[i]);
-      current = current.next;
-    }
-  }
-
-  @Override
-  public String toString() {
-    StringBuilder sb = new StringBuilder();
-
-    ListNode cur = this;
-
-    while (cur != null) {
-      sb.append(cur.val).append("-->");
-      cur = cur.next;
-    }
-
-    return sb.toString();
-  }
-}
 
 public class ReverseList {
 
@@ -42,10 +11,56 @@ public class ReverseList {
     ListNode listNode = new ListNode(new int[]{1, 2, 3});
 
     System.out.println(listNode);
+    listNode = reverseListOne(listNode);
+    System.out.println(listNode);
+    listNode = reverseListTwo(listNode);
+    System.out.println(listNode);
+    System.out.println(reverseListThree(listNode));
   }
 
-  private static void reverseList(int[] arr) {
+  private static ListNode reverseListOne(ListNode head) {
 
+    ListNode cur = head;
+    Stack<ListNode> stack = new Stack<>();
+    while (cur != null) {
+      stack.add(cur);
+      cur = cur.next;
+    }
+    ListNode result = null;
+    if (stack.size() > 0) {
+      result = stack.pop();
+    }
+    cur = result;
+    for (int i = stack.size(); i > 0; i--) {
+      cur.next = stack.pop();
+      cur = cur.next;
+      cur.next = null;
+    }
+    return result;
   }
+
+  private static ListNode reverseListTwo(ListNode head) {
+    ListNode newHead = null;
+    while (head != null) {
+      ListNode next = head.next;
+      head.next = newHead;
+      newHead = head;
+      head = next;
+    }
+    return newHead;
+  }
+
+  private static ListNode reverseListThree(ListNode head) {
+    return reverseListInt(head, null);
+  }
+
+  private static ListNode reverseListInt(ListNode head, ListNode newHead) {
+    if (head == null)
+      return newHead;
+    ListNode next = head.next;
+    head.next = newHead;
+    return reverseListInt(next, head);
+  }
+
 
 }
