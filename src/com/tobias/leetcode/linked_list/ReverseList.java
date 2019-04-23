@@ -8,7 +8,7 @@ import java.util.Stack;
 public class ReverseList {
 
   public static void main(String[] args) {
-    ListNode listNode = new ListNode(new int[]{1, 2, 3});
+    ListNode listNode = new ListNode(new int[]{1, 2, 3, 4, 5});
 
     System.out.println(listNode);
     listNode = reverseListOne(listNode);
@@ -40,14 +40,7 @@ public class ReverseList {
   }
 
   private static ListNode reverseListTwo(ListNode head) {
-    ListNode newHead = null;
-    while (head != null) {
-      ListNode next = head.next;
-      head.next = newHead;
-      newHead = head;
-      head = next;
-    }
-    return newHead;
+    return getReverseListNode(head);
   }
 
   private static ListNode reverseListThree(ListNode head) {
@@ -62,5 +55,17 @@ public class ReverseList {
     return reverseListInt(next, head);
   }
 
+  public static ListNode getReverseListNode(ListNode head) {
+    ListNode prev = null;
+
+    while (head != null) {
+      ListNode next = head.next;
+      head.next = prev;
+      prev = head;
+      head = next;
+    }
+
+    return prev;
+  }
 
 }
