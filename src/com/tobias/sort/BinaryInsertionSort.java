@@ -12,7 +12,6 @@ public class BinaryInsertionSort {
   public static int[] sort(int[] array) {
     for (int i = 1; i < array.length; i++) {
       int x = array[i];
-
       // Find location to insert using binary search
       int j = Math.abs(Arrays.binarySearch(array, 0, i, x) + 1);
 

@@ -1,6 +1,9 @@
 package rudiments;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import org.junit.Test;
 
 public class ForEachTest {
@@ -95,5 +98,21 @@ public class ForEachTest {
     }
     System.out.println(g);
   }
+
+  @Test
+  public void test8() {
+//    int[] arrs = {8, 9, 1, 7, 2, 3, 5, 4, 6, 0};
+    int[] arrs = new int[300];
+    List<Integer> list = new ArrayList<>(300);
+    for (int i = 0; i < 300; i++) {
+      arrs[i] = i;
+      list.add(i);
+    }
+    Collections.shuffle(list);
+    Collections.sort(list);
+    Arrays.sort(arrs);
+    System.out.println(Arrays.toString(arrs));
+  }
+
 
 }
