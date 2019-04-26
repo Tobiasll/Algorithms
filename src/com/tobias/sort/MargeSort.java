@@ -30,4 +30,9 @@ public class MargeSort {
     }
     return result;
   }
+
+  private static int[] sortByWhile(int[] arrs) {
+
+    return arrs;
+  }
 }

@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class ShellSort {
 
   public static void main(String[] args) {
-    System.out.println(Arrays.toString(shellSort(new int[]{8, 9, 1, 7, 2, 3, 5, 4, 6, 0})));
+    System.out.println(Arrays.toString(shellSort2(new int[]{8, 9, 1, 7, 2, 3, 5, 4, 6, 0})));
   }
 
   private static int[] shellSort(int[] array) {
@@ -25,4 +25,27 @@ public class ShellSort {
     }
     return array;
   }
+
+  private static int[] shellSort2(int[] array) {
+    int n = array.length;
+    int h = 1;
+
+    while (h < n / 3) {
+      h = h * 3 + 1;
+    }
+
+    while (h >= 1) {
+      for (int i = h; i < n; i++) {
+        for (int j = i; j >= h && array[j] < array[j - h];j -= h) {
+          int temp = array[j];
+          array[j] = array[j - h];
+          array[j - h] = temp;
+        }
+
+      }
+      h = h / 3;
+    }
+    return array;
+  }
+
 }
