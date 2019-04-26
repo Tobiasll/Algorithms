@@ -7,6 +7,8 @@ public class BinarySearch {
     System.out.println(findKeyByBinarySearch(8, new int[]{1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 9}));
     System.out.println(findFirstAppearByBinarySearch(8, new int[]{1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 9}));
     System.out.println(findLastAppearByBinarySearch(8, new int[]{1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 9}));
+    System.out.println(findGEKeyByBinarySearch(7, new int[]{1, 2, 3, 4, 5, 6, 8, 8, 8, 8, 8, 9}));
+    System.out.println(findLEKeyByBinarySearch(7, new int[]{1, 2, 3, 4, 5, 6, 6, 6, 8, 8, 8, 8, 8, 9}));
 
   }
 
@@ -68,7 +70,50 @@ public class BinarySearch {
     return -1;
   }
 
+  /**
+   * 查找第一个大于等于给定值的元素
+   */
+  private static int findGEKeyByBinarySearch(int key, int[] arrs) {
 
+    int low = 0, hight = arrs.length - 1, mid;
 
+    while (low <= hight) {
+      mid = low + ((hight - low) >> 1);
+
+      if (key <= arrs[mid]) {
+        if (mid == 0 | arrs[mid - 1] < key) {
+          return mid;
+        } else {
+          hight = mid - 1;
+        }
+      } else {
+        low = mid + 1;
+      }
+    }
+
+    return -1;
+  }
+
+  /**
+   * 查找最后一个小于等于给定值的元素
+   */
+  private static int findLEKeyByBinarySearch(int key, int[] arrs) {
+    int low = 0, hight = arrs.length - 1, mid;
+
+    while (low <= hight) {
+      mid = low + ((hight - low) >> 1);
+      if (key >= arrs[mid]) {
+        if (mid == arrs.length - 1 | arrs[mid + 1] > key) {
+          return mid;
+        } else {
+          low = mid + 1;
+        }
+      } else {
+        hight = mid - 1;
+      }
+    }
+
+    return -1;
+  }
 
 }
