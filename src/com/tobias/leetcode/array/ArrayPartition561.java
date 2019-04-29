@@ -11,19 +11,20 @@ import java.util.Arrays;
  * Output: 4
  * Explanation: n is 2, and the maximum sum of pairs is 4 = min(1, 2) + min(3, 4).
  */
-public class Solution561 {
+public class ArrayPartition561 {
 
   public static void main(String[] args) {
-    System.out.println(arrayPairSum(new int[]{1,4,3,2}));
+    System.out.println(arrayPairSum(new int[]{1, 4, 3, 2}));
   }
 
-  public static int arrayPairSum(int[] nums) {
-
+  private static int arrayPairSum(int[] nums) {
     Arrays.sort(nums);
-    int result = 0;
+    int sum = 0;
     for (int i = 0; i < nums.length; i += 2) {
-      result += nums[i];
+      if (i + 1 < nums.length) {
+        sum += Math.min(nums[i], nums[i + 1]);
+      }
     }
-    return result;
+    return sum;
   }
 }
