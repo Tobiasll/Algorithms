@@ -32,7 +32,7 @@ public class ArrayTest {
 
   }
 
-  class LRUCache<K, V> extends LinkedHashMap {
+  class LRUCache extends LinkedHashMap {
 
     @Override
     protected boolean removeEldestEntry(Entry eldest) {
@@ -46,7 +46,7 @@ public class ArrayTest {
 
   @Test
   public void test2() {
-    LRUCache<String, Integer> cache = new LRUCache<>();
+    LRUCache cache = new LRUCache();
 
     cache.put("a", 1);
     cache.put("b", 2);
