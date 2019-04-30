@@ -55,7 +55,7 @@ public class ReverseList {
     return reverseListInt(next, head);
   }
 
-  public static ListNode getReverseListNode(ListNode head) {
+  static ListNode getReverseListNode(ListNode head) {
     ListNode prev = null;
 
     while (head != null) {
