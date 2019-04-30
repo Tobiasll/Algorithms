@@ -1,4 +1,4 @@
-package com.tobias.sort;
+package com.tobias.rudiment.sort;
 
 import java.util.Arrays;
 
