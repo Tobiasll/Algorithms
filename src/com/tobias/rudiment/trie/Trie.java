@@ -18,6 +18,10 @@ public class Trie {
     }
   }
 
+  Trie() {
+    this.root = new Node();
+  }
+
   private Node root;
   private int size;
 
@@ -43,6 +47,7 @@ public class Trie {
   }
 
   public static void main(String[] args) {
+    new Trie().add("tst");
 
   }
 
