@@ -1,6 +1,7 @@
 package com.tobias.leetcode.array;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -20,7 +21,8 @@ import java.util.List;
 public class FindAllNumbersDisappearedInAnArrays448 {
 
   public static void main(String[] args) {
-    System.out.println(findDisappearedNumbers(new int[]{4, 3, 2, 7, 8, 2, 3, 1}));
+    System.out.println(findDisappearedNumbersByStupid(new int[]{4, 3, 2, 7, 8, 2, 3, 1}));
+    System.out.println(findDisappearedNumbersByStupid(new int[]{1, 1}));
   }
 
   private static List<Integer> findDisappearedNumbersByGenius(int[] nums) {
@@ -38,6 +40,7 @@ public class FindAllNumbersDisappearedInAnArrays448 {
         ret.add(i + 1);
       }
     }
+
     return ret;
   }
 
@@ -53,5 +56,20 @@ public class FindAllNumbersDisappearedInAnArrays448 {
       }
     }
     return res;
+  }
+
+  private static List<Integer> findDisappearedNumbersByStupid(int[] nums) {
+    Arrays.sort(nums);
+    List<Integer> list = new ArrayList<>();
+    for (int i = 0; i < nums.length - 1; i++) {
+      if (nums[i] + 1 < nums[i + 1]  ) {
+        while (nums[i] + 1 < nums[i + 1]) {
+          nums[i] = nums[i] + 1;
+          list.add(nums[i]);
+        }
+      }
+    }
+
+    return list;
   }
 }
