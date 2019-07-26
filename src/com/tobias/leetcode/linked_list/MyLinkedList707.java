@@ -98,10 +98,11 @@ public class MyLinkedList707 {
     //[[],[-1,0],[0],[-1]]
 
 
-    linkedList.addAtIndex(-1 ,0);
-    System.out.println(linkedList.get(0));
-    linkedList.deleteAtIndex(-1);
+    linkedList.addAtTail(0);
+    linkedList.addAtTail(2);
+    System.out.println(linkedList);
 
+    linkedList.deleteAtIndex(0);
 
     System.out.println(linkedList);
   }

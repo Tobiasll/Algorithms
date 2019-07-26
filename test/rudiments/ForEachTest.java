@@ -3,6 +3,7 @@ package rudiments;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import org.junit.Test;
 
@@ -137,7 +138,7 @@ public class ForEachTest {
     return 0;
   }
 
-  public static int knapsack3(int[] weight, int[] value, int n, int w) {
+  private static int knapsack3(int[] weight, int[] value, int n, int w) {
     int[][] states = new int[n][w+1];
     for (int i = 0; i < n; ++i) { // 初始化 states
       for (int j = 0; j < w+1; ++j) {
@@ -168,6 +169,43 @@ public class ForEachTest {
     }
     return maxvalue;
   }
+
+  @Test
+  public void test10() {
+
+    int x = 2;
+    int y = 3;
+
+    System.out.println((x & 1) == 0);
+    System.out.println((y & 1) == 0);
+
+    x = x ^ y;
+    y = x ^ y;
+    x = x ^ y;
+
+    System.out.println(x);
+    System.out.println(y);
+
+    System.out.println((x & 1) == 0);
+    System.out.println((y & 1) == 0);
+
+  }
+
+
+  @Test
+  public void test11() {
+    List<Integer> integers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+
+    Iterator<Integer> iterator = integers.iterator();
+
+    while (iterator.hasNext()) {
+      iterator.remove();
+      iterator.next();
+    }
+
+    System.out.println(integers);
+  }
+
 
 
 }

@@ -2,6 +2,7 @@ package com.tobias.rudiment.stack;
 
 import java.util.Stack;
 
+@SuppressWarnings("")
 public class Solution {
 
   private static Stack<Character> stack = new Stack<>();
