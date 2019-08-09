@@ -1,5 +1,9 @@
 package com.tobias.Algorithm_forth.chapter_two.queue;
 
+/**
+ * 无序优先队列实现
+ * @author Tobias
+ */
 public class UnorderedQueue extends MaxPQ {
 
   private int maxIndex = 0;
