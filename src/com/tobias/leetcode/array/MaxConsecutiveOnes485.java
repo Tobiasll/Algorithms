@@ -7,7 +7,7 @@ public class MaxConsecutiveOnes485 {
   }
 
   /**
-   * 空间复杂度太高Memory Usage: 40.4 MB, less than 5.28% of Java online submissions for Max Consecutive Ones.
+   * 空间复杂度太高Memory Usage: 40.4 MB, less than 5.28% of Java online submissions for max Consecutive Ones.
    */
   private static int findMaxConsecutiveOnes(int[] nums) {
     int count = 0, max = count;
