@@ -34,4 +34,17 @@ public class ListNode {
 
     return sb.toString();
   }
+
+  public int getVal() {
+    return this.val;
+  }
+
+  public ListNode getNext() {
+    return next;
+  }
+
+  public static void main(String[] args) {
+    ListNode listNode = new ListNode(new int[]{1, 2, 3, 4, 5, 6});
+    System.out.println(listNode);
+  }
 }
