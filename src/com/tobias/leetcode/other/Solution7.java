@@ -30,5 +30,9 @@ public class Solution7 {
 
   public static void main(String[] args) {
     System.out.println(reverse(123));
+    System.out.println(123 / 10);
+    System.out.println(123 % 10);
+    System.out.println(Integer.MAX_VALUE /  10);
+    System.out.println(Integer.MIN_VALUE /  10);
   }
 }
