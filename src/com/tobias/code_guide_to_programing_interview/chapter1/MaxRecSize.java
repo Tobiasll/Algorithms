@@ -22,7 +22,7 @@ public class MaxRecSize {
     return maxRecSzie;
   }
 
-  private int maxRecFromBottom(int[] highs) {
+  public int maxRecFromBottom(int[] highs) {
     int maxRecSize = 0;
     Stack<Integer> stack = new Stack<>();
     for (int i = 0; i < highs.length; i++) {
@@ -47,8 +47,10 @@ public class MaxRecSize {
 
   public static void main(String[] args) {
     MaxRecSize object = new MaxRecSize();
-    int maxRecSize = object.getMaxRecSize(new int[][]{{1, 0, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 0}});
+//    int maxRecSize = object.getMaxRecSize(new int[][]{{1, 0, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 0}});
+    int maxRecSize = object.maxRecFromBottom(new int[]{1,8,6,2,5,4,8,3,7});
     System.out.println(maxRecSize);
+
   }
 
 

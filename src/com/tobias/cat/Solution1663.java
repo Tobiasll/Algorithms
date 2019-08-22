@@ -1,5 +1,7 @@
 package com.tobias.cat;
 
+import java.util.Arrays;
+
 /**
  * 1663. 忧郁
  * cat-only-icon
@@ -26,10 +28,24 @@ package com.tobias.cat;
 public class Solution1663 {
 
   public static void main(String[] args) {
+    Solution1663 solution1663 = new Solution1663();
+    System.out.println(solution1663.depress(7, 3, new int[]{5,3,4,2,1}));
+    System.out.println(solution1663.depress(3, 3, new int[]{5,1,1,2,3,1}));
 
   }
   public String depress(int m, int k, int[] arr) {
+    if (arr.length == 0) {
+       return "no";
+    }
     // Write your code here .
-    return null;
+    int sum = 0;
+    Arrays.sort(arr);
+    for (int i = 0; i < k; i++) {
+      sum += arr[i];
+      if (sum >= m) {
+        return "no";
+      }
+    }
+    return "yes";
   }
 }
