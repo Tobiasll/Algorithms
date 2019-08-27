@@ -35,6 +35,7 @@ public class GenerateParentheses22 {
   }
 
   /**
+   * the best solve
    * My method is DP. First consider how to get the result f(n) from previous result f(0)...f(n-1).
    * Actually, the result f(n) will be put an extra () pair to f(n-1). Let the "(" always at the first position, to produce a valid result, we can only put ")" in a way that there will be i pairs () inside the extra () and n - 1 - i pairs () outside the extra pair.
    *
