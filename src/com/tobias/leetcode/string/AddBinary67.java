@@ -18,17 +18,38 @@ package com.tobias.leetcode.string;
 public class AddBinary67 {
 
   public static void main(String[] args) {
-    int num = 1;
-    for (int i = 0; i < 3; i++) {
-      System.out.println(2 * 2 * 2);
-    }
+    AddBinary67 addBinary67 = new AddBinary67();
+    System.out.println(addBinary67.addBinary("11", "1"));
+    System.out.println(addBinary67.addBinary("1010", "1011"));
+    System.out.println(addBinary67.addBinary("1010", "1011"));
+    System.out.println(Math.sqrt(2));
   }
 
   public String addBinary(String a, String b) {
-    int suma = a.length() == 0 ? a.charAt(a.length() - 1) == '0' ? 0 : 1 : 0;
-    int sumb = b.length() == 0 ? b.charAt(b.length() - 1) == '0' ? 0 : 1 : 0;
 
-    return a;
+    StringBuilder sb = new StringBuilder();
+    int i = a.length() - 1;
+    int j = b.length() - 1;
+    int carry = 0;
+
+    while (i >= 0 || j >= 0) {
+      int num1 = i >= 0 ? a.charAt(i) - '0' : 0;
+      int num2 = j >= 0 ? b.charAt(j) - '0' : 0;
+      int sum = num1 + num2 + carry;
+      if (sum >= 2) {
+        sum = sum % 2;
+        carry = 1;
+      } else {
+        carry = 0;
+      }
+      sb.append(sum);
+      i--;
+      j--;
+    }
+    if (carry == 1) {
+      sb.append(carry);
+    }
+    return sb.reverse().toString();
   }
 
 }
