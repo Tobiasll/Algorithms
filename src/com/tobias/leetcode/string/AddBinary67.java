@@ -33,9 +33,7 @@ public class AddBinary67 {
     int carry = 0;
 
     while (i >= 0 || j >= 0) {
-      int num1 = i >= 0 ? a.charAt(i) - '0' : 0;
-      int num2 = j >= 0 ? b.charAt(j) - '0' : 0;
-      int sum = num1 + num2 + carry;
+      int sum = MultiplyStrings43.calculateSum(a, b, i, j, carry);
       if (sum >= 2) {
         sum = sum % 2;
         carry = 1;
