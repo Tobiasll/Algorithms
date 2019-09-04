@@ -96,5 +96,10 @@ public class ArrayTest {
 
   }
 
+  @Test
+  public void test11() {
+    System.out.println(1 << 5);
+  }
+
 
 }

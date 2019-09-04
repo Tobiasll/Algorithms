@@ -40,13 +40,17 @@ public class MinStack155 {
   private Node head;
   private Node tail;
   private int size;
-  private int min = Integer.MIN_VALUE;
+
   public int getSize() {
     return size;
   }
 
   public MinStack155() {
 
+  }
+
+  public int getHead() {
+    return head.value;
   }
 
   public void push(int x) {
