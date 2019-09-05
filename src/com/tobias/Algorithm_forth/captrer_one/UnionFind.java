@@ -11,6 +11,7 @@ public class UnionFind {
   public UnionFind(int N) {
     this.count = N;
     this.ids = new int[N];
+    this.weight = new int[N];
     for (int i = 0; i < N; i++) {
       ids[i] = i;
       weight[i] = 1;
@@ -87,11 +88,12 @@ public class UnionFind {
     return ids[p];
   }
 
-  //    private static int[] targets = {9, 0, 3, 4, 5, 8, 7, 2, 2, 1, 5, 7, 0, 3, 4, 2};
-  private static int[] targets = {4, 3, 3, 8, 6, 5, 9, 4, 2, 1, 8, 9, 5, 0, 7, 2, 6, 1, 1, 0, 6, 7};
+      private static int[] targets = {9, 0, 3, 4, 5, 8, 7, 2, 2, 1, 5, 7, 0, 3, 4, 2};
+//  private static int[] targets = {4, 3, 3, 8, 6, 5, 9, 4, 2, 1, 8, 9, 5, 0, 7, 2, 6, 1, 1, 0, 6, 7};
 
   public static void main(String[] args) {
-    UnionFind uf = new UnionFind(10);
+
+    UnionFind uf = new UnionFind(targets.length);
     for (int i = 0; i < targets.length; i += 2) {
       if (uf.connect(targets[i], targets[i + 1])) {
         continue;
