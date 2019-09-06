@@ -37,8 +37,41 @@ import java.util.Set;
  */
 public class CombinationSum39 {
 
-  public List<List<Integer>> combinationSumByDynamicHasDuplicate(int[] candidates, int target) {
-    // 动态规划将所有subproblem收集到集合中
+  public List<List<Integer>> combinationSumByDynamic(int[] candidates, int target) {
+    // RunTime : 8 ms Memory ： 37.4 MB
+    List<List<List<Integer>>> opt = new ArrayList<>();
+    for (int i = 0; i <= target; i++) {
+      List<List<Integer>> temp = new ArrayList<>();
+      opt.add(i, temp);
+    }
+
+    for (int candidate : candidates) {
+      for (int sum = candidate; sum <= target; sum++) {
+        List<List<Integer>> optResult = opt.get(sum);
+        List<List<Integer>> optSubResult = opt.get(sum - candidate);
+        //刚开始 optResult 的大小是 0，所以单独考虑一下这种情况 即 sum = 3 = [[3]]的情况
+        if (sum == candidate) {
+          ArrayList<Integer> temp = new ArrayList<>();
+          temp.add(candidate);
+          optResult.add(temp);
+        }
+
+        //如果 ans.get(sum - nums[i])大小不等于 0，就可以按之前的想法更新了。
+        //每个 ans_sub[j] 都加上 nums[i]
+        if (optSubResult.size() > 0) {
+          for (List<Integer> list : optSubResult) {
+            ArrayList<Integer> temp = new ArrayList<>(list);
+            temp.add(candidate);
+            optResult.add(temp);
+          }
+        }
+      }
+    }
+    return opt.get(target);
+  }
+
+    public List<List<Integer>> combinationSumByDynamicHasDuplicate(int[] candidates, int target) {
+    // 动态规划将所有subproblem收集到集合中 RunTime : 82 ms Memory ： 43.8 MB
     List<List<List<Integer>>> opt = new ArrayList<>();
     // 排序数组，提升性能，这样可以提现结束循环
     Arrays.sort(candidates);
@@ -69,8 +102,8 @@ public class CombinationSum39 {
           // 那么值为 3 时， 那么需要子问题等于5加上3才可以等于目标值8， 子问题5 = [[3, 2], [2, 3], [5]]， 遍历三个结果加上当前值3 = [3, 2, 3], [2, 3, 3], [5, 3]
           // 那么值为 5 时， 那么需要子问题等于3加上5才可以等于目标值8， 子问题3 = [[3]]， 遍历一个结果加上当前值5 = [3, 5]
           // 最后目标值8的结果就为 上面三个的结果相加 = [[2, 2, 2, 2], [3, 3, 2], [3, 2, 3], [2, 3, 3], [5, 3], [3, 5]]
-          List<List<Integer>> tempOptResult = opt.get(sum - candidate);
-          for (List<Integer> list : tempOptResult) {
+          List<List<Integer>> optSubResult = opt.get(sum - candidate);
+          for (List<Integer> list : optSubResult) {
             List<Integer> insideList = new ArrayList<>(list);
             // 关键点，将当前值插入到拿到的子问题集合中
             insideList.add(candidate);
@@ -124,8 +157,8 @@ public class CombinationSum39 {
    * [3, 5] remain = 0 添加进结果集合
    * [5] remain = 3
    * [5, 5] remain = -2
-   *
-   */
+   * Runtime ： 4 ms	Memery ： 36.7 MB
+  */
   private void backtrack(List<List<Integer>> result, List<Integer> templist, int[] candidates,
       int remain, int start) {
     // 不断的递减所有结果，导致结果溢出，小于零，所有直接无须进行调用下去，直接结束当前调用栈
@@ -174,7 +207,7 @@ public class CombinationSum39 {
 
   public static void main(String[] args) {
     CombinationSum39 combinationSum39 = new CombinationSum39();
-    List<List<Integer>> list = combinationSum39.combinationSumByDynamicHasDuplicate(new int[]{2, 3, 5}, 8);
+    List<List<Integer>> list = combinationSum39.combinationSumByDynamic(new int[]{2, 3, 5}, 8);
     for (List<Integer> integers : list) {
       System.out.println(integers);
     }
