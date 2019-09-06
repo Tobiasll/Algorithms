@@ -48,6 +48,7 @@ public class CombinationSum39 {
     for (int candidate : candidates) {
       for (int sum = candidate; sum <= target; sum++) {
         List<List<Integer>> optResult = opt.get(sum);
+        // 计算获取到子问题集合
         List<List<Integer>> optSubResult = opt.get(sum - candidate);
         //刚开始 optResult 的大小是 0，所以单独考虑一下这种情况 即 sum = 3 = [[3]]的情况
         if (sum == candidate) {
@@ -61,6 +62,7 @@ public class CombinationSum39 {
         if (optSubResult.size() > 0) {
           for (List<Integer> list : optSubResult) {
             ArrayList<Integer> temp = new ArrayList<>(list);
+            // 将当前值添加到子问题集合中
             temp.add(candidate);
             optResult.add(temp);
           }
@@ -83,7 +85,7 @@ public class CombinationSum39 {
       for (int candidate : candidates) {
         // 如果当前值等于该子问题，因为数组是有序的，那么就说明，当前值直接命中目标，可以直接添加进结果集合， 例如 sum = 2 =  [[2]]/ sum = 3 = [[3]]
         if (candidate == sum) {
-          List<Integer> insideList = new ArrayList<>();
+          List<Integer> insideList = new ArrayList<>(1);
           insideList.add(candidate);
           optResult.add(insideList);
 
@@ -181,7 +183,7 @@ public class CombinationSum39 {
     }
   }
 
-  private List<List<Integer>> removeDuplicate(List<List<Integer>> outList) {
+  public List<List<Integer>> removeDuplicate(List<List<Integer>> outList) {
     Map<String, String> map = new HashMap<>();
     for (List<Integer> list : outList) {
       list.sort(Comparator.comparingInt(o -> o));
