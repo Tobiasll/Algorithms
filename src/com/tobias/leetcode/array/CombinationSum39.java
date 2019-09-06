@@ -1,7 +1,12 @@
 package com.tobias.leetcode.array;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Given a set of candidate numbers (candidates) (without duplicates) and a target number (target), find all unique combinations in candidates where the candidate numbers sums to target.
@@ -32,7 +37,63 @@ import java.util.List;
  */
 public class CombinationSum39 {
 
-  public List<List<Integer>> combinationSum(int[] candidates, int target) {
+  public List<List<Integer>> combinationSumByDynamicHasDuplicate(int[] candidates, int target) {
+    // 动态规划将所有subproblem收集到集合中
+    List<List<List<Integer>>> opt = new ArrayList<>();
+    // 排序数组，提升性能，这样可以提现结束循环
+    Arrays.sort(candidates);
+    // 计算目标之前的所有子问题结果
+    for (int sum = 0; sum <= target; sum++) {
+      // 当前目标结果集合
+      List<List<Integer>> optResult = new ArrayList<>();
+      // 遍历数组的值，
+      for (int candidate : candidates) {
+        // 如果当前值等于该子问题，因为数组是有序的，那么就说明，当前值直接命中目标，可以直接添加进结果集合， 例如 sum = 2 =  [[2]]/ sum = 3 = [[3]]
+        if (candidate == sum) {
+          List<Integer> insideList = new ArrayList<>();
+          insideList.add(candidate);
+          optResult.add(insideList);
+
+        } else if (candidate < sum) {
+          // 当前值小于目标值， 拿到当前目标 - 当前值的子问题集合
+          // 例如 目标值 8 前7个结果集为
+          //[]
+          //[]
+          //[[2]]
+          //[[3]]
+          //[[2, 2]]
+          //[[3, 2], [2, 3], [5]]
+          //[[2, 2, 2], [3, 3]]
+          //[[3, 2, 2], [2, 3, 2], [5, 2], [2, 2, 3], [2, 5]]
+          // 那么值为 2 时， 那么需要子问题等于6加上2才可以等于目标值8， 子问题6 = [[2, 2, 2], [3, 3]]， 遍历两个结果加上当前值2 = [2, 2, 2, 2], [3, 3, 2]
+          // 那么值为 3 时， 那么需要子问题等于5加上3才可以等于目标值8， 子问题5 = [[3, 2], [2, 3], [5]]， 遍历三个结果加上当前值3 = [3, 2, 3], [2, 3, 3], [5, 3]
+          // 那么值为 5 时， 那么需要子问题等于3加上5才可以等于目标值8， 子问题3 = [[3]]， 遍历一个结果加上当前值5 = [3, 5]
+          // 最后目标值8的结果就为 上面三个的结果相加 = [[2, 2, 2, 2], [3, 3, 2], [3, 2, 3], [2, 3, 3], [5, 3], [3, 5]]
+          List<List<Integer>> tempOptResult = opt.get(sum - candidate);
+          for (List<Integer> list : tempOptResult) {
+            List<Integer> insideList = new ArrayList<>(list);
+            // 关键点，将当前值插入到拿到的子问题集合中
+            insideList.add(candidate);
+            optResult.add(insideList);
+          }
+        } else {
+          // 溢出情况，当前值大于目标值
+          break;
+        }
+      }
+      // 将当前结果插入到当前子问题索引处
+      opt.add(sum, optResult);
+    }
+
+    for (List<List<Integer>> list : opt) {
+      System.out.println(list);
+    }
+
+    return removeDuplicate(opt.get(target));
+  }
+
+
+  public List<List<Integer>> combinationSumByBacktrack(int[] candidates, int target) {
     List<List<Integer>> result = new ArrayList<>();
     backtrack(result, new ArrayList<>(), candidates, target, 0);
     return result;
@@ -87,9 +148,33 @@ public class CombinationSum39 {
     }
   }
 
+  private List<List<Integer>> removeDuplicate(List<List<Integer>> outList) {
+    Map<String, String> map = new HashMap<>();
+    for (List<Integer> list : outList) {
+      list.sort(Comparator.comparingInt(o -> o));
+      StringBuilder key = new StringBuilder();
+      for (int j = 0; j < list.size() - 1; j++) {
+        key.append(list.get(j)).append(",");
+      }
+      key.append(list.get(list.size() - 1));
+      map.put(key.toString(), "");
+    }
+    List<List<Integer>> result = new ArrayList<>();
+    Set<String> keySet = map.keySet();
+    for (String s : keySet) {
+      String[] split = s.split(",");
+      List<Integer> insideList = new ArrayList<>(split.length);
+      for (String str : split) {
+        insideList.add(Integer.parseInt(str));
+      }
+      result.add(insideList);
+    }
+    return result;
+  }
+
   public static void main(String[] args) {
     CombinationSum39 combinationSum39 = new CombinationSum39();
-    List<List<Integer>> list = combinationSum39.combinationSum(new int[]{2, 3, 5}, 8);
+    List<List<Integer>> list = combinationSum39.combinationSumByDynamicHasDuplicate(new int[]{2, 3, 5}, 8);
     for (List<Integer> integers : list) {
       System.out.println(integers);
     }
