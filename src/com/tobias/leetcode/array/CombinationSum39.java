@@ -186,6 +186,7 @@ public class CombinationSum39 {
   public List<List<Integer>> removeDuplicate(List<List<Integer>> outList) {
     Map<String, String> map = new HashMap<>();
     for (List<Integer> list : outList) {
+      // 出现当数组唯一的时候需要排序，如Permutations46题需要加上，而PermutationsII47数组不唯一的情况下则需要注释掉
       list.sort(Comparator.comparingInt(o -> o));
       StringBuilder key = new StringBuilder();
       for (int j = 0; j < list.size() - 1; j++) {

@@ -126,7 +126,7 @@ public class Permutations46 {
 
   public static void main(String[] args) {
     Permutations46 permutations46 = new Permutations46();
-    List<List<Integer>> permute = permutations46.permute(new int[]{1, 2, 3});
+    List<List<Integer>> permute = permutations46.permuteByForeach(new int[]{1, 2, 3});
     for (List<Integer> list : permute) {
       System.out.println(list);
     }
