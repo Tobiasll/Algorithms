@@ -19,29 +19,6 @@ import java.util.Map;
  *   {4,1,8,3}
  * ]
  * The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
- *
- * public int minimumTotal(List<List<Integer>> triangle) {
- *     int rows = triangle.size();
- *     int cols = triangle.get(rows - 1).size();
- *     int[] dp = new int[cols];
- *     dp[0] = triangle.get(0).get(0);
- *     for (int row = 1; row < rows; row++) {
- *         List<Integer> curRow = triangle.get(row);
- *         int col = curRow.size() - 1;
- *         dp[col] = dp[col - 1] + curRow.get(col);
- *         col--;
- *         for (; col > 0; col--) {
- *             dp[col] = Math.min(dp[col - 1], dp[col]) + curRow.get(col);
- *         }
- *
- *         dp[col] = dp[col] + curRow.get(col);
- *     }
- *     int min = Integer.MAX_VALUE;
- *     for (int col = 0; col < cols; col++) {
- *         min = Math.min(min, dp[col]);
- *     }
- *     return min;
- * }
  */
 public class Triangle120 {
 
