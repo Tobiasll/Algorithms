@@ -1,6 +1,8 @@
 package com.tobias.leetcode.array;
 
+
 import java.util.Arrays;
+import java.util.Stack;
 
 /**
  *Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it is able to trap after raining.
@@ -15,7 +17,26 @@ import java.util.Arrays;
  */
 public class TrappingRainWater42 {
 
-  public int trapByDoublePoint(int[] height) {
+  public int trapByStack(int[] height) {
+    int result = 0;
+    Stack<Integer> stack = new Stack<>();
+    for (int i = 0; i < height.length; i++) {
+      while (!stack.isEmpty() && height[stack.peek()] < height[i]) {
+        int peekValue = height[stack.peek()];
+        stack.pop();
+        if (stack.isEmpty()) {
+          break;
+        }
+        int distinct = i - stack.peek()  - 1;
+        int min = Math.min(height[stack.peek()], height[i]);
+        result += (min - peekValue) * distinct;
+      }
+      stack.push(i);
+    }
+    return result;
+  }
+
+    public int trapByDoublePoint(int[] height) {
     int result = 0, maxLeft = 0, maxRight = 0, leftPoint = 1, rightPoint = height.length - 2;
     for (int i = 1; i < height.length - 1; i++) {
       if (height[leftPoint - 1] < height[rightPoint + 1]) {
@@ -119,8 +140,8 @@ public class TrappingRainWater42 {
 
   public static void main(String[] args) {
     TrappingRainWater42 trappingRainWater42 = new TrappingRainWater42();
-    System.out.println(trappingRainWater42.trapByDoublePoint(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
-    System.out.println(trappingRainWater42.trapByDoublePoint(new int[]{2,1,0,2}));
-    System.out.println(trappingRainWater42.trapByDoublePoint(new int[]{4,2,0,3,2,5}));
+    System.out.println(trappingRainWater42.trapByStack(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
+    System.out.println(trappingRainWater42.trapByStack(new int[]{2,1,0,2}));
+    System.out.println(trappingRainWater42.trapByStack(new int[]{4,2,0,3,2,5}));
   }
 }
