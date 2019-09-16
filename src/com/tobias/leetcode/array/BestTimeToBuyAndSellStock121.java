@@ -23,7 +23,21 @@ import java.util.Map;
  * Output: 0
  * Explanation: In this case, no transaction is done, i.e. max profit = 0.
  */
-public class BestTimetoBuyandSellStock121 {
+public class BestTimeToBuyAndSellStock121 {
+
+  public int maxProfitByDoublePoint(int[] prices) {
+    int buy = 0;
+    int sell = 0;
+    int result = 0;
+    while (sell < prices.length) {
+      if (prices[sell] - prices[buy] < 0) {
+        buy = sell;
+      }
+      result = Math.max(result, prices[sell] - prices[buy]);
+      sell++;
+    }
+    return result;
+  }
 
   public int maxProfit(int[] prices) {
     int maxCur = 0;
@@ -59,10 +73,10 @@ public class BestTimetoBuyandSellStock121 {
 
 
   public static void main(String[] args) {
-    BestTimetoBuyandSellStock121 bestTimetoBuyandSellStock121 = new BestTimetoBuyandSellStock121();
-    System.out.println(bestTimetoBuyandSellStock121.maxProfit(new int[]{7,1,5,3,6,4}));
-    System.out.println(bestTimetoBuyandSellStock121.maxProfit(new int[]{7,6,4,3,1}));
-    System.out.println(bestTimetoBuyandSellStock121.maxProfit(new int[]{2,4,1}));
+    BestTimeToBuyAndSellStock121 bestTimetoBuyandSellStock121 = new BestTimeToBuyAndSellStock121();
+    System.out.println(bestTimetoBuyandSellStock121.maxProfitByDoublePoint(new int[]{7,1,5,3,6,4}));
+    System.out.println(bestTimetoBuyandSellStock121.maxProfitByDoublePoint(new int[]{7,6,4,3,1}));
+    System.out.println(bestTimetoBuyandSellStock121.maxProfitByDoublePoint(new int[]{2,4,1}));
   }
 
 }
