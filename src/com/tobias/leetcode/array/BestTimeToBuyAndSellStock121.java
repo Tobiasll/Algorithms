@@ -25,7 +25,32 @@ import java.util.Map;
  */
 public class BestTimeToBuyAndSellStock121 {
 
-  public int maxProfitByDoublePoint(int[] prices) {
+  public int maxProfitByDPWithVariable(int[] prices) {
+    int dpHold = Integer.MIN_VALUE, dpUnhold = 0;
+    for (int price : prices) {
+      dpUnhold = Math.max(dpUnhold, dpHold + price);
+      dpHold = Math.max(dpHold,  -price);
+    }
+
+    return dpUnhold;
+  }
+
+    public int maxProfitByDPWithArray(int[] prices) {
+    int[][] dp = new int[prices.length][2];
+
+    for (int i = 0; i < prices.length; i++) {
+      if (i - 1 == -1) {
+        dp[i][0] = 0;
+        dp[i][1] = -prices[i];
+        continue;
+      }
+      dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+      dp[i][1] = Math.max(dp[i - 1][1],  -prices[i]);
+    }
+    return dp[prices.length - 1][0];
+  }
+
+    public int maxProfitByDoublePoint(int[] prices) {
     int buy = 0;
     int sell = 0;
     int result = 0;
@@ -39,7 +64,7 @@ public class BestTimeToBuyAndSellStock121 {
     return result;
   }
 
-  public int maxProfit(int[] prices) {
+  public int maxProfitDBAndKadane(int[] prices) {
     int maxCur = 0;
     int result = 0;
     for (int i = 1; i < prices.length - 1; i++) {
@@ -74,9 +99,10 @@ public class BestTimeToBuyAndSellStock121 {
 
   public static void main(String[] args) {
     BestTimeToBuyAndSellStock121 bestTimetoBuyandSellStock121 = new BestTimeToBuyAndSellStock121();
-    System.out.println(bestTimetoBuyandSellStock121.maxProfitByDoublePoint(new int[]{7,1,5,3,6,4}));
-    System.out.println(bestTimetoBuyandSellStock121.maxProfitByDoublePoint(new int[]{7,6,4,3,1}));
-    System.out.println(bestTimetoBuyandSellStock121.maxProfitByDoublePoint(new int[]{2,4,1}));
+    System.out.println(bestTimetoBuyandSellStock121.maxProfitByDPWithArray(new int[]{7,1,5,3,6,4}));
+    System.out.println(bestTimetoBuyandSellStock121.maxProfitByDPWithArray(new int[]{7,6,4,3,1}));
+    System.out.println(bestTimetoBuyandSellStock121.maxProfitByDPWithArray(new int[]{2,4,1}));
+    System.out.println(bestTimetoBuyandSellStock121.maxProfitByDPWithArray(new int[]{1,2}));
   }
 
 }

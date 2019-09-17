@@ -28,6 +28,29 @@ package com.tobias.leetcode.array;
  */
 public class BestTimeToBuyAndSellStockII122 {
 
+  public int maxProfitByDPWithVariable(int[] prices) {
+    int dpHold = Integer.MIN_VALUE, dpUnhold = 0;
+    for (int price : prices) {
+      dpUnhold = Math.max(dpUnhold, dpHold + price);
+      dpHold = Math.max(dpHold, dpUnhold - price);
+    }
+    return dpUnhold;
+  }
+
+
+    public int maxProfitByDPWithArray(int[] prices) {
+    int[][] dp = new int[prices.length][2];
+    for (int i = 0; i < prices.length; i++) {
+      if (i - 1 == -1) {
+        dp[i][0] = 0;
+        dp[i][0b1] = -prices[i];
+        continue;
+      }
+      dp[i][0] = Math.max(dp[i - 0b1][0], dp[i - 0b1][0b1] + prices[i]);
+      dp[i][0b1] = Math.max(dp[i - 0b1][1], dp[i - 0b1][0] - prices[i]);
+    }
+    return dp[prices.length - 0b1][0];
+  }
 
 
   public int maxProfit2(int[] prices) {
@@ -60,9 +83,11 @@ public class BestTimeToBuyAndSellStockII122 {
   }
 
   public static void main(String[] args) {
+
     BestTimeToBuyAndSellStockII122 bestTimeToBuyAndSellStockII122 = new BestTimeToBuyAndSellStockII122();
-    System.out.println(bestTimeToBuyAndSellStockII122.maxProfit2(new int[]{7,1,5,3,6,4}));
+    System.out.println(bestTimeToBuyAndSellStockII122.maxProfitByDPWithVariable(new int[]{7,1,5,3,6,4}));
     System.out.println(bestTimeToBuyAndSellStockII122.maxProfit2(new int[]{1,2,3,4,5}));
     System.out.println(bestTimeToBuyAndSellStockII122.maxProfit2(new int[]{7,6,4,3,1}));
+    System.out.println(bestTimeToBuyAndSellStockII122.maxProfit2(new int[]{1, 3, 2, 8, 4, 9}));
   }
 }
