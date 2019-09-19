@@ -27,26 +27,37 @@ import java.util.List;
  */
 public class Subsets78 {
 
-
-  public List<List<Integer>> subsets(int[] nums) {
-    List<List<Integer>> ans = new ArrayList<>();
-    int bit_nums = nums.length;
-    int ans_nums = 1 << bit_nums; //执行 2 的 n 次方
-    for (int i = 0; i < ans_nums; i++) {
-      List<Integer> tmp = new ArrayList<>();
+  /**
+   *  000 | []  | []
+   *  001 | 001 | [1]
+   *  010 | 020 | [2]
+   *  011 | 021 | [1, 2]
+   *  100 | 300 | [3]
+   *  101 | 301 | [1, 3]
+   *  110 | 320 | [2, 3]
+   *  111 | 321 | [1, 2, 3]
+    */
+  public List<List<Integer>> subsetsByDisplacement(int[] nums) {
+    List<List<Integer>> result = new ArrayList<>();
+    int bitNums = nums.length;
+    int resultLength = 1 << bitNums; //执行 2 的 n 次方，拿到结果的个数8
+    for (int i = 0; i < resultLength; i++) {
+      List<Integer> insideList = new ArrayList<>();
       int count = 0; //记录当前对应数组的哪一位
-      int i_copy = i; //用来移位
-      while (i_copy != 0) {
-        if ((i_copy & 1) == 1) { //判断当前位是否是 1
-          tmp.add(nums[count]);
+      int iCopy = i; //用来移位
+      while (iCopy != 0) {
+        if ((iCopy & 1) == 1) { //判断当前位是否是 1,如果为1则添加进临时数组
+          insideList.add(nums[count]);
         }
         count++;
-        i_copy = i_copy >> 1;//右移一位
+        // 不断右移直到出现0也就是最左边都为0，结束循环 例如 i = 4 = 100 ，第一次循环后右移一位结果为10 = 2，
+        // 然后继续位移一位结果为1 = 1 ，（4 - 2 - 1 - 0）继续位移就为0了，则退出循环
+        iCopy = iCopy >> 1;//右移一位
       }
-      ans.add(tmp);
+      result.add(insideList);
 
     }
-    return ans;
+    return result;
   }
 
   public List<List<Integer>> subsetsByBacktrack(int[] nums) {
@@ -103,9 +114,9 @@ public class Subsets78 {
 
   public static void main(String[] args) {
     Subsets78 subsets78 = new Subsets78();
-    List<List<Integer>> subsets = subsets78.subsetsByBacktrack(new int[]{1, 2, 3});
+    List<List<Integer>> subsets = subsets78.subsetsByDisplacement(new int[]{1, 2, 3});
     for (List<Integer> subset : subsets) {
-//      System.out.println(subset);
+      System.out.println(subset);
     }
   }
 }
