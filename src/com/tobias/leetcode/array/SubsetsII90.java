@@ -24,6 +24,37 @@ import java.util.List;
  */
 public class SubsetsII90 {
 
+  /**
+   * 位计算复制答案，dug仍然看不懂~~~///(^v^)\\\~~~，明天继续debug
+   */
+  public List<List<Integer>> subsetsWithDup(int[] num) {
+    Arrays.sort(num);
+    List<List<Integer>> lists = new ArrayList<>();
+    int subsetNum = 1<<num.length;
+    for(int i=0;i<subsetNum;i++){
+      List<Integer> list = new ArrayList<>();
+      boolean illegal=false;
+      for(int j=0;j<num.length;j++){
+        //当前位是 1
+        if((i>>j&1)==1){
+          //当前是重复数字，并且前一位是 0，跳过这种情况
+          if(j>0&&num[j]==num[j-1]&&(i>>(j-1)&1)==0){
+            illegal=true;
+            break;
+          }else{
+            list.add(num[j]);
+          }
+        }
+      }
+      if(!illegal){
+        lists.add(list);
+      }
+
+    }
+    return lists;
+  }
+
+
   public List<List<Integer>> subsetsWithDupByForeach2(int[] nums) {
     List<List<Integer>> result = new ArrayList<>();
     Arrays.sort(nums);
@@ -93,8 +124,8 @@ public class SubsetsII90 {
 
   public static void main(String[] args) {
     SubsetsII90 subsetsII90 = new SubsetsII90();
-//    List<List<Integer>> list = subsetsII90.subsetsWithDupByForeach2(new int[]{1, 2, 2});
-    List<List<Integer>> list = subsetsII90.subsetsWithDupByForeach2(new int[]{4,4,4,1,4});
+    List<List<Integer>> list = subsetsII90.subsetsWithDup(new int[]{1, 2, 2});
+//    List<List<Integer>> list = subsetsII90.subsetsWithDupByForeach2(new int[]{4,4,4,1,4});
     for (List<Integer> integers : list) {
       System.out.println(integers);
     }
