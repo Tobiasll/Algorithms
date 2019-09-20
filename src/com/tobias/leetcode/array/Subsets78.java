@@ -38,18 +38,18 @@ public class Subsets78 {
    *  111 | 321 | [1, 2, 3]
     */
   public List<List<Integer>> subsetsByDisplacement(int[] nums) {
-    List<List<Integer>> result = new ArrayList<>();
+    List<List<Integer>> result = new ArrayList<>(1 << nums.length);
     int bitNums = nums.length;
     int resultLength = 1 << bitNums; //执行 2 的 n 次方，拿到结果的个数8
     for (int i = 0; i < resultLength; i++) {
       List<Integer> insideList = new ArrayList<>();
-      int count = 0; //记录当前对应数组的哪一位
+      int index = 0; //记录当前对应数组的哪一位
       int iCopy = i; //用来移位
       while (iCopy != 0) {
         if ((iCopy & 1) == 1) { //判断当前位是否是 1,如果为1则添加进临时数组
-          insideList.add(nums[count]);
+          insideList.add(nums[index]);
         }
-        count++;
+        index++;
         // 不断右移直到出现0也就是最左边都为0，结束循环 例如 i = 4 = 100 ，第一次循环后右移一位结果为10 = 2，
         // 然后继续位移一位结果为1 = 1 ，（4 - 2 - 1 - 0）继续位移就为0了，则退出循环
         iCopy = iCopy >> 1;//右移一位
@@ -61,7 +61,7 @@ public class Subsets78 {
   }
 
   public List<List<Integer>> subsetsByBacktrack(int[] nums) {
-    List<List<Integer>> result = new ArrayList<>();
+    List<List<Integer>> result = new ArrayList<>(1 << nums.length);
     backtrack(nums, 0, new ArrayList<>(), result);
     return result;
   }
@@ -77,7 +77,7 @@ public class Subsets78 {
 
 
   public List<List<Integer>> subsetsByForeach2(int[] nums) {
-    List<List<Integer>> result = new ArrayList<>();
+    List<List<Integer>> result = new ArrayList<>(1 << nums.length);
     result.add(Collections.emptyList());
 
     for (int num : nums) {
@@ -93,7 +93,7 @@ public class Subsets78 {
 
     public List<List<Integer>> subsetsByForeach1(int[] nums) {
 
-    List<List<Integer>> result = new ArrayList<>();
+    List<List<Integer>> result = new ArrayList<>(1 << nums.length);
     result.add(Collections.emptyList());
 
     for (int i = 0; i < nums.length; i++) {
