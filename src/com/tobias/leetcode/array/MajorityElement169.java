@@ -1,6 +1,7 @@
 package com.tobias.leetcode.array;
 
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,20 +21,44 @@ import java.util.Map;
  */
 public class MajorityElement169 {
 
+  public int majorityElementByMooreMajorityVote (int[] nums) {
+    int result = nums[0];
+    int count = 1;
+    for (int i = 1; i < nums.length; i++) {
+      if (count == 0) {
+        result = nums[i];
+        count++;
+      } else if (result == nums[i]) {
+        count++;
+      } else {
+        count--;
+      }
+    }
+    return result;
+  }
 
+    /**
+     * Runtime: 1 ms, faster than 99.95% of Java online submissions for Majority Element.
+     * Memory Usage: 41.3 MB, less than 83.82% of Java online submissions for Majority Element
+     */
+  public int majorityElementBySoryArray(int[] nums) {
+    Arrays.sort(nums);
+    return nums[nums.length / 2];
+  }
 
+  /**
+   * Runtime: 1 ms, faster than 5.95% of Java online submissions for Majority Element.
+   * Memory Usage: 41.3 MB, less than 70.82% of Java online submissions for Majority Element
+   */
   public int majorityElement(int[] nums) {
     Map<Integer, Integer> map = new HashMap<>();
+    int result = 0;
+
     for (int num : nums) {
       map.merge(num, 1, (a, b) -> a + b);
-    }
-
-    int result = 0;
-    int maxCount = 0;
-    for (Integer key : map.keySet()) {
-      if (map.get(key) > maxCount) {
-        result = key;
-        maxCount = map.get(key);
+      if (map.get(num) > nums.length / 2) {
+        result = num;
+        break;
       }
     }
     return result;
@@ -41,7 +66,7 @@ public class MajorityElement169 {
 
   public static void main(String[] args) {
     MajorityElement169 majorityElement169 = new MajorityElement169();
-    System.out.println(majorityElement169.majorityElement(new int[]{3,2,3}));
-    System.out.println(majorityElement169.majorityElement(new int[]{2,2,1,1,1,2,2}));
+    System.out.println(majorityElement169.majorityElementByMooreMajorityVote(new int[]{3,2,3}));
+    System.out.println(majorityElement169.majorityElementByMooreMajorityVote(new int[]{2,2,1,1,1,2,2}));
   }
 }
