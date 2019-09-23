@@ -62,7 +62,7 @@ public class RemoveElement27 {
     RemoveElement27 removeElement27 = new RemoveElement27();
     System.out.println(removeElement27.removeElement(new int[]{3,2,2,3}, 3));
     System.out.println(removeElement27.removeElement(new int[]{0,1,2,2,3,0,4,2}, 2));
-    "".indexOf("");
+
 
   }
 }
