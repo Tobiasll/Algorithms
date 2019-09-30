@@ -38,15 +38,11 @@ public class ExcelSheetColumnNumber171 {
     if (s == null || s.length() == 0) {
       return 0;
     }
-    int result = s.charAt(s.length() - 1) - 'A' + 1, count = 0;
+    int result = s.charAt(s.length() - 1) - 'A' + 1,  ans = 26;
     for (int i = s.length() - 2; i >= 0; i--) {
       int num = s.charAt(i) - 'A' + 1;
-      int ans = 26;
-      for (int j = 0; j < count; j++) {
-        ans *= 26;
-      }
       result += ans * num;
-      count++;
+      ans *= 26;
     }
     return result;
   }
