@@ -31,7 +31,7 @@ public class UnorderedQueue extends MaxPQ {
   @Override
   public Comparable max() {
     if (isEmpty()) {
-      throw new IllegalCallerException("current queue hasn't element!");
+//      throw new IllegalCallerException("current queue hasn't element!");
     }
     Comparable max = arrays[0];
     for (int i = 1; i < size(); i++) {
@@ -47,7 +47,7 @@ public class UnorderedQueue extends MaxPQ {
   @Override
   public Comparable delMax() {
     if (isEmpty()) {
-      throw new IllegalCallerException("current queue hasn't element!");
+//      throw new IllegalCallerException("current queue hasn't element!");
     }
     if (!isLatestData) {
       max();
