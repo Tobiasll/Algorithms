@@ -44,13 +44,10 @@ public class NumberOf1Bits191 {
     public int hammingWeight1(int n) {
         int num = Math.abs(n);
         int count = 0;
-        String s = "";
         while (num != 0) {
             count += num % 2;
-            s += num % 2;
             num = num / 2;
         }
-        System.out.println(s);
         return n < 0 ? 32 - count : count;
     }
 
