@@ -42,22 +42,26 @@ public class NumberOf1Bits191 {
     }
 
     public int hammingWeight1(int n) {
-        int num = Math.abs(n);
-        int count = 0;
-        while (num != 0) {
-            count += num % 2;
-            num = num / 2;
+        int result = 0;
+        while (n != 0) {
+            // 不断累加n 是否 == 1
+            result += (n & 1);
+            // 因为n的取值范围包括负数，所以我们需要使用无符号右移来得到二进制，不能使用普通的右移或n / 2来获取二进制，右移正整数情况下符号位为0，所以高位右移为0，而负数为+1所以高位为1
+            // 负数右移首先获取正整数二进制码，然后获取符号位码，即补码（+1），然后进行取反，将正整数的二进制的0变1，1变0，然后最后位加1，
+            // 此时就可以得到负数的二进制了，然后开始右移多少位就在高位加多少个1，然后在减1就可以得到补码了
+            n >>>= 1;
         }
-        return n < 0 ? 32 - count : count;
+
+        return result ;
     }
 
     public static void main(String[] args) {
 
-        System.out.println(Integer.toBinaryString(-3));
+
         NumberOf1Bits191 bits191 = new NumberOf1Bits191();
         System.out.println(bits191.hammingWeight1(-3));
         System.out.println(bits191.hammingWeight1(-2));
         System.out.println(bits191.hammingWeight1(-4));
-
+        System.out.println(Integer.toBinaryString(-4));
     }
 }
