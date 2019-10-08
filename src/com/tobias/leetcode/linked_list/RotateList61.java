@@ -23,9 +23,7 @@ package com.tobias.leetcode.linked_list;
 public class RotateList61 {
 
 
-  /**
-   * Time Limit Exceeded
-   */
+
   public ListNode rotateRight1(ListNode head, int k) {
 
     ListNode root = head;
