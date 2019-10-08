@@ -182,7 +182,25 @@ public class ValidSudoku36 {
         {'.','.','.','.','8','.','.','7','9'},
   };
 
-    System.out.println(validSudoku36.isValidSudoku(temp));
+//    System.out.println(validSudoku36.isValidSudoku(temp));
+      String result = "";
+      System.out.println(Integer.toBinaryString(-2));
+      System.out.println(-2 % 2);
+      System.out.println(-2 / 2);
+      System.out.println(-1 % 2);
+      System.out.println(-1 / 2);
+      System.out.println(-1 % 2);
+      System.out.println(-1 / 2);
+      int n = -5;
+      int count = 0;
+      int time = 0;
+      while (n != 0 && time < 31) {
+          count += n % 2;
+          n = n / 2;
+          time++;
+      }
+      System.out.println(count);
+      System.out.println(time);
   }
 
 
