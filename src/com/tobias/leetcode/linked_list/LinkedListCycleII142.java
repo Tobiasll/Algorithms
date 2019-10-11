@@ -50,8 +50,8 @@ public class LinkedListCycleII142 {
       fast = fast.next.next;
       if (slow == fast) {
         node = fast;
-        while (slow != node) {
-          slow = slow.next;
+        while (head != node) {
+          head = head.next;
           node = node.next;
         }
         return head;
