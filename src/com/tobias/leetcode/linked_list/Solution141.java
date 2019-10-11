@@ -19,6 +19,7 @@ public class Solution141 {
 
   public static void main(String[] args) {
     System.out.println(hasCycle(new ListNode(new int[]{3,2,0,-4})));
+    System.out.println(hasCycle(new ListNode(new int[]{2, 1})));
   }
 
   private static boolean hasCycle(ListNode head) {
