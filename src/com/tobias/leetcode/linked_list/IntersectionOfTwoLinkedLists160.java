@@ -70,8 +70,46 @@ public class IntersectionOfTwoLinkedLists160 {
     return result.next;
   }
 
-  public static void main(String[] args) {
-    IntersectionOfTwoLinkedLists160 intersectionOfTwoLinkedLists160 = new IntersectionOfTwoLinkedLists160();
-    System.out.println(intersectionOfTwoLinkedLists160.getIntersectionNode(new ListNode(new int[]{4,1,8,4,5}), new ListNode(new int[]{5,0,1,8,4,5})));
+  public static void main(String[] args) throws Exception {
+//    IntersectionOfTwoLinkedLists160 intersectionOfTwoLinkedLists160 = new IntersectionOfTwoLinkedLists160();
+//    System.out.println(intersectionOfTwoLinkedLists160.getIntersectionNode(new ListNode(new int[]{4,1,8,4,5}), new ListNode(new int[]{5,0,1,8,4,5})));
+
+    // 测试并行流执行是否会出现join
+    List<Thread> list = new ArrayList<>();
+    for (int i = 1; i < 10; i++) {
+      list.add(new Thread(() -> System.out.println(Thread.currentThread().getName() + " 当前线程执行"), "线程" + i));
+    }
+
+    list.add(new Thread(() -> {
+      try {
+        Thread.sleep(5000);
+      } catch (InterruptedException ignored) {
+      }
+      System.out.println(Thread.currentThread().getName() + " 当前线程执行");
+    }, "线程" + 10));
+
+//    list.parallelStream().forEach(thread -> {
+//      thread.start();
+//      try {
+//        thread.join();
+//      } catch (InterruptedException ignored) {
+//      }
+//    });
+
+    List<Integer> list2 = new ArrayList<>();
+    for (int i = 0; i < 10; i++) {
+      list2.add(i);
+    }
+
+    list2.parallelStream().forEach(integer -> {
+      if (integer.equals(5)) {
+        try {
+          Thread.sleep(5000);
+        } catch (InterruptedException ignored) {
+        }
+      }
+      System.out.println(Thread.currentThread().getName() + " 执行数字 : " + integer);
+    });
+    System.out.println("主线程输出");
   }
 }
