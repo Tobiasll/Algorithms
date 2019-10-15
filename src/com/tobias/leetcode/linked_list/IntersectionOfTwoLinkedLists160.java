@@ -80,19 +80,23 @@ public class IntersectionOfTwoLinkedLists160 {
       list.add(new Thread(() -> System.out.println(Thread.currentThread().getName() + " 当前线程执行"), "线程" + i));
     }
 
-    list.add(new Thread(() -> {
-      try {
-        Thread.sleep(5000);
-      } catch (InterruptedException ignored) {
-      }
-      System.out.println(Thread.currentThread().getName() + " 当前线程执行");
-    }, "线程" + 10));
-
+//    list.add(new Thread(() -> {
+//      try {
+//        Thread.sleep(5000);
+//      } catch (InterruptedException ignored) {
+//      }
+//      System.out.println(Thread.currentThread().getName() + " 当前线程执行");
+//    }, "线程" + 10));
+//
 //    list.parallelStream().forEach(thread -> {
 //      thread.start();
 //      try {
-//        thread.join();
-//      } catch (InterruptedException ignored) {
+//        if (thread.getName().contains("10")) {
+//          thread.join();
+////        Thread.sleep(6000);
+//        }
+//      } catch (InterruptedException e) {
+//        e.printStackTrace();
 //      }
 //    });
 
