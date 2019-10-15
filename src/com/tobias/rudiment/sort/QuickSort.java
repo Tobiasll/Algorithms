@@ -6,8 +6,7 @@ import java.util.List;
 
 public class QuickSort {
   public static void main(String[] args) {
-    System.out.println(sort(
-        new ArrayList<>(Arrays.asList(8, 9, 1, 7, 2, 3, 5, 4, 6, 0))));
+    System.out.println(sort(new ArrayList<>(Arrays.asList(8, 9, 1, 7, 2, 3, 5, 4, 6, 0))));
   }
 
   private static List<Integer> sort(List<Integer> lists) {
