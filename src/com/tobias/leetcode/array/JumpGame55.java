@@ -19,6 +19,50 @@ package com.tobias.leetcode.array;
 public class JumpGame55 {
 
   public boolean canJump(int[] nums) {
+    int max = 0;
+    for (int i = 0; i < nums.length; i++) {
+      if (max < i) {
+        return false;
+      }
+      max = Math.max(max, nums[i] + i);
+    }
+    return true;
+  }
+
+  public boolean canJump1(int[] nums) {
+    int max = 0;
+    for (int i = 0; i < nums.length - 1; i++) {
+      if (nums[i] == 0 && max <= i) {
+        return false;
+      }
+      max = Math.max(max, nums[i] + i);
+    }
+    return true;
+  }
+
+  public boolean canJumpIsCanJumpZero(int[] nums) {
+// 注意这里循环的便捷为小于nums.length - 1而不是num.length，否则会出现{0}会被处理，并且{2，0，0}中的第二个0被处理，
+    // 由于 j + nums[j] > i 所以如果出现重复零的情况，最后面的那个零是可以不被处理的
+    for (int i = 0; i < nums.length - 1; i++) {
+      if (nums[i] == 0) {
+        boolean flag = false;
+        int j = i - 1;
+        while (j >= 0) {
+          if (j + nums[j] > i) {
+            flag = true;
+            break;
+          }
+          j--;
+        }
+        if (!flag && nums.length != 1) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+    public boolean canJumpByEager2(int[] nums) {
     int position = nums.length - 1;
     boolean isUpdate;
     while (position != 0) {
@@ -63,5 +107,7 @@ public class JumpGame55 {
     System.out.println(jumpGame55.canJump(new int[]{2, 3, 1, 1, 4}));
     System.out.println(jumpGame55.canJump(new int[]{3, 2, 1, 0, 4}));
     System.out.println(jumpGame55.canJump(new int[]{0}));
+    System.out.println(jumpGame55.canJump(new int[]{2,0,0}));
+    System.out.println(jumpGame55.canJump(new int[]{3,0,0,0}));
   }
 }
