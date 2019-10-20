@@ -4,7 +4,10 @@ public class BinarySearch {
 
   public static void main(String[] args) {
 
-    System.out.println(findKeyByBinarySearch(8, new int[]{1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 9}));
+    System.out.println(findKeyByBinarySearch(6, new int[]{1, 2, 3, 4, 5, 7, 8, 8, 8, 8, 8, 9}));
+    System.out.println(findKeyByBinarySearch(3, new int[]{1, 10 ,23}));
+    System.out.println(findKeyByBinarySearch(24, new int[]{1, 10 ,23}));
+    System.out.println(findKeyByBinarySearch(1, new int[]{9, 10 ,23}));
     System.out.println(findFirstAppearByBinarySearch(8, new int[]{1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 9}));
     System.out.println(findLastAppearByBinarySearch(8, new int[]{1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 9}));
     System.out.println(findGEKeyByBinarySearch(7, new int[]{1, 2, 3, 4, 5, 6, 8, 8, 8, 8, 8, 9}));
@@ -26,6 +29,8 @@ public class BinarySearch {
         return mid;
       }
     }
+    System.out.println(low);
+    System.out.println(hight);
     return -1;
   }
 

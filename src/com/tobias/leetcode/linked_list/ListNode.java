@@ -11,13 +11,15 @@ public class ListNode {
 
   public ListNode(int[] arr) {
     if (arr == null || arr.length == 0) {
-      throw new IllegalArgumentException("arr can not be empty");
+//      throw new IllegalArgumentException("arr can not be empty");
     }
-    this.val = arr[0];
-    ListNode current = this;
-    for (int i = 1; i < arr.length; i++) {
-      current.next = new ListNode(arr[i]);
-      current = current.next;
+    if (arr.length > 0) {
+      this.val = arr[0];
+      ListNode current = this;
+      for (int i = 1; i < arr.length; i++) {
+        current.next = new ListNode(arr[i]);
+        current = current.next;
+      }
     }
   }
 

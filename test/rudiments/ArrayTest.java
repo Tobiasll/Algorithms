@@ -1,8 +1,7 @@
 package rudiments;
 
 import com.tobias.rudiment.array.MyArray;
-import org.junit.jupiter.api.Test;
-
+import org.junit.Test;
 
 public class ArrayTest {
 
@@ -29,6 +28,17 @@ public class ArrayTest {
     System.out.println(array.get(0));
 
 
+  }
+
+  @Test
+  public void test2() {
+    int n = -5;
+    String result = "";
+    while (n != 0) {
+      result += n % 2;
+      n = n >> 1;
+    }
+    System.out.println(result);
   }
 
 
