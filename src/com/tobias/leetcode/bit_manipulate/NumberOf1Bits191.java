@@ -52,7 +52,7 @@ public class NumberOf1Bits191 {
     }
 
     public static void main(String[] args) {
-
+        
         System.out.println(Integer.toBinaryString(-3));
         NumberOf1Bits191 bits191 = new NumberOf1Bits191();
         System.out.println(bits191.hammingWeight1(-3));
