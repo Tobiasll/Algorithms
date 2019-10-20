@@ -63,5 +63,7 @@ public class NumberOf1Bits191 {
         System.out.println(bits191.hammingWeight1(-2));
         System.out.println(bits191.hammingWeight1(-4));
         System.out.println(Integer.toBinaryString(-4));
+        System.out.println(Integer.toBinaryString(-4));
+        System.out.println(Integer.toBinaryString(-4));
     }
 }
