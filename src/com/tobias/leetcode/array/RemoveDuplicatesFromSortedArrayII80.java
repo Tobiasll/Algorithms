@@ -40,6 +40,17 @@ package com.tobias.leetcode.array;
 public class RemoveDuplicatesFromSortedArrayII80 {
 
   public int removeDuplicates(int[] nums) {
+    int slow = 1;
+    for (int max = 2, fast = 2; fast < nums.length; fast++) {
+      if (nums[slow - max + 1] != nums[fast]) {
+        nums[++slow] = nums[fast];
+      }
+    }
+    return slow + 1;
+  }
+
+
+    public int removeDuplicates1(int[] nums) {
     int slow = 0;
 
     for (int fast = 1, count = 1; fast < nums.length; fast++) {
