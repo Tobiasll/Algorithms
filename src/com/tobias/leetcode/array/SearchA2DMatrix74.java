@@ -29,7 +29,7 @@ package com.tobias.leetcode.array;
  */
 public class SearchA2DMatrix74 {
 
-  public boolean searchMatrix(int[][] matrix, int target) {
+  public boolean searchMatrix1(int[][] matrix, int target) {
     if (matrix == null || matrix.length == 0) {
       return false;
     }
@@ -64,6 +64,29 @@ public class SearchA2DMatrix74 {
     }
     return false;
   }
+
+  public boolean searchMatrix(int[][] matrix, int target) {
+    int rows = matrix.length;
+    if (rows == 0) {
+      return false;
+    }
+    int cols = matrix[0].length;
+    int left = 0;
+    int right = rows * cols - 1;
+    while (left <= right) {
+      int mid = (left + right) / 2;
+      int temp = matrix[mid / cols][mid % cols];
+      if (temp == target) {
+        return true;
+      } else if (temp < target) {
+        left = mid + 1;
+      } else {
+        right = mid - 1;
+      }
+    }
+    return false;
+  }
+
 
   public static void main(String[] args) {
     SearchA2DMatrix74 searchA2DMatrix74 = new SearchA2DMatrix74();

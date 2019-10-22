@@ -25,9 +25,8 @@ public class MergeKSortedLists23 {
     }
     int n = 1;
     while (n < lists.length) {
-      // 第一次合并为0, 1、2，3、4，5、6，7
-      // 第二次合并为0，2、4，6
-      // 第三次合并为0，4、8，12
+      // 第一次合并为1-->1-->3-->4-->4-->5-->
+      // 第二次合并为1-->1-->2-->3-->4-->4-->5-->6-->
       for (int i = 0; i + n < lists.length; i = i + n * 2) {
         lists[i] = mergeKLists(lists[i], lists[i + n]);
       }
@@ -161,7 +160,7 @@ public class MergeKSortedLists23 {
 
   public static void main(String[] args) {
     MergeKSortedLists23 mergeKSortedLists23 = new MergeKSortedLists23();
-    System.out.println(mergeKSortedLists23.mergeKLists4(new ListNode[]{new ListNode(new int[]{1, 4, 5}),
+    System.out.println(mergeKSortedLists23.mergeKLists2(new ListNode[]{new ListNode(new int[]{1, 4, 5}),
             new ListNode(new int[]{1, 3, 4}), new ListNode(new int[]{2, 6})}));
     System.out.println(mergeKSortedLists23.mergeKLists4(new ListNode[]{null, null}));
     System.out.println(mergeKSortedLists23.mergeKLists4(new ListNode[]{new ListNode(new int[]{1, 2, 2}), new ListNode(new int[]{1, 1, 2})}));

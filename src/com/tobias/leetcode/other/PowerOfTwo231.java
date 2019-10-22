@@ -42,18 +42,17 @@ public class PowerOfTwo231 {
     return n == 1;
   }
 
-    /**
-     * Time Limit Exceeded
-     */
+
   public boolean isPowerOfTwo1(int n) {
     if (n == 1) {
       return true;
     }
-    for (int i = 0; true; i++) {
-      int num = 2 << i;
+    int num = 0;
+    for (int i = 0; num >= 0; i++) {
+      num = 2 << i;
       if (num == n) {
         return true;
-      }
+    }
       if (num > n) {
         break;
       }
@@ -63,11 +62,12 @@ public class PowerOfTwo231 {
 
   public static void main(String[] args) {
     PowerOfTwo231 powerOfTwo231 = new PowerOfTwo231();
-    System.out.println(powerOfTwo231.isPowerOfTwo(1));
-    System.out.println(powerOfTwo231.isPowerOfTwo(16));
-    System.out.println(powerOfTwo231.isPowerOfTwo(218));
-    System.out.println(powerOfTwo231.isPowerOfTwo(256));
-    System.out.println(powerOfTwo231.isPowerOfTwo(0));
+    System.out.println(powerOfTwo231.isPowerOfTwo1(1));
+    System.out.println(powerOfTwo231.isPowerOfTwo1(16));
+    System.out.println(powerOfTwo231.isPowerOfTwo1(218));
+    System.out.println(powerOfTwo231.isPowerOfTwo1(256));
+    System.out.println(powerOfTwo231.isPowerOfTwo1(0));
+    System.out.println(powerOfTwo231.isPowerOfTwo1(1073741825));
 
   }
 }
