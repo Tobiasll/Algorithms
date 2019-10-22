@@ -1,4 +1,4 @@
-package com.tobias.leetcode.array;
+package com.tobias.leetcode.binary_search;
 
 
 /**
