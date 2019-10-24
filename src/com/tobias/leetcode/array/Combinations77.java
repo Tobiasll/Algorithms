@@ -20,11 +20,42 @@ import java.util.Set;
  *   [1,3],
  *   [1,4],
  * ]
+ *
  */
 public class Combinations77 {
 
 
-  public List<List<Integer>> combine(int n, int k) {
+  /**
+   * Runtime: 58 ms, faster than 5.15% of Java online submissions for Combinations.
+   * Memory Usage: 43.8 MB, less than 6.52% of Java online submissions for Combinations.
+   */
+  public List<List<Integer>> combineByIteratorSimulateBacktrack(int n, int k) {
+    List<List<Integer>> result = new ArrayList<>();
+    List<Integer> insideList = new ArrayList<>();
+    for (int i = 0; i < k; i++) {
+      insideList.add(0);
+    }
+    int i = 0;
+    while (i >= 0) {
+      insideList.set(i, insideList.get(i) + 1);
+      if (insideList.get(i) > n) {
+        i--;
+      } else if (i == k - 1) {
+        result.add(new ArrayList<>(insideList));
+      } else {
+        i++;
+        insideList.set(i, insideList.get(i - 1));
+      }
+
+    }
+    return result;
+  }
+
+  /**
+   * Runtime: 2 ms, faster than 96.57% of Java online submissions for Combinations.
+   * Memory Usage: 39.4 MB, less than 82.61% of Java online submissions for Combinations.
+   */
+    public List<List<Integer>> combine(int n, int k) {
     List<List<Integer>> result = new ArrayList<>();
     backtrack(1, n ,k , result, new ArrayList<>());
     return result;
@@ -35,6 +66,9 @@ public class Combinations77 {
     if (insideList.size() == k) {
       result.add(new ArrayList<>(insideList));
       return;
+
+
+
     }
     for (int i = start; i <= n - (k - insideList.size()) + 1; i++) {
       insideList.add(i);
@@ -76,11 +110,11 @@ public class Combinations77 {
 
   public static void main(String[] args) {
     Combinations77 combinations77 = new Combinations77();
-    System.out.println(combinations77.combine(4, 2));
-    System.out.println(combinations77.combine(4, 3));
-    System.out.println(combinations77.combine(5, 3));
-    System.out.println(combinations77.combine(10, 4));
-    System.out.println(combinations77.combine(1, 1));
-    System.out.println(combinations77.combine(3, 1));
+    System.out.println(combinations77.combineByIteratorSimulateBacktrack(4, 2));
+    System.out.println(combinations77.combineByIteratorSimulateBacktrack(4, 3));
+    System.out.println(combinations77.combineByIteratorSimulateBacktrack(5, 3));
+    System.out.println(combinations77.combineByIteratorSimulateBacktrack(10, 4));
+    System.out.println(combinations77.combineByIteratorSimulateBacktrack(1, 1));
+    System.out.println(combinations77.combineByIteratorSimulateBacktrack(3, 1));
   }
 }
