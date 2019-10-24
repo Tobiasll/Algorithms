@@ -16,6 +16,80 @@ import java.util.Set;
 public class Combinations77 {
 
 
+  public List<List<Integer>> combineByDynamicAttribute(int n, int k) {
+    List<List<Integer>>[] dp = new List[k + 1];
+    dp[0] = new ArrayList<>();
+    dp[0].add(new ArrayList<>());
+
+    for (int i = 1; i <= n; i++) {
+      List<List<Integer>> temp = new ArrayList<>(dp[0]);
+      for (int j = 1; j <= i && j <= k; j++) {
+        List<List<Integer>> lastList = temp;
+        if (dp[j] != null) {
+          temp = new ArrayList<>(dp[j]);
+        }
+        if (i <= j) {
+          dp[j] = new ArrayList<>();
+        }
+        for (List<Integer> list : lastList) {
+          List<Integer> tempList = new ArrayList<>(list);
+          tempList.add(i);
+          dp[j].add(tempList);
+        }
+      }
+    }
+    return dp[k];
+  }
+
+    /**
+     * Runtime: 79 ms, faster than 5.02% of Java online submissions for Combinations.
+     * Memory Usage: 176.5 MB, less than 6.52% of Java online submissions for Combinations.
+     */
+  public List<List<Integer>> combineByDynamicAttributeUseMatrixArray(int n, int k) {
+    List<List<Integer>>[][] dp = new List[n + 1][k + 1];
+
+    for (int i = 0; i < n; i++) {
+      dp[i][0] = new ArrayList();
+      dp[i][0].add(new ArrayList<>());
+    }
+
+    for (int i = 1; i <= n; i++) {
+      for (int j = 1; j <= i && j <= k; j++) {
+        dp[i][j] = new ArrayList<>();
+        if (i > j) {
+          dp[i][j].addAll(dp[i - 1][j]);
+        }
+        for (List<Integer> list : dp[i - 1][j - 1]) {
+          List<Integer> tempList = new ArrayList<>(list);
+          tempList.add(i);
+          dp[i][j].add(tempList);
+        }
+      }
+    }
+    return dp[n][k];
+  }
+
+    /**
+     * Runtime: 5 ms, faster than 84.65% of Java online submissions for Combinations.
+     * Memory Usage: 41.3 MB, less than 17.39% of Java online submissions for Combinations.
+     */
+  public List<List<Integer>> combine(int n, int k) {
+    if (k == n || k == 0) {
+      List<Integer> insideList = new ArrayList<>();
+      for (int i = 1; i <= k; i++) {
+        insideList.add(i);
+      }
+      return new ArrayList<>(Collections.singletonList(insideList));
+    }
+    List<List<Integer>> result = combine(n - 1, k - 1);
+    for (List<Integer> list : result) {
+      list.add(n);
+    }
+    result.addAll(combine(n - 1, k));
+    return result;
+  }
+
+
   /**
    * Runtime: 6 ms, faster than 82.69% of Java online submissions for Combinations.
    * Memory Usage: 38.8 MB, less than 86.96% of Java online submissions for Combinations.
@@ -38,7 +112,7 @@ public class Combinations77 {
         //(k - (i - 1） 代表当前已经有的个数，最后再加 1 是因为取了 n
         // m = 拿到当前层集合的最后一个元素然后再加一，然后放进新集合中，新集合包含了旧集合的数还有一个递增的数
         for (int m = list.get(list.size() - 1) + 1; m <= n - (k - (i - 1)) + 1; m++) {
-          List<Integer> newList = new ArrayList<Integer>(list);
+          List<Integer> newList = new ArrayList<>(list);
           newList.add(m);
           tmp.add(newList);
         }
@@ -80,7 +154,7 @@ public class Combinations77 {
    * Runtime: 2 ms, faster than 96.57% of Java online submissions for Combinations. Memory Usage:
    * 39.4 MB, less than 82.61% of Java online submissions for Combinations.
    */
-  public List<List<Integer>> combine(int n, int k) {
+  public List<List<Integer>> combineByBacktrack(int n, int k) {
     List<List<Integer>> result = new ArrayList<>();
     backtrack(1, n, k, result, new ArrayList<>());
     return result;
@@ -134,11 +208,11 @@ public class Combinations77 {
 
   public static void main(String[] args) {
     Combinations77 combinations77 = new Combinations77();
-    System.out.println(combinations77.combineByIterator(4, 2));
-    System.out.println(combinations77.combineByIterator(4, 3));
-    System.out.println(combinations77.combineByIterator(5, 3));
-    System.out.println(combinations77.combineByIterator(10, 4));
-    System.out.println(combinations77.combineByIterator(1, 1));
-    System.out.println(combinations77.combineByIterator(3, 1));
+    System.out.println(combinations77.combineByDynamicAttribute(4, 2));
+    System.out.println(combinations77.combineByDynamicAttribute(4, 3));
+    System.out.println(combinations77.combineByDynamicAttribute(5, 3));
+    System.out.println(combinations77.combineByDynamicAttribute(10, 4));
+    System.out.println(combinations77.combineByDynamicAttribute(1, 1));
+    System.out.println(combinations77.combineByDynamicAttribute(3, 1));
   }
 }
