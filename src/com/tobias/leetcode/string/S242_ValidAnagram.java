@@ -19,11 +19,14 @@ import java.util.Map;
  */
 public class S242_ValidAnagram {
 
+
+
+
   /**
    * Runtime: 3 ms, faster than 93.36% of Java online submissions for Valid Anagram.
    * Memory Usage: 37 MB, less than 97.42% of Java online submissions for Valid Anagram.
    */
-  public boolean isAnagram(String s, String t) {
+  public boolean isAnagramByIntegerArray(String s, String t) {
     if (s.length() != t.length()) {
       return false;
     }
@@ -92,7 +95,7 @@ public class S242_ValidAnagram {
 
   public static void main(String[] args) {
     S242_ValidAnagram s242_validAnagram = new S242_ValidAnagram();
-    System.out.println(s242_validAnagram.isAnagram("anagram", "nagaram"));
-    System.out.println(s242_validAnagram.isAnagram("rat", "cat"));
+    System.out.println(s242_validAnagram.isAnagramByIntegerArray("anagram", "nagaram"));
+    System.out.println(s242_validAnagram.isAnagramByIntegerArray("rat", "cat"));
   }
 }
