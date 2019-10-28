@@ -1,8 +1,6 @@
 package com.tobias.leetcode.array;
 
 
-import java.util.Arrays;
-
 /**
  * Given an integer array nums, find the contiguous subarray (containing at least one number) which
  * has the largest sum and return its sum.
@@ -65,14 +63,10 @@ public class MaximumSubarray53 {
 
   public static void main(String[] args) {
     MaximumSubarray53 maximumSubarray53 = new MaximumSubarray53();
-    System.out.println(maximumSubarray53.maxSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
-    System.out.println(maximumSubarray53.maxSubArray(new int[]{-2, 1}));
-    maximumSubarray53.sortIntegers2(new int[]{3,2,1,4,5});
+    System.out.println(maximumSubarray53.findGreatestSumOfSubArray(new int[]{-2, 1, -3, 4, -1, 2, 1, -5, 4}));
+    System.out.println(maximumSubarray53.findGreatestSumOfSubArray(new int[]{-2, 1}));
+
   }
 
-  public void sortIntegers2(int[] A) {
-    Arrays.sort(A);
-    // write your code here
-    System.out.println(Arrays.toString(A));
-  }
+
 }
