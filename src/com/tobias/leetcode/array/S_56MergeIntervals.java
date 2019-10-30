@@ -91,10 +91,10 @@ public class S_56MergeIntervals {
 
   public static void main(String[] args) {
     S_56MergeIntervals s_56MergeIntervals = new S_56MergeIntervals();
-//    int[][] merge = s_56MergeIntervals.merge(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}});
+    int[][] merge = s_56MergeIntervals.merge(new int[][]{{1, 3}, {2, 6}, {8, 10}, {15, 18}});
 //    int[][] merge = s_56MergeIntervals.merge(new int[][]{{1, 4}, {0, 4}});
 //    int[][] merge = s_56MergeIntervals.merge(new int[][]{{1, 4}, {1, 5}});
-    int[][] merge = s_56MergeIntervals.merge(new int[][]{{1,4},{2,3}});
+//    int[][] merge = s_56MergeIntervals.merge(new int[][]{{1,4},{2,3}});
     for (int[] insideArray : merge) {
       System.out.println(Arrays.toString(insideArray));
     }
