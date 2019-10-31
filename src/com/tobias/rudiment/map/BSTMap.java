@@ -3,6 +3,7 @@ package com.tobias.rudiment.map;
 public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
 
   class Node {
+
     K key;
     V value;
     Node left;
@@ -50,7 +51,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
 
   @Override
   public void add(K key, V value) {
-   root = add(root, key, value);
+    root = add(root, key, value);
   }
 
 

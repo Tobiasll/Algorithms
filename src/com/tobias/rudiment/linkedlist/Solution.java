@@ -17,7 +17,6 @@ public class Solution {
 
   private ListNode removeElements2(ListNode head, int val) {
 
-
     ListNode dummyHead = new ListNode(-1);
     dummyHead.next = head;
     handleData(val, dummyHead);
@@ -28,11 +27,10 @@ public class Solution {
   private void handleData(int val, ListNode dummyHead) {
     ListNode prev = dummyHead;
 
-    while(prev.next != null){
-      if(prev.next.val == val) {
+    while (prev.next != null) {
+      if (prev.next.val == val) {
         prev.next = prev.next.next;
-      }
-      else {
+      } else {
         prev = prev.next;
       }
     }

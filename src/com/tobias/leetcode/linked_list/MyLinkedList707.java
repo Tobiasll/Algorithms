@@ -3,6 +3,7 @@ package com.tobias.leetcode.linked_list;
 public class MyLinkedList707 {
 
   private class Node {
+
     int val;
     Node next;
 
@@ -20,12 +21,16 @@ public class MyLinkedList707 {
   private int size;
   private Node head;
 
-  /** Initialize your data structure here. */
+  /**
+   * Initialize your data structure here.
+   */
   public MyLinkedList707() {
     head = new Node(0, null);
   }
 
-  /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
+  /**
+   * Get the value of the index-th node in the linked list. If the index is invalid, return -1.
+   */
   public int get(int index) {
     if (index < 0 | index >= size) {
       return -1;
@@ -37,7 +42,10 @@ public class MyLinkedList707 {
     return cur.val;
   }
 
-  /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
+  /**
+   * Add a node of value val before the first element of the linked list. After the insertion, the
+   * new node will be the first node of the linked list.
+   */
   public void addAtHead(int val) {
     add(0, val);
   }
@@ -51,12 +59,18 @@ public class MyLinkedList707 {
     size++;
   }
 
-  /** Append a node of value val to the last element of the linked list. */
+  /**
+   * Append a node of value val to the last element of the linked list.
+   */
   public void addAtTail(int val) {
     add(size, val);
   }
 
-  /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
+  /**
+   * Add a node of value val before the index-th node in the linked list. If index equals to the
+   * length of linked list, the node will be appended to the end of linked list. If index is greater
+   * than the length, the node will not be inserted.
+   */
   public void addAtIndex(int index, int val) {
     if (index <= size && index >= 0) {
       add(index, val);
@@ -65,7 +79,9 @@ public class MyLinkedList707 {
     }
   }
 
-  /** Delete the index-th node in the linked list, if the index is valid. */
+  /**
+   * Delete the index-th node in the linked list, if the index is valid.
+   */
   public void deleteAtIndex(int index) {
     if (index >= 0 && index <= size) {
       Node cur = head;
@@ -96,7 +112,6 @@ public class MyLinkedList707 {
 
     // ["MyLinkedList","addAtIndex","get","deleteAtIndex"]
     //[[],[-1,0],[0],[-1]]
-
 
     linkedList.addAtTail(0);
     linkedList.addAtTail(2);

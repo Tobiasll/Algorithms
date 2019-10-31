@@ -12,31 +12,14 @@ import java.util.List;
  *
  * Example:
  *
- * Input: nums = [1,2,3]
- * Output:
- * [
- *   [3],
- *   [1],
- *   [2],
- *   [1,2,3],
- *   [1,3],
- *   [2,3],
- *   [1,2],
- *   []
- * ]
+ * Input: nums = [1,2,3] Output: [ [3], [1], [2], [1,2,3], [1,3], [2,3], [1,2], [] ]
  */
 public class Subsets78 {
 
   /**
-   *  000 | []  | []
-   *  001 | 001 | [1]
-   *  010 | 020 | [2]
-   *  011 | 021 | [1, 2]
-   *  100 | 300 | [3]
-   *  101 | 301 | [1, 3]
-   *  110 | 320 | [2, 3]
-   *  111 | 321 | [1, 2, 3]
-    */
+   * 000 | []  | [] 001 | 001 | [1] 010 | 020 | [2] 011 | 021 | [1, 2] 100 | 300 | [3] 101 | 301 |
+   * [1, 3] 110 | 320 | [2, 3] 111 | 321 | [1, 2, 3]
+   */
   public List<List<Integer>> subsetsByDisplacement(int[] nums) {
     List<List<Integer>> result = new ArrayList<>(1 << nums.length);
     int bitNums = nums.length;
@@ -66,7 +49,8 @@ public class Subsets78 {
     return result;
   }
 
-  private void backtrack(int[] nums, int start, List<Integer> tempList, List<List<Integer>> result) {
+  private void backtrack(int[] nums, int start, List<Integer> tempList,
+      List<List<Integer>> result) {
     result.add(new ArrayList<>(tempList));
     for (int i = start; i < nums.length; i++) {
       tempList.add(nums[i]);
@@ -91,7 +75,7 @@ public class Subsets78 {
     return result;
   }
 
-    public List<List<Integer>> subsetsByForeach1(int[] nums) {
+  public List<List<Integer>> subsetsByForeach1(int[] nums) {
 
     List<List<Integer>> result = new ArrayList<>(1 << nums.length);
     result.add(Collections.emptyList());

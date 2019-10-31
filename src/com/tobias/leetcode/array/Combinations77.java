@@ -41,10 +41,10 @@ public class Combinations77 {
     return dp[k];
   }
 
-    /**
-     * Runtime: 79 ms, faster than 5.02% of Java online submissions for Combinations.
-     * Memory Usage: 176.5 MB, less than 6.52% of Java online submissions for Combinations.
-     */
+  /**
+   * Runtime: 79 ms, faster than 5.02% of Java online submissions for Combinations. Memory Usage:
+   * 176.5 MB, less than 6.52% of Java online submissions for Combinations.
+   */
   public List<List<Integer>> combineByDynamicAttributeUseMatrixArray(int n, int k) {
     List<List<Integer>>[][] dp = new List[n + 1][k + 1];
 
@@ -69,10 +69,10 @@ public class Combinations77 {
     return dp[n][k];
   }
 
-    /**
-     * Runtime: 5 ms, faster than 84.65% of Java online submissions for Combinations.
-     * Memory Usage: 41.3 MB, less than 17.39% of Java online submissions for Combinations.
-     */
+  /**
+   * Runtime: 5 ms, faster than 84.65% of Java online submissions for Combinations. Memory Usage:
+   * 41.3 MB, less than 17.39% of Java online submissions for Combinations.
+   */
   public List<List<Integer>> combine(int n, int k) {
     if (k == n || k == 0) {
       List<Integer> insideList = new ArrayList<>();
@@ -91,8 +91,8 @@ public class Combinations77 {
 
 
   /**
-   * Runtime: 6 ms, faster than 82.69% of Java online submissions for Combinations.
-   * Memory Usage: 38.8 MB, less than 86.96% of Java online submissions for Combinations.
+   * Runtime: 6 ms, faster than 82.69% of Java online submissions for Combinations. Memory Usage:
+   * 38.8 MB, less than 86.96% of Java online submissions for Combinations.
    */
   public List<List<Integer>> combineByIterator(int n, int k) {
     if (n == 0 || k == 0 || k > n) {

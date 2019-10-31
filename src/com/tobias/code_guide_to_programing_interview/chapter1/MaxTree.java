@@ -53,11 +53,11 @@ public class MaxTree {
       Node currentNode = nodes[i];
       Node left = lmap.get(currentNode);
       Node right = rmap.get(currentNode);
-      if (left == null && right == null){
-       head = currentNode;
+      if (left == null && right == null) {
+        head = currentNode;
       } else if (left == null) {
         if (right.left == null) {
-          right.left= currentNode;
+          right.left = currentNode;
         } else {
           right.right = currentNode;
         }

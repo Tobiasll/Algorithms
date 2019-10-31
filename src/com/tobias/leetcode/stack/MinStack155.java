@@ -66,7 +66,7 @@ public class MinStack155 {
   }
 
   public void pop() {
-    if (tail != null ) {
+    if (tail != null) {
       if (tail.prev != null) {
         tail = tail.prev;
       } else {
@@ -126,6 +126,6 @@ public class MinStack155 {
     minStack.pop();
     System.out.println(minStack.getMin());
     System.out.println(minStack);
-  //[null,null,null,null,2147483647,null,2147483646,null,2147483646,null,null,2147483647,2147483647,null,-2147483648,-2147483648,null,2147483647]
+    //[null,null,null,null,2147483647,null,2147483646,null,2147483646,null,null,2147483647,2147483647,null,-2147483648,-2147483648,null,2147483647]
   }
 }

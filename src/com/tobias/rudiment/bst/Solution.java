@@ -4,7 +4,8 @@ package com.tobias.rudiment.bst;
 import java.util.LinkedList;
 
 class TreeNode {
-  int val ;
+
+  int val;
   TreeNode left;
   TreeNode right;
 
@@ -15,7 +16,7 @@ class TreeNode {
 
 public class Solution {
 
-  private int[] array = { 1, 2, 7, 3, 5, 8, 9, 4, 6, 10, 11};
+  private int[] array = {1, 2, 7, 3, 5, 8, 9, 4, 6, 10, 11};
   private LinkedList<TreeNode> nodeList;
   private static int count = 0;
 
@@ -26,7 +27,7 @@ public class Solution {
     }
     //最后一个父节点在数组中的索引
     int lastParentIndex = array.length / 2 - 1;
-    for(int parentInex = 0; parentInex < lastParentIndex; parentInex++) {
+    for (int parentInex = 0; parentInex < lastParentIndex; parentInex++) {
       nodeList.get(parentInex).left = nodeList.get(parentInex * 2 + 1);
       nodeList.get(parentInex).right = nodeList.get(parentInex * 2 + 2);
     }
@@ -34,24 +35,26 @@ public class Solution {
     // 左孩子
     nodeList.get(lastParentIndex).left = nodeList.get(lastParentIndex * 2 + 1);
     // 右孩子
-    if(array.length % 2 == 1) {
+    if (array.length % 2 == 1) {
       nodeList.get(lastParentIndex).right = nodeList.get(lastParentIndex * 2 + 2);
     }
   }
 
   // 层次遍历
   public void levelTraverse(TreeNode root) {
-    if(root == null) return;
+    if (root == null) {
+      return;
+    }
 
     LinkedList<TreeNode> list = new LinkedList<>();
     list.add(root);
-    while(list.size() != 0) {
+    while (list.size() != 0) {
       TreeNode node = list.removeFirst();
       System.out.print(node.val + " ");
-      if(node.left != null) {
+      if (node.left != null) {
         list.add(node.left);
       }
-      if(node.right != null) {
+      if (node.right != null) {
         list.add(node.right);
       }
     }
@@ -60,7 +63,7 @@ public class Solution {
 
 
   public TreeNode invertTree(TreeNode root) {
-    if(root == null){
+    if (root == null) {
       count++;
       return null;
     }

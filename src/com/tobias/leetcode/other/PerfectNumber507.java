@@ -10,7 +10,6 @@ package com.tobias.leetcode.other;
 public class PerfectNumber507 {
 
 
-
   public boolean checkPerfectNumber(int num) {
     int sum = 1;
     for (int i = 2; i * i < num; i++) {
@@ -18,7 +17,6 @@ public class PerfectNumber507 {
         sum = sum + i + num / i;
       }
     }
-
 
     return sum == num && num != 1;
   }

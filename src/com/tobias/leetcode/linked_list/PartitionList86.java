@@ -2,14 +2,14 @@ package com.tobias.leetcode.linked_list;
 
 
 /**
- *Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
+ * Given a linked list and a value x, partition it such that all nodes less than x come before nodes
+ * greater than or equal to x.
  *
  * You should preserve the original relative order of the nodes in each of the two partitions.
  *
  * Example:
  *
- * Input: head = 1->4->3->2->5->2, x = 3
- * Output: 1->2->2->4->3->5
+ * Input: head = 1->4->3->2->5->2, x = 3 Output: 1->2->2->4->3->5
  */
 public class PartitionList86 {
 
@@ -33,7 +33,7 @@ public class PartitionList86 {
     return minListNode.next;
   }
 
-    public ListNode partition(ListNode head, int x) {
+  public ListNode partition(ListNode head, int x) {
     ListNode dummy = new ListNode(0);
     dummy.next = head;
     ListNode tail = null;
@@ -44,7 +44,7 @@ public class PartitionList86 {
         tail = head;
         head = head.next;
         break;
-      }else {
+      } else {
         head = head.next;
       }
     }
@@ -60,7 +60,7 @@ public class PartitionList86 {
         tail.next = move;
         //更新 tail
         tail = move;
-      }else{
+      } else {
         head = head.next;
       }
 
@@ -69,12 +69,9 @@ public class PartitionList86 {
   }
 
 
-
-
-
   public static void main(String[] args) {
     PartitionList86 partitionList86 = new PartitionList86();
-    System.out.println(partitionList86.partition2(new ListNode(new int[]{1,4,3,2,5,2}), 3));
-    System.out.println(partitionList86.partition2(new ListNode(new int[]{2,1}), 2));
+    System.out.println(partitionList86.partition2(new ListNode(new int[]{1, 4, 3, 2, 5, 2}), 3));
+    System.out.println(partitionList86.partition2(new ListNode(new int[]{2, 1}), 2));
   }
 }

@@ -6,26 +6,13 @@ package com.tobias.leetcode.string;
  *
  * For example:
  *
- *     1 -> A
- *     2 -> B
- *     3 -> C
- *     ...
- *     26 -> Z
- *     27 -> AA
- *     28 -> AB
- *     ...
- * Example 1:
+ * 1 -> A 2 -> B 3 -> C ... 26 -> Z 27 -> AA 28 -> AB ... Example 1:
  *
- * Input: 1
- * Output: "A"
- * Example 2:
+ * Input: 1 Output: "A" Example 2:
  *
- * Input: 28
- * Output: "AB"
- * Example 3:
+ * Input: 28 Output: "AB" Example 3:
  *
- * Input: 701
- * Output: "ZY"
+ * Input: 701 Output: "ZY"
  */
 public class ExcelSheetColumnTitle168 {
 
@@ -33,7 +20,7 @@ public class ExcelSheetColumnTitle168 {
     StringBuilder result = new StringBuilder();
     while (n > 0) {
       n--;
-      result.append((char)('A' +  n % 26));
+      result.append((char) ('A' + n % 26));
       n /= 26;
 
     }

@@ -9,15 +9,14 @@ package com.tobias.leetcode.array;
  *
  * 示例：
  *
- * 输入：[4,2,5,7]
- * 输出：[4,5,2,7]
- * 解释：[4,7,2,5]，[2,5,4,7]，[2,7,4,5] 也会被接受。
+ * 输入：[4,2,5,7] 输出：[4,5,2,7] 解释：[4,7,2,5]，[2,5,4,7]，[2,7,4,5] 也会被接受。
  */
 public class Solution922 {
 
   public static void main(String[] args) {
 
   }
+
   public static int[] sortArrayByParityII(int[] A) {
 
     int j = 1;

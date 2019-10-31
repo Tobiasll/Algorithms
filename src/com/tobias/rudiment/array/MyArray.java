@@ -2,7 +2,6 @@ package com.tobias.rudiment.array;
 
 /**
  * @author Tobias
- * @param <E>
  */
 
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -123,7 +122,7 @@ public class MyArray<E extends Number> {
       System.arraycopy(data, index + 1, data, index, size - index);
     }
     size--;
-    if (size == data.length / REDUCE_MULTIPLE && data.length > CAPACITY ) {
+    if (size == data.length / REDUCE_MULTIPLE && data.length > CAPACITY) {
       resize(data.length / 2);
     }
     return elementOfRemove;

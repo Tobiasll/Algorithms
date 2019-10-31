@@ -31,8 +31,9 @@ public class MergeSortedArray88 {
         continue;
       }
       if (nums1[i] >= nums2[j]) {
-        if (m + j - i >= 0)
+        if (m + j - i >= 0) {
           System.arraycopy(nums1, i, nums1, i + 1, m + j - i);
+        }
         nums1[i++] = nums2[j++];
       } else {
         i++;
@@ -46,8 +47,9 @@ public class MergeSortedArray88 {
     if (n == 0) {
       return;
     }
-    if (m >= 0)
+    if (m >= 0) {
       System.arraycopy(nums1, 0, nums1, n, m);
+    }
     int i = n, j = 0, k = 0;
     while (j < n) {
       if (n + m == i) {
@@ -89,13 +91,11 @@ public class MergeSortedArray88 {
   }
 
 
-
-
   public static void main(String[] args) {
     MergeSortedArray88 mergeSortedArray88 = new MergeSortedArray88();
 //    mergeSortedArray88.mergeByDirect(new int[]{1, 2, 3, 4, 0, 0, 0, 0}, 4, new int[]{1, 2, 5, 6}, 4);
 //    mergeSortedArray88.mergeByDirect(new int[]{1, 2, 3, 4, 0, 0, 0}, 4, new int[]{2, 5, 6}, 3);
-    mergeSortedArray88.merge3(new int[]{1, 2 ,3, 0, 0, 0, 0}, 3, new int[]{2, 5, 6, 7}, 4);
-    mergeSortedArray88.merge3(new int[]{4,0,0,0,0,0}, 1, new int[]{1,2,3,5,6}, 5);
+    mergeSortedArray88.merge3(new int[]{1, 2, 3, 0, 0, 0, 0}, 3, new int[]{2, 5, 6, 7}, 4);
+    mergeSortedArray88.merge3(new int[]{4, 0, 0, 0, 0, 0}, 1, new int[]{1, 2, 3, 5, 6}, 5);
   }
 }

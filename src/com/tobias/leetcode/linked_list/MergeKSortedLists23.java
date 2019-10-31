@@ -61,16 +61,16 @@ public class MergeKSortedLists23 {
   }
 
   /**
-     * Runtime: 38 ms, faster than 22.41% of Java online submissions for Merge k Sorted Lists.
-     * Memory Usage: 38 MB, less than 95.63% of Java online submissions for Merge k Sorted Lists.
-     */
+   * Runtime: 38 ms, faster than 22.41% of Java online submissions for Merge k Sorted Lists. Memory
+   * Usage: 38 MB, less than 95.63% of Java online submissions for Merge k Sorted Lists.
+   */
   public ListNode mergeKLists3(ListNode[] lists) {
 
     ListNode result = new ListNode(0);
     Queue<ListNode> queue = new PriorityQueue<>(Comparator.comparingInt(o -> o.val));
     for (ListNode list : lists) {
       // list 为空会报错，优先队列的offer源码会监测是否为空，一旦为空会抛空指针异常，同时判空可以减少一丢丢时间复杂度（忽略不计）
-      if (list != null ) {
+      if (list != null) {
         queue.add(list);
       }
     }
@@ -87,14 +87,14 @@ public class MergeKSortedLists23 {
   }
 
 
-    /**
-     * Runtime: 1098 ms, faster than 5.01% of Java online submissions for Merge k Sorted Lists. Memory
-     * Usage: 59.2 MB, less than 5.47% of Java online submissions for Merge k Sorted Lists.
-     *
-     * use isBreak : Runtime: 332 ms, faster than 5.48% of Java online submissions for Merge k Sorted
-     * Lists. Memory Usage: 57.8 MB, less than 5.47% of Java online submissions for Merge k Sorted
-     * Lists.
-     */
+  /**
+   * Runtime: 1098 ms, faster than 5.01% of Java online submissions for Merge k Sorted Lists. Memory
+   * Usage: 59.2 MB, less than 5.47% of Java online submissions for Merge k Sorted Lists.
+   *
+   * use isBreak : Runtime: 332 ms, faster than 5.48% of Java online submissions for Merge k Sorted
+   * Lists. Memory Usage: 57.8 MB, less than 5.47% of Java online submissions for Merge k Sorted
+   * Lists.
+   */
   public ListNode mergeKLists2(ListNode[] lists) {
     if (lists == null || lists.length == 0) {
       return null;
@@ -160,10 +160,12 @@ public class MergeKSortedLists23 {
 
   public static void main(String[] args) {
     MergeKSortedLists23 mergeKSortedLists23 = new MergeKSortedLists23();
-    System.out.println(mergeKSortedLists23.mergeKLists2(new ListNode[]{new ListNode(new int[]{1, 4, 5}),
+    System.out
+        .println(mergeKSortedLists23.mergeKLists2(new ListNode[]{new ListNode(new int[]{1, 4, 5}),
             new ListNode(new int[]{1, 3, 4}), new ListNode(new int[]{2, 6})}));
     System.out.println(mergeKSortedLists23.mergeKLists4(new ListNode[]{null, null}));
-    System.out.println(mergeKSortedLists23.mergeKLists4(new ListNode[]{new ListNode(new int[]{1, 2, 2}), new ListNode(new int[]{1, 1, 2})}));
+    System.out.println(mergeKSortedLists23.mergeKLists4(
+        new ListNode[]{new ListNode(new int[]{1, 2, 2}), new ListNode(new int[]{1, 1, 2})}));
 
   }
 }

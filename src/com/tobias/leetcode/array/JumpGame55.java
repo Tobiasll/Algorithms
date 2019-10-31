@@ -62,7 +62,7 @@ public class JumpGame55 {
     return true;
   }
 
-    public boolean canJumpByEager2(int[] nums) {
+  public boolean canJumpByEager2(int[] nums) {
     int position = nums.length - 1;
     boolean isUpdate;
     while (position != 0) {
@@ -84,8 +84,7 @@ public class JumpGame55 {
   }
 
 
-
-    public boolean canJumpByEager1(int[] nums) {
+  public boolean canJumpByEager1(int[] nums) {
     int end = 0;
     int maxPosition = 0;
 
@@ -107,7 +106,7 @@ public class JumpGame55 {
     System.out.println(jumpGame55.canJump(new int[]{2, 3, 1, 1, 4}));
     System.out.println(jumpGame55.canJump(new int[]{3, 2, 1, 0, 4}));
     System.out.println(jumpGame55.canJump(new int[]{0}));
-    System.out.println(jumpGame55.canJump(new int[]{2,0,0}));
-    System.out.println(jumpGame55.canJump(new int[]{3,0,0,0}));
+    System.out.println(jumpGame55.canJump(new int[]{2, 0, 0}));
+    System.out.println(jumpGame55.canJump(new int[]{3, 0, 0, 0}));
   }
 }

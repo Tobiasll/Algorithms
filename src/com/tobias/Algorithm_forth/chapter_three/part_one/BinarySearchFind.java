@@ -1,6 +1,6 @@
 package com.tobias.Algorithm_forth.chapter_three.part_one;
 
-public class BinarySearchFind<K extends Comparable<K>, V>  {
+public class BinarySearchFind<K extends Comparable<K>, V> {
 
   private K[] keys;
   private V[] values;
@@ -45,7 +45,8 @@ public class BinarySearchFind<K extends Comparable<K>, V>  {
     }
     int rank = rank(key);
     if (rank < size) {
-      return values[rank]; }
+      return values[rank];
+    }
 
     return null;
   }
@@ -73,7 +74,7 @@ public class BinarySearchFind<K extends Comparable<K>, V>  {
       if (keys[mid].compareTo(key) > 0) {
         hi = mid - 1;
       } else if (keys[mid].compareTo(key) < 0) {
-         low = mid + 1;
+        low = mid + 1;
       } else {
         return mid;
       }

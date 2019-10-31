@@ -16,7 +16,7 @@ public class MaxRecSize {
         highs[j] = map[i][j] == 0 ? 0 : highs[j] + 1;
       }
       System.out.println(Arrays.toString(highs));
-      maxRecSzie = Math.max(maxRecFromBottom(highs) ,maxRecSzie);
+      maxRecSzie = Math.max(maxRecFromBottom(highs), maxRecSzie);
     }
 
     return maxRecSzie;
@@ -48,7 +48,7 @@ public class MaxRecSize {
   public static void main(String[] args) {
     MaxRecSize object = new MaxRecSize();
 //    int maxRecSize = object.getMaxRecSize(new int[][]{{1, 0, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 0}});
-    int maxRecSize = object.maxRecFromBottom(new int[]{1,8,6,2,5,4,8,3,7});
+    int maxRecSize = object.maxRecFromBottom(new int[]{1, 8, 6, 2, 5, 4, 8, 3, 7});
     System.out.println(maxRecSize);
 
   }

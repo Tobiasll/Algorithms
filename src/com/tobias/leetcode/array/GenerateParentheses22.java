@@ -6,17 +6,12 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+ * Given n pairs of parentheses, write a function to generate all combinations of well-formed
+ * parentheses.
  *
  * For example, given n = 3, a solution set is:
  *
- * [
- *   "((()))",
- *   "(()())",
- *   "(())()",
- *   "()(())",
- *   "()()()"
- * ]
+ * [ "((()))", "(()())", "(())()", "()(())", "()()()" ]
  */
 public class GenerateParentheses22 {
 
@@ -35,19 +30,18 @@ public class GenerateParentheses22 {
   }
 
   /**
-   * the best solve
-   * My method is DP. First consider how to get the result f(n) from previous result f(0)...f(n-1).
-   * Actually, the result f(n) will be put an extra () pair to f(n-1). Let the "(" always at the first position, to produce a valid result, we can only put ")" in a way that there will be i pairs () inside the extra () and n - 1 - i pairs () outside the extra pair.
+   * the best solve My method is DP. First consider how to get the result f(n) from previous result
+   * f(0)...f(n-1). Actually, the result f(n) will be put an extra () pair to f(n-1). Let the "("
+   * always at the first position, to produce a valid result, we can only put ")" in a way that
+   * there will be i pairs () inside the extra () and n - 1 - i pairs () outside the extra pair.
    *
    * Let us consider an example to get clear view:
    *
-   * f(0): ""
-   * f(1): "("f(0)")"
-   * f(2): "("f(0)")"f(1), "("f(1)")"
-   * f(3): "("f(0)")"f(2), "("f(1)")"f(1), "("f(2)")"
-   * So f(n) = "("f(0)")"f(n-1) , "("f(1)")"f(n-2) "("f(2)")"f(n-3) ... "("f(i)")"f(n-1-i) ... "(f(n-1)")"
+   * f(0): "" f(1): "("f(0)")" f(2): "("f(0)")"f(1), "("f(1)")" f(3): "("f(0)")"f(2),
+   * "("f(1)")"f(1), "("f(2)")" So f(n) = "("f(0)")"f(n-1) , "("f(1)")"f(n-2) "("f(2)")"f(n-3) ...
+   * "("f(i)")"f(n-1-i) ... "(f(n-1)")"
    */
-  private List<String> addGenerateParenthesesByPD( int n) {
+  private List<String> addGenerateParenthesesByPD(int n) {
     List<List<String>> lists = new ArrayList<>();
     lists.add(Collections.singletonList(""));
 
@@ -81,14 +75,15 @@ public class GenerateParentheses22 {
     }
 
     if (left > 0) {
-      addGenerateParentheses(list, str + "(", left  - 1, right);
+      addGenerateParentheses(list, str + "(", left - 1, right);
     }
     if (right > 0) {
       addGenerateParentheses(list, str + ")", left, right - 1);
     }
   }
 
-  private void addGenerateParentheses2(List<String> list, String str, int open, int close, int max) {
+  private void addGenerateParentheses2(List<String> list, String str, int open, int close,
+      int max) {
 
     if (str.length() == max * 2) {
       list.add(str);
@@ -96,7 +91,7 @@ public class GenerateParentheses22 {
     }
 
     if (open < max) {
-      addGenerateParentheses2(list, str + "(", open  + 1, close, max);
+      addGenerateParentheses2(list, str + "(", open + 1, close, max);
     }
     if (close < open) {
       addGenerateParentheses2(list, str + ")", open, close + 1, max);

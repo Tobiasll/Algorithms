@@ -7,10 +7,9 @@ import java.util.Arrays;
  *
  * A sudoku solution must satisfy all of the following rules:
  *
- * Each of the digits 1-9 must occur exactly once in each row.
- * Each of the digits 1-9 must occur exactly once in each column.
- * Each of the the digits 1-9 must occur exactly once in each of the 9 3x3 sub-boxes of the grid.
- * Empty cells are indicated by the character '.'.
+ * Each of the digits 1-9 must occur exactly once in each row. Each of the digits 1-9 must occur
+ * exactly once in each column. Each of the the digits 1-9 must occur exactly once in each of the 9
+ * 3x3 sub-boxes of the grid. Empty cells are indicated by the character '.'.
  */
 public class SudokuSolver37 {
 
@@ -37,7 +36,7 @@ public class SudokuSolver37 {
               // 查看填写完是否符合要求，是否解决掉当前的问题
               if (solve(board)) {
                 // 解决成功
-                 return true;
+                return true;
               } else {
                 // 进行回溯
                 // 解决失败，将刚刚填写进去的数字去除，递增数字，尝试将新数字填写进去，看看能不能解决问题，不能则继续递增
@@ -87,9 +86,14 @@ public class SudokuSolver37 {
 
   public static void main(String[] args) {
 
-    char[][] board = new char[][]{{'5','3','.','.','7','.','.','.','.'},{'6','.','.','1','9','5','.','.','.'},{'.','9','8','.','.','.','.','6','.'},
-      {'8','.','.','.','6','.','.','.','3'},{'4','.','.','8','.','3','.','.','1'}
-    ,{'7','.','.','.','2','.','.','.','6'},{'.','6','.','.','.','.','2','8','.'},{'.','.','.','4','1','9','.','.','5'},{'.','.','.','.','8','.','.','7','9'}};
+    char[][] board = new char[][]{{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
+        {'6', '.', '.', '1', '9', '5', '.', '.', '.'},
+        {'.', '9', '8', '.', '.', '.', '.', '6', '.'},
+        {'8', '.', '.', '.', '6', '.', '.', '.', '3'}, {'4', '.', '.', '8', '.', '3', '.', '.', '1'}
+        , {'7', '.', '.', '.', '2', '.', '.', '.', '6'},
+        {'.', '6', '.', '.', '.', '.', '2', '8', '.'},
+        {'.', '.', '.', '4', '1', '9', '.', '.', '5'},
+        {'.', '.', '.', '.', '8', '.', '.', '7', '9'}};
 
     SudokuSolver37 sudokuSolver37 = new SudokuSolver37();
     sudokuSolver37.solveSudoku(board);

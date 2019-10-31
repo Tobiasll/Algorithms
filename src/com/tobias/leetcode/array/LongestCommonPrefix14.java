@@ -7,13 +7,10 @@ package com.tobias.leetcode.array;
  *
  * Example 1:
  *
- * Input: ["flower","flow","flight"]
- * Output: "fl"
- * Example 2:
+ * Input: ["flower","flow","flight"] Output: "fl" Example 2:
  *
- * Input: ["dog","racecar","car"]
- * Output: ""
- * Explanation: There is no common prefix among the input strings.
+ * Input: ["dog","racecar","car"] Output: "" Explanation: There is no common prefix among the input
+ * strings.
  */
 public class LongestCommonPrefix14 {
 
@@ -34,7 +31,8 @@ public class LongestCommonPrefix14 {
 
   public static void main(String[] args) {
     LongestCommonPrefix14 commonPrefix14 = new LongestCommonPrefix14();
-    System.out.println(commonPrefix14.longestCommonPrefix(new String[]{"flower","flow","flight"}));
-    System.out.println(commonPrefix14.longestCommonPrefix(new String[]{"dog","racecar","car"}));
+    System.out
+        .println(commonPrefix14.longestCommonPrefix(new String[]{"flower", "flow", "flight"}));
+    System.out.println(commonPrefix14.longestCommonPrefix(new String[]{"dog", "racecar", "car"}));
   }
 }

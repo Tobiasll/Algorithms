@@ -3,17 +3,11 @@ package com.tobias.cat;
 import java.util.HashMap;
 
 /**
- * 157. 判断字符串是否没有重复字符
- * 实现一个算法确定字符串中的字符是否均唯一出现
+ * 157. 判断字符串是否没有重复字符 实现一个算法确定字符串中的字符是否均唯一出现
  *
- * 样例
- * Example 1:
- * 	Input: "abc_____"
- * 	Output: false
+ * 样例 Example 1: Input: "abc_____" Output: false
  *
- * Example 2:
- * 	Input:  "abc"
- * 	Output: true
+ * Example 2: Input:  "abc" Output: true
  */
 public class Solution157 {
 

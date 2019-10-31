@@ -16,8 +16,9 @@ public class UnionFind implements UF {
   }
 
   private int find(int p) {
-    if(p < 0 || p >= parent.length)
+    if (p < 0 || p >= parent.length) {
       throw new IllegalArgumentException("p is out of bound.");
+    }
 
     while (p != parent[p]) {
       parent[p] = parent[parent[p]];
@@ -35,8 +36,9 @@ public class UnionFind implements UF {
 
   @Override
   public boolean isConnected(int p, int q) {
-    if(p < 0 || p >= parent.length)
+    if (p < 0 || p >= parent.length) {
       throw new IllegalArgumentException("p is out of bound.");
+    }
     return find(p) == find(q);
   }
 
@@ -47,7 +49,7 @@ public class UnionFind implements UF {
     int qRoot = find(q);
 
     if (pRoot == qRoot) {
-     return;
+      return;
     }
 
     if (rank[pRoot] < rank[qRoot]) {

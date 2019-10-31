@@ -10,7 +10,9 @@ public class ReverseLinkedListII92 {
   }
 
   private static ListNode reverseBetween(ListNode head, int m, int n) {
-    if (head == null) return head;
+    if (head == null) {
+      return head;
+    }
     ListNode dummy = new ListNode(0);
     dummy.next = head;
     ListNode first = dummy;
@@ -28,7 +30,6 @@ public class ReverseLinkedListII92 {
       first.next = later;
       later = start.next;
     }
-
 
     return dummy.next;
   }

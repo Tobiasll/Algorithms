@@ -68,7 +68,7 @@ public class RegularExpressionMatching10 {
 
     // 从 len 开始减少
     for (int i = text.length(); i >= 0; i--) {
-      
+
       for (int j = pattern.length(); j >= 0; j--) {
         // dp[text.length()][pattern.length()] 已经进行了初始化
         if (i == text.length() && j == pattern.length()) {

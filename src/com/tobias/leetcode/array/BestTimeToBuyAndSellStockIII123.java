@@ -55,7 +55,7 @@ public class BestTimeToBuyAndSellStockIII123 {
 
   public int maxProfit1(int[] prices) {
     if (prices == null || prices.length == 0) {
-       return 0;
+      return 0;
     }
     int[][][] dp = new int[prices.length][3][2];
     for (int i = 0; i < prices.length; i++) {
@@ -77,8 +77,9 @@ public class BestTimeToBuyAndSellStockIII123 {
 
   public static void main(String[] args) {
     BestTimeToBuyAndSellStockIII123 bestTimeToBuyAndSellStockIII123 = new BestTimeToBuyAndSellStockIII123();
-    System.out.println(bestTimeToBuyAndSellStockIII123.maxProfit3(new int[]{3, 3, 5, 0, 0, 3, 1, 4}));
-    System.out.println(bestTimeToBuyAndSellStockIII123.maxProfit3(new int[]{1,2,3,4,5}));
-    System.out.println(bestTimeToBuyAndSellStockIII123.maxProfit3(new int[]{7,6,4,3,1}));
+    System.out
+        .println(bestTimeToBuyAndSellStockIII123.maxProfit3(new int[]{3, 3, 5, 0, 0, 3, 1, 4}));
+    System.out.println(bestTimeToBuyAndSellStockIII123.maxProfit3(new int[]{1, 2, 3, 4, 5}));
+    System.out.println(bestTimeToBuyAndSellStockIII123.maxProfit3(new int[]{7, 6, 4, 3, 1}));
   }
 }

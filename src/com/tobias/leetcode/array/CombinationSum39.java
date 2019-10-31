@@ -9,31 +9,19 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Given a set of candidate numbers (candidates) (without duplicates) and a target number (target), find all unique combinations in candidates where the candidate numbers sums to target.
+ * Given a set of candidate numbers (candidates) (without duplicates) and a target number (target),
+ * find all unique combinations in candidates where the candidate numbers sums to target.
  *
  * The same repeated number may be chosen from candidates unlimited number of times.
  *
  * Note:
  *
- * All numbers (including target) will be positive integers.
- * The solution set must not contain duplicate combinations.
- * Example 1:
+ * All numbers (including target) will be positive integers. The solution set must not contain
+ * duplicate combinations. Example 1:
  *
- * Input: candidates = [2,3,6,7], target = 7,
- * A solution set is:
- * [
- *   [7],
- *   [2,2,3]
- * ]
- * Example 2:
+ * Input: candidates = [2,3,6,7], target = 7, A solution set is: [ [7], [2,2,3] ] Example 2:
  *
- * Input: candidates = [2,3,5], target = 8,
- * A solution set is:
- * [
- *   [2,2,2,2],
- *   [2,3,3],
- *   [3,5]
- * ]
+ * Input: candidates = [2,3,5], target = 8, A solution set is: [ [2,2,2,2], [2,3,3], [3,5] ]
  */
 public class CombinationSum39 {
 
@@ -72,7 +60,7 @@ public class CombinationSum39 {
     return opt.get(target);
   }
 
-    public List<List<Integer>> combinationSumByDynamicHasDuplicate(int[] candidates, int target) {
+  public List<List<Integer>> combinationSumByDynamicHasDuplicate(int[] candidates, int target) {
     // 动态规划将所有subproblem收集到集合中 RunTime : 82 ms Memory ： 43.8 MB
     List<List<List<Integer>>> opt = new ArrayList<>();
     // 排序数组，提升性能，这样可以提现结束循环
@@ -135,32 +123,15 @@ public class CombinationSum39 {
   }
 
   /**
-   * 回溯法的整个过程
-   * candidates = 2, 3, 5 target = 8
-   * [2] remain = 6
-   * [2, 2] remain = 4
-   * [2, 2, 2] remain = 2
-   * [2, 2, 2, 2] remain = 0 添加进结果集合
-   * [2, 2, 2, 3] remain =  -1 超出目标值，直接返回结束此调用栈
-   * [2, 2, 2, 5] remain =  -3 超出目标值，直接返回结束此调用栈
-   * [2, 2, 3] remain =  7
-   * [2, 2, 3, 3] remain = -2 超出目标值，直接返回结束此调用栈
-   * [2, 2, 3, 5] remain = -4 超出目标值，直接返回结束此调用栈
-   * [2, 2, 5] remain = -1 超出目标值，直接返回结束此调用栈
-   * [2, 3] remain = 5
-   * [2, 3, 3] remain = 0 添加进结果集合
-   * [2, 3, 5] remain = -2 超出目标值，直接返回结束此调用栈
-   * [2, 5] remain = 1
-   * [2, 5, 5] remain = -4 超出目标值，直接返回结束此调用栈
-   * [3] remain = 5
-   * [3, 3] remain = 2
-   * [3, 3, 3] remain = -1 超出目标值，直接返回结束此调用栈
-   * [3, 3, 5] remain = -3 超出目标值，直接返回结束此调用栈
-   * [3, 5] remain = 0 添加进结果集合
-   * [5] remain = 3
-   * [5, 5] remain = -2
-   * Runtime ： 4 ms	Memery ： 36.7 MB
-  */
+   * 回溯法的整个过程 candidates = 2, 3, 5 target = 8 [2] remain = 6 [2, 2] remain = 4 [2, 2, 2] remain = 2
+   * [2, 2, 2, 2] remain = 0 添加进结果集合 [2, 2, 2, 3] remain =  -1 超出目标值，直接返回结束此调用栈 [2, 2, 2, 5] remain
+   * =  -3 超出目标值，直接返回结束此调用栈 [2, 2, 3] remain =  7 [2, 2, 3, 3] remain = -2 超出目标值，直接返回结束此调用栈 [2, 2,
+   * 3, 5] remain = -4 超出目标值，直接返回结束此调用栈 [2, 2, 5] remain = -1 超出目标值，直接返回结束此调用栈 [2, 3] remain = 5 [2,
+   * 3, 3] remain = 0 添加进结果集合 [2, 3, 5] remain = -2 超出目标值，直接返回结束此调用栈 [2, 5] remain = 1 [2, 5, 5]
+   * remain = -4 超出目标值，直接返回结束此调用栈 [3] remain = 5 [3, 3] remain = 2 [3, 3, 3] remain = -1
+   * 超出目标值，直接返回结束此调用栈 [3, 3, 5] remain = -3 超出目标值，直接返回结束此调用栈 [3, 5] remain = 0 添加进结果集合 [5] remain =
+   * 3 [5, 5] remain = -2 Runtime ： 4 ms	Memery ： 36.7 MB
+   */
   private void backtrack(List<List<Integer>> result, List<Integer> templist, int[] candidates,
       int remain, int start) {
     // 不断的递减所有结果，导致结果溢出，小于零，所有直接无须进行调用下去，直接结束当前调用栈

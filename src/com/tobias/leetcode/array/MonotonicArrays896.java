@@ -3,7 +3,6 @@ package com.tobias.leetcode.array;
 public class MonotonicArrays896 {
 
 
-
   public boolean isMonotonic(int[] A) {
     boolean inc = true, dec = true;
     for (int i = 1; i < A.length; ++i) {

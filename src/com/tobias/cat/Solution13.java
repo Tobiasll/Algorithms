@@ -3,7 +3,8 @@ package com.tobias.cat;
 public class Solution13 {
 
   public static void main(String[] args) {
-    System.out.println(count("This won iz correkt. It has, No Mistakes et Oll. But there are two BIG mistakes in this sentence. and here is one more."));
+    System.out.println(count(
+        "This won iz correkt. It has, No Mistakes et Oll. But there are two BIG mistakes in this sentence. and here is one more."));
   }
 
   private static int count(String s) {

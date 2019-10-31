@@ -1,7 +1,8 @@
 package com.tobias.leetcode.array;
 
 /**
- * Given an array of non-negative integers, you are initially positioned at the first index of the array.
+ * Given an array of non-negative integers, you are initially positioned at the first index of the
+ * array.
  *
  * Each element in the array represents your maximum jump length at that position.
  *
@@ -9,11 +10,8 @@ package com.tobias.leetcode.array;
  *
  * Example:
  *
- * Input: [2,3,1,1,4]
- * Output: 2
- * Explanation: The minimum number of jumps to reach the last index is 2.
- *     Jump 1 step from index 0 to 1, then 3 steps to the last index.
- * Note:
+ * Input: [2,3,1,1,4] Output: 2 Explanation: The minimum number of jumps to reach the last index is
+ * 2. Jump 1 step from index 0 to 1, then 3 steps to the last index. Note:
  */
 public class JumpGameII45 {
 
@@ -26,7 +24,7 @@ public class JumpGameII45 {
       maxPosition = Math.max(maxPosition, nums[i] + i);
       if (end == i) {
         end = maxPosition;
-        step ++;
+        step++;
       }
 
     }
@@ -34,7 +32,7 @@ public class JumpGameII45 {
   }
 
 
-    public int jump1(int[] nums) {
+  public int jump1(int[] nums) {
     int step = 0;
     int position = nums.length - 1;
     boolean isUpdate;
@@ -58,6 +56,6 @@ public class JumpGameII45 {
 
   public static void main(String[] args) {
     JumpGameII45 jumpGameII45 = new JumpGameII45();
-    System.out.println(jumpGameII45.jump(new int[]{2,3,1,1,4}));
+    System.out.println(jumpGameII45.jump(new int[]{2, 3, 1, 1, 4}));
   }
 }

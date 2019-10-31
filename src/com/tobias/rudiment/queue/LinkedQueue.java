@@ -66,8 +66,9 @@ public class LinkedQueue<E> implements Queue<E> {
     Node delNode = head;
     head = delNode.next;
     delNode.next = null;
-    if(head == null)
+    if (head == null) {
       tail = null;
+    }
     size--;
     return delNode.e;
   }

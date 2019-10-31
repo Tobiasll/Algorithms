@@ -1,7 +1,8 @@
 package com.tobias.leetcode.string;
 
 /**
- * Given a string s consists of upper/lower-case alphabets and empty space characters ' ', return the length of last word in the string.
+ * Given a string s consists of upper/lower-case alphabets and empty space characters ' ', return
+ * the length of last word in the string.
  *
  * If the last word does not exist, return 0.
  *
@@ -9,8 +10,7 @@ package com.tobias.leetcode.string;
  *
  * Example:
  *
- * Input: "Hello World"
- * Output: 5
+ * Input: "Hello World" Output: 5
  */
 public class LengthOfLastWord58 {
 
@@ -24,7 +24,7 @@ public class LengthOfLastWord58 {
     for (int i = chars.length - 1; i >= 0; i--) {
       if (chars[i] == ' ' && hashCharacter) {
         break;
-      } else if (chars[i] != ' '){
+      } else if (chars[i] != ' ') {
         hashCharacter = true;
         count++;
       }

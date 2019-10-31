@@ -4,7 +4,9 @@ package com.tobias.leetcode.array;
 import java.util.Arrays;
 
 /**
- * Given an array nums of n integers and an integer target, find three integers in nums such that the sum is closest to target. Return the sum of the three integers. You may assume that each input would have exactly one solution.
+ * Given an array nums of n integers and an integer target, find three integers in nums such that
+ * the sum is closest to target. Return the sum of the three integers. You may assume that each
+ * input would have exactly one solution.
  *
  * Example:
  *
@@ -28,7 +30,7 @@ public class ThreeSumClosest16 {
       while (low < hi) {
         int sum = nums[low] + nums[hi] + nums[i];
         if (sum < target) {
-           low++;
+          low++;
         } else {
           hi--;
         }

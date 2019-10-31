@@ -17,7 +17,6 @@ public class Test {
     int start = 0;
     int maxLenth = 0;
 
-
     for (int i = 0; i < chars.length; i++) {
 
       if (map.get(chars[i]) != null && map.get(chars[i]) >= start) {

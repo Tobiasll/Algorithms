@@ -2,30 +2,17 @@ package com.tobias.leetcode.binary_search;
 
 
 /**
- * Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
+ * Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the
+ * following properties:
  *
- * Integers in each row are sorted from left to right.
- * The first integer of each row is greater than the last integer of the previous row.
- * Example 1:
+ * Integers in each row are sorted from left to right. The first integer of each row is greater than
+ * the last integer of the previous row. Example 1:
  *
- * Input:
- * matrix = [
- *   [1,   3,  5,  7],
- *   [10, 11, 16, 20],
- *   [23, 30, 34, 50]
- * ]
- * target = 3
- * Output: true
+ * Input: matrix = [ [1,   3,  5,  7], [10, 11, 16, 20], [23, 30, 34, 50] ] target = 3 Output: true
  * Example 2:
  *
- * Input:
- * matrix = [
- *   {1,   3,  5,  7},
- *   {10, 11, 16, 20},
- *   {23, 30, 34, 50}
- * ]
- * target = 13
- * Output: false
+ * Input: matrix = [ {1,   3,  5,  7}, {10, 11, 16, 20}, {23, 30, 34, 50} ] target = 13 Output:
+ * false
  */
 public class SearchA2DMatrix74 {
 
@@ -36,7 +23,7 @@ public class SearchA2DMatrix74 {
     if (matrix[0] == null || matrix[0].length == 0) {
       return false;
     }
-    int low = 0,  hight = matrix.length - 1, mid;
+    int low = 0, hight = matrix.length - 1, mid;
 
     while (low <= hight) {
       mid = (low + hight) >> 1;
@@ -49,8 +36,8 @@ public class SearchA2DMatrix74 {
       }
     }
     int targetArrayIndex = hight < 0 ? 0 : hight;
-     low = 0;
-     hight = matrix[targetArrayIndex].length - 1;
+    low = 0;
+    hight = matrix[targetArrayIndex].length - 1;
 
     while (low <= hight) {
       mid = (low + hight) >> 1;
@@ -91,9 +78,9 @@ public class SearchA2DMatrix74 {
   public static void main(String[] args) {
     SearchA2DMatrix74 searchA2DMatrix74 = new SearchA2DMatrix74();
     System.out.println(searchA2DMatrix74.searchMatrix(new int[][]{
-        {1,   3,  5,  7},
-        {10, 11, 16, 20},
-        {23, 30, 34, 50}},
+            {1, 3, 5, 7},
+            {10, 11, 16, 20},
+            {23, 30, 34, 50}},
         3));
     System.out.println(searchA2DMatrix74.searchMatrix(new int[][]{{1}}, 2));
     System.out.println(searchA2DMatrix74.searchMatrix(new int[][]{{}}, 2));

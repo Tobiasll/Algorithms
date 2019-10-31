@@ -17,14 +17,14 @@ public class MoveZeroes283 {
   }
 
   private static void moveZeroes(int[] nums) {
-    for(int k = 0, i = 0; i < nums.length; ++i){
-      if(nums[i] != 0 && nums[k] == 0){
+    for (int k = 0, i = 0; i < nums.length; ++i) {
+      if (nums[i] != 0 && nums[k] == 0) {
         int temp = nums[i];
         nums[i] = nums[k];
         nums[k++] = temp;
-      }
-      else if(nums[k] != 0)
+      } else if (nums[k] != 0) {
         k = i;
+      }
     }
   }
 

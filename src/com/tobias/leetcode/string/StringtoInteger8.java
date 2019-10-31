@@ -42,7 +42,6 @@ package com.tobias.leetcode.string;
 public class StringtoInteger8 {
 
 
-
   public int myAtoi(String str) {
     if (str == null || "".equals(str)) {
       return 0;
@@ -77,7 +76,7 @@ public class StringtoInteger8 {
         return Integer.MIN_VALUE;
       }
     }
-      return (int)(result * signt);
+    return (int) (result * signt);
 
   }
 

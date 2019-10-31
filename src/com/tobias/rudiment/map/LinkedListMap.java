@@ -3,6 +3,7 @@ package com.tobias.rudiment.map;
 public class LinkedListMap<K extends Comparable<K>, V> implements Map<K, V> {
 
   private class Node {
+
     K key;
     V value;
     Node next;
@@ -13,11 +14,11 @@ public class LinkedListMap<K extends Comparable<K>, V> implements Map<K, V> {
       this.next = next;
     }
 
-    Node(K key, V value){
+    Node(K key, V value) {
       this(key, value, null);
     }
 
-    Node(){
+    Node() {
       this(null, null, null);
     }
 
@@ -34,6 +35,7 @@ public class LinkedListMap<K extends Comparable<K>, V> implements Map<K, V> {
     this.size = 0;
     this.dummyHead = new Node();
   }
+
   @Override
   public int getSize() {
     return size;
@@ -66,7 +68,7 @@ public class LinkedListMap<K extends Comparable<K>, V> implements Map<K, V> {
       dummyHead.next = new Node(key, value, dummyHead.next);
       size++;
     } else {
-        node.value = value;
+      node.value = value;
     }
 
   }
@@ -84,7 +86,7 @@ public class LinkedListMap<K extends Comparable<K>, V> implements Map<K, V> {
 
   @Override
   public void set(K key, V value) {
-      add(key, value);
+    add(key, value);
   }
 
   @Override
@@ -98,7 +100,7 @@ public class LinkedListMap<K extends Comparable<K>, V> implements Map<K, V> {
       prev = prev.next;
     }
 
-    if (prev.next != null ){
+    if (prev.next != null) {
       Node delNode = prev.next;
       prev.next = delNode.next;
       delNode.next = null;

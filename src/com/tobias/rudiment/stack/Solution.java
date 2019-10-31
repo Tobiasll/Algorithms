@@ -37,7 +37,6 @@ public class Solution {
       }
     }
 
-
     return stack.isEmpty();
   }
 

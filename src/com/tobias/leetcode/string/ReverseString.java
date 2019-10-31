@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class ReverseString {
 
   public static void main(String[] args) {
-    char[] s = {'h','e','l','l','o'};
+    char[] s = {'h', 'e', 'l', 'l', 'o'};
     reverseString(s);
 
   }

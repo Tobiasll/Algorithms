@@ -5,7 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
+ * Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0?
+ * Find all unique triplets in the array which gives the sum of zero.
  *
  * Note:
  *
@@ -15,11 +16,7 @@ import java.util.List;
  *
  * Given array nums = [-1, 0, 1, 2, -1, -4],
  *
- * A solution set is:
- * [
- *   [-1, 0, 1],
- *   [-1, -1, 2]
- * ]
+ * A solution set is: [ [-1, 0, 1], [-1, -1, 2] ]
  */
 public class ThreeSum15 {
 
@@ -38,7 +35,8 @@ public class ThreeSum15 {
             while (low < hi && nums[hi] == nums[hi - 1]) {
               hi--;
             }
-            low++; hi--;
+            low++;
+            hi--;
           } else if (nums[low] + nums[hi] < sum) {
             low++;
           } else {

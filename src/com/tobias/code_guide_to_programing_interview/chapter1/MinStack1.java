@@ -33,7 +33,7 @@ public class MinStack1 {
 
   public static void main(String[] args) {
     MinStack2 minStack1 = new MinStack2();
-    int[] nums = {3, 4, 5, 1, 2,1};
+    int[] nums = {3, 4, 5, 1, 2, 1};
     for (int num : nums) {
       minStack1.push(num);
     }

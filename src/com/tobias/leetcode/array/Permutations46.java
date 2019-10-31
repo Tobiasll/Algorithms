@@ -6,20 +6,11 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *Given a collection of distinct integers, return all possible permutations.
+ * Given a collection of distinct integers, return all possible permutations.
  *
  * Example:
  *
- * Input: [1,2,3]
- * Output:
- * [
- *   [1,2,3],
- *   [1,3,2],
- *   [2,1,3],
- *   [2,3,1],
- *   [3,1,2],
- *   [3,2,1]
- * ]
+ * Input: [1,2,3] Output: [ [1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1] ]
  */
 public class Permutations46 {
 
@@ -29,7 +20,7 @@ public class Permutations46 {
     return permuteByChange(nums);
   }
 
-  int count ;
+  int count;
 
   private List<List<Integer>> permuteByChange(int[] nums) {
     List<List<Integer>> result = new ArrayList<>();

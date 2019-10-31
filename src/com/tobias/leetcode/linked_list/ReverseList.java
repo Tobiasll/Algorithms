@@ -4,7 +4,6 @@ package com.tobias.leetcode.linked_list;
 import java.util.Stack;
 
 
-
 public class ReverseList {
 
   public static void main(String[] args) {
@@ -48,8 +47,9 @@ public class ReverseList {
   }
 
   private static ListNode reverseListInt(ListNode head, ListNode newHead) {
-     if (head == null)
+    if (head == null) {
       return newHead;
+    }
     ListNode next = head.next;
     head.next = newHead;
     return reverseListInt(next, head);

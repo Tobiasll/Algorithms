@@ -8,42 +8,25 @@ import java.util.Map;
 /**
  * Given a string S and a string T, count the number of distinct subsequences of S which equals T.
  *
- * A subsequence of a string is a new string which is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (ie, "ACE" is a subsequence of "ABCDE" while "AEC" is not).
+ * A subsequence of a string is a new string which is formed from the original string by deleting
+ * some (can be none) of the characters without disturbing the relative positions of the remaining
+ * characters. (ie, "ACE" is a subsequence of "ABCDE" while "AEC" is not).
  *
  * Example 1:
  *
- * Input: S = "rabbbit", T = "rabbit"
- * Output: 3
- * Explanation:
+ * Input: S = "rabbbit", T = "rabbit" Output: 3 Explanation:
  *
- * As shown below, there are 3 ways you can generate "rabbit" from S.
- * (The caret symbol ^ means the chosen letters)
+ * As shown below, there are 3 ways you can generate "rabbit" from S. (The caret symbol ^ means the
+ * chosen letters)
  *
- * rabbbit
- * ^^^^ ^^
- * rabbbit
- * ^^ ^^^^
- * rabbbit
- * ^^^ ^^^
- * Example 2:
+ * rabbbit ^^^^ ^^ rabbbit ^^ ^^^^ rabbbit ^^^ ^^^ Example 2:
  *
- * Input: S = "babgbag", T = "bag"
- * Output: 5
- * Explanation:
+ * Input: S = "babgbag", T = "bag" Output: 5 Explanation:
  *
- * As shown below, there are 5 ways you can generate "bag" from S.
- * (The caret symbol ^ means the chosen letters)
+ * As shown below, there are 5 ways you can generate "bag" from S. (The caret symbol ^ means the
+ * chosen letters)
  *
- * babgbag
- * ^^ ^
- * babgbag
- * ^^    ^
- * babgbag
- * ^    ^^
- * babgbag
- *   ^  ^^
- * babgbag
- *     ^^^
+ * babgbag ^^ ^ babgbag ^^    ^ babgbag ^    ^^ babgbag ^  ^^ babgbag ^^^
  */
 public class DistinctSubsequences115 {
 
@@ -72,7 +55,7 @@ public class DistinctSubsequences115 {
     return dp[s.length()];
   }
 
-    public int numDistinctByDynamicPlanningWithReverseOrderArray(String s, String t) {
+  public int numDistinctByDynamicPlanningWithReverseOrderArray(String s, String t) {
     int[] dp = new int[s.length() + 1];
     for (int i = 0; i <= s.length(); i++) {
       dp[i] = 1;
@@ -93,7 +76,7 @@ public class DistinctSubsequences115 {
     return dp[0];
   }
 
-    public int numDistinctByDynamicPlanningWithMatrix(String s, String t) {
+  public int numDistinctByDynamicPlanningWithMatrix(String s, String t) {
     int[][] dp = new int[s.length() + 1][t.length() + 1];
     for (int i = 0; i <= s.length(); i++) {
       dp[i][t.length()] = 1;
@@ -117,13 +100,14 @@ public class DistinctSubsequences115 {
     return dp[0][0];
   }
 
-    public int numDistinctByBacktrack(String s, String t) {
+  public int numDistinctByBacktrack(String s, String t) {
     Map<String, Integer> map = new HashMap<>();
     numDistinctByBacktrack(s, 0, t, 0, map);
     return count;
   }
 
-  private void   numDistinctByBacktrack(String s, int sStart, String t, int tStart, Map<String, Integer> map) {
+  private void numDistinctByBacktrack(String s, int sStart, String t, int tStart,
+      Map<String, Integer> map) {
     if (tStart == t.length()) {
       count++;
       return;
@@ -146,13 +130,13 @@ public class DistinctSubsequences115 {
   }
 
 
-
   public int numDistinctBydivideAndConquer(String s, String t) {
     Map<String, Integer> map = new HashMap<>();
     return numDistinctBydivideAndConquer(s, 0, t, 0, map);
   }
 
-  private int  numDistinctBydivideAndConquer(String s, int sStart, String t, int tStart, Map<String, Integer> map) {
+  private int numDistinctBydivideAndConquer(String s, int sStart, String t, int tStart,
+      Map<String, Integer> map) {
     if (tStart == t.length()) {
       return 1;
     }
@@ -165,7 +149,8 @@ public class DistinctSubsequences115 {
       return map.get(key);
     }
     if (s.charAt(sStart) == t.charAt(tStart)) {
-      count = numDistinctBydivideAndConquer(s, sStart + 1, t, tStart + 1, map) + numDistinctBydivideAndConquer(s, sStart + 1, t, tStart, map);
+      count = numDistinctBydivideAndConquer(s, sStart + 1, t, tStart + 1, map)
+          + numDistinctBydivideAndConquer(s, sStart + 1, t, tStart, map);
     } else {
       count = numDistinctBydivideAndConquer(s, sStart + 1, t, tStart, map);
     }
@@ -176,7 +161,8 @@ public class DistinctSubsequences115 {
 
   public static void main(String[] args) {
     DistinctSubsequences115 distinctSubsequences115 = new DistinctSubsequences115();
-    System.out.println(distinctSubsequences115.numDistinctByDynamicPlanningWithOrderArray("babgbag", "bag"));
+    System.out.println(
+        distinctSubsequences115.numDistinctByDynamicPlanningWithOrderArray("babgbag", "bag"));
   }
 
 }

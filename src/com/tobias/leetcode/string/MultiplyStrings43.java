@@ -2,22 +2,18 @@ package com.tobias.leetcode.string;
 
 
 /**
- * Given two non-negative integers num1 and num2 represented as strings, return the product of num1 and num2, also represented as a string.
+ * Given two non-negative integers num1 and num2 represented as strings, return the product of num1
+ * and num2, also represented as a string.
  *
  * Example 1:
  *
- * Input: num1 = "2", num2 = "3"
- * Output: "6"
- * Example 2:
+ * Input: num1 = "2", num2 = "3" Output: "6" Example 2:
  *
- * Input: num1 = "123", num2 = "456"
- * Output: "56088"
- * Note:
+ * Input: num1 = "123", num2 = "456" Output: "56088" Note:
  *
- * The length of both num1 and num2 is < 110.
- * Both num1 and num2 contain only digits 0-9.
- * Both num1 and num2 do not contain any leading zero, except the number 0 itself.
- * You must not use any built-in BigInteger library or convert the inputs to integer directly.
+ * The length of both num1 and num2 is < 110. Both num1 and num2 contain only digits 0-9. Both num1
+ * and num2 do not contain any leading zero, except the number 0 itself. You must not use any
+ * built-in BigInteger library or convert the inputs to integer directly.
  */
 public class MultiplyStrings43 {
 
@@ -93,7 +89,7 @@ public class MultiplyStrings43 {
 
   static int calculateSum(String result, String resultPart, int firstIndex, int secondIndex,
       int carry) {
-    int digit1 = firstIndex >= 0 ?  result.charAt(firstIndex) - '0' : 0;
+    int digit1 = firstIndex >= 0 ? result.charAt(firstIndex) - '0' : 0;
     int digit2 = secondIndex >= 0 ? resultPart.charAt(secondIndex) - '0' : 0;
     return digit1 + digit2 + carry;
   }

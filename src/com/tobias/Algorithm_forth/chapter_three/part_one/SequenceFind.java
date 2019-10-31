@@ -3,11 +3,12 @@ package com.tobias.Algorithm_forth.chapter_three.part_one;
 public class SequenceFind<K extends Comparable<K>, V> {
 
   class Node {
+
     K key;
     V value;
     Node next;
 
-    public Node(K key,V value, Node next) {
+    public Node(K key, V value, Node next) {
       this.key = key;
       this.value = value;
       this.next = next;

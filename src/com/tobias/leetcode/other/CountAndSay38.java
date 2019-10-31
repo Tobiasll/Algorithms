@@ -37,7 +37,6 @@ public class CountAndSay38 {
   }
 
 
-
   public static void main(String[] args) {
     CountAndSay38 countAndSay38 = new CountAndSay38();
 //    System.out.println(countAndSay38.countAndSay(1));

@@ -5,15 +5,11 @@ import com.tobias.leetcode.linked_list.ListNode;
 /**
  * 计算一个链表中值为非负奇数的节点的个数。
  *
- * 样例
- * 样例 1：
+ * 样例 样例 1：
  *
- * 输入：1->3->5->null
- * 输出：3
- * 样例 2：
+ * 输入：1->3->5->null 输出：3 样例 2：
  *
- * 输入：0->null
- * 输出：0
+ * 输入：0->null 输出：0
  */
 public class Solution1664 {
 

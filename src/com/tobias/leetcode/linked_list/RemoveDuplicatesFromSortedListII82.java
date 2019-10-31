@@ -1,16 +1,14 @@
 package com.tobias.leetcode.linked_list;
 
 /**
- * Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list.
+ * Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct
+ * numbers from the original list.
  *
  * Example 1:
  *
- * Input: 1->2->3->3->4->4->5
- * Output: 1->2->5
- * Example 2:
+ * Input: 1->2->3->3->4->4->5 Output: 1->2->5 Example 2:
  *
- * Input: 1->1->1->2->3
- * Output: 2->3
+ * Input: 1->1->1->2->3 Output: 2->3
  */
 public class RemoveDuplicatesFromSortedListII82 {
 
@@ -29,7 +27,7 @@ public class RemoveDuplicatesFromSortedListII82 {
           resultNode.next = new ListNode(root.val);
           resultNode = resultNode.next;
         }
-      } else if (root.next != null && root.next.val == root.val){
+      } else if (root.next != null && root.next.val == root.val) {
         temp = root.val;
         count++;
       }
@@ -40,7 +38,9 @@ public class RemoveDuplicatesFromSortedListII82 {
 
   public static void main(String[] args) {
     RemoveDuplicatesFromSortedListII82 removeDuplicatesFromSortedListII82 = new RemoveDuplicatesFromSortedListII82();
-    System.out.println(removeDuplicatesFromSortedListII82.deleteDuplicates(new ListNode(new int[]{1, 2, 3, 3, 4, 4, 5})));
-    System.out.println(removeDuplicatesFromSortedListII82.deleteDuplicates(new ListNode(new int[]{-2147483648,2147483647,2})));
+    System.out.println(removeDuplicatesFromSortedListII82
+        .deleteDuplicates(new ListNode(new int[]{1, 2, 3, 3, 4, 4, 5})));
+    System.out.println(removeDuplicatesFromSortedListII82
+        .deleteDuplicates(new ListNode(new int[]{-2147483648, 2147483647, 2})));
   }
 }

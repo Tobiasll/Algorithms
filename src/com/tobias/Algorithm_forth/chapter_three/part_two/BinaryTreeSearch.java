@@ -3,6 +3,7 @@ package com.tobias.Algorithm_forth.chapter_three.part_two;
 public class BinaryTreeSearch<K extends Comparable<K>, V> {
 
   private class Node {
+
     K key;
     V value;
     Node left;

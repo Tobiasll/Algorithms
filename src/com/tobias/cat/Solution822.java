@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class Solution822 {
+
   /**
    * @param head: the given linked list
    * @return: the array that store the values in reverse order
@@ -23,7 +23,7 @@ public class Solution822 {
 
   private void traverseAndPutVal(ListNode head, List<Integer> list) {
     if (head == null) {
-      return ;
+      return;
     }
     traverseAndPutVal(head.next, list);
     list.add(head.val);

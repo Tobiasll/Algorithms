@@ -3,16 +3,16 @@ package com.tobias.leetcode.array;
 import java.util.Arrays;
 import java.util.Random;
 
-/**'
- * Given an array A of non-negative integers, return an array consisting of all the even elements of A, followed by all the odd elements of A.
+/**
+ * ' Given an array A of non-negative integers, return an array consisting of all the even elements
+ * of A, followed by all the odd elements of A.
  *
  * You may return any answer array that satisfies this condition.
-
+ *
  * Example 1:
  *
- * Input: [3,1,2,4]
- * Output: [2,4,3,1]
- * The outputs [4,2,3,1], [2,4,1,3], and [4,2,1,3] would also be accepted.
+ * Input: [3,1,2,4] Output: [2,4,3,1] The outputs [4,2,3,1], [2,4,1,3], and [4,2,1,3] would also be
+ * accepted.
  */
 
 public class Solution905 {
@@ -26,13 +26,13 @@ public class Solution905 {
     }
 
     long start = System.currentTimeMillis();
-    System.out.println(Arrays.toString(sortArrayByParitySimple(new int[]{4,3,1,2,4})));
+    System.out.println(Arrays.toString(sortArrayByParitySimple(new int[]{4, 3, 1, 2, 4})));
     long end = System.currentTimeMillis();
     System.out.println(end - start);
 
-     start = System.currentTimeMillis();
-    System.out.println(Arrays.toString(sortArrayByParity(new int[]{4,3,1,2,4})));
-     end = System.currentTimeMillis();
+    start = System.currentTimeMillis();
+    System.out.println(Arrays.toString(sortArrayByParity(new int[]{4, 3, 1, 2, 4})));
+    end = System.currentTimeMillis();
     System.out.println(end - start);
   }
 
@@ -58,9 +58,13 @@ public class Solution905 {
 
     while (low < hight) {
 
-      while (low < hight && A[low] % 2 == 0) low++;
+      while (low < hight && A[low] % 2 == 0) {
+        low++;
+      }
 
-      while (low < hight && A[hight] % 2 != 1) hight--;
+      while (low < hight && A[hight] % 2 != 1) {
+        hight--;
+      }
 
       if (low < hight) {
         int temp = A[low];
@@ -75,7 +79,7 @@ public class Solution905 {
 
   public static int[] sortArrayByParity(int[] A) {
 
-    for (int i = 0,j = 0; i < A.length; i++) {
+    for (int i = 0, j = 0; i < A.length; i++) {
       if (A[i] % 2 == 0) {
         int temp = A[j];
         A[j++] = A[i];

@@ -19,7 +19,8 @@ public class Solution5 {
 
   }
 
-  private longestPalindromeNode process(String word, int left, int right, longestPalindromeNode longestPalindromeNode) {
+  private longestPalindromeNode process(String word, int left, int right,
+      longestPalindromeNode longestPalindromeNode) {
     int maxLength;
     while (left >= 0 && right < word.length() && word.charAt(left) == word.charAt(right)) {
       left--;
@@ -41,13 +42,13 @@ public class Solution5 {
     longestPalindromeNode longestPalindromeNode = new longestPalindromeNode();
 
     for (int i = 0; i < s.length(); i++) {
-      int remainingLength  = s.length() - i;
+      int remainingLength = s.length() - i;
       int formMaxPalindrome = remainingLength + (remainingLength - 1);
       if (formMaxPalindrome < s.length() - 1) {
         break;
       }
-    longestPalindromeNode = process(s, i, i, longestPalindromeNode);
-    longestPalindromeNode = process(s, i, i + 1, longestPalindromeNode);
+      longestPalindromeNode = process(s, i, i, longestPalindromeNode);
+      longestPalindromeNode = process(s, i, i + 1, longestPalindromeNode);
     }
     return longestPalindromeNode.word;
   }

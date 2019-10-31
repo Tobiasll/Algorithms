@@ -24,7 +24,7 @@ import java.util.List;
 public class ReshapeTheMatrix566 {
 
   public static void main(String[] args) {
-    int[][] ints = matrixReshape(new int[][]{{1, 2},{3, 4}}, 1, 4);
+    int[][] ints = matrixReshape(new int[][]{{1, 2}, {3, 4}}, 1, 4);
 //    int[][] ints = matrixReshape(new int[][]{{1, 2}, {3, 4}}, 2, 2);
     for (int[] anInt : ints) {
       System.out.println(Arrays.toString(anInt));

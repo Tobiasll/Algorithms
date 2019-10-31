@@ -14,23 +14,22 @@ import java.util.List;
  *
  * Example:
  *
- * Input: 3
- * Output: [1,3,3,1]
+ * Input: 3 Output: [1,3,3,1]
  */
 public class PascalTriangleII119 {
 
   public List<Integer> bestGetRow(int rowIndex) {
-      List<Integer> result = new ArrayList<>(rowIndex + 1);
-      for (int i = 0; i <= rowIndex; i++) {
-        result.add(1);
-        for (int j = i - 1; j > 0; j--) {
-          result.set(j, result.get(j) + result.get(j - 1));
-        }
+    List<Integer> result = new ArrayList<>(rowIndex + 1);
+    for (int i = 0; i <= rowIndex; i++) {
+      result.add(1);
+      for (int j = i - 1; j > 0; j--) {
+        result.set(j, result.get(j) + result.get(j - 1));
       }
-      return result;
+    }
+    return result;
   }
 
-    public List<Integer> getRow(int rowIndex) {
+  public List<Integer> getRow(int rowIndex) {
     List<List<Integer>> result = new ArrayList<>();
     result.add(Collections.singletonList(1));
 

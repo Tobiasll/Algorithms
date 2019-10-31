@@ -1,20 +1,19 @@
 package com.tobias.leetcode.linked_list;
 
 /**
- * 21. Merge Two Sorted Lists
- * Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
+ * 21. Merge Two Sorted Lists Merge two sorted linked lists and return it as a new list. The new
+ * list should be made by splicing together the nodes of the first two lists.
  *
  * Example:
  *
- * Input: 1->2->4, 1->3->4
- * Output: 1->1->2->3->4->4
+ * Input: 1->2->4, 1->3->4 Output: 1->1->2->3->4->4
  */
 public class Solution21 {
 
   public static void main(String[] args) {
-    System.out.println(mergeTwoListsTwo(new ListNode(new int[]{1, 2, 4}), new ListNode(new int[]{1, 3, 4})));
+    System.out.println(
+        mergeTwoListsTwo(new ListNode(new int[]{1, 2, 4}), new ListNode(new int[]{1, 3, 4})));
   }
-
 
 
   private static ListNode mergeTwoListsTwo(ListNode l1, ListNode l2) {

@@ -20,11 +20,9 @@ import java.util.Map;
 public class S242_ValidAnagram {
 
 
-
-
   /**
-   * Runtime: 3 ms, faster than 93.36% of Java online submissions for Valid Anagram.
-   * Memory Usage: 37 MB, less than 97.42% of Java online submissions for Valid Anagram.
+   * Runtime: 3 ms, faster than 93.36% of Java online submissions for Valid Anagram. Memory Usage:
+   * 37 MB, less than 97.42% of Java online submissions for Valid Anagram.
    */
   public boolean isAnagramByIntegerArray(String s, String t) {
     if (s.length() != t.length()) {

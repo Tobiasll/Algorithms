@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class BinaryInsertionSort {
 
   public static void main(String[] args) {
-    System.out.println( Arrays.toString(sort(new int[]{1, 3, 4, 2, 7, 5})));
+    System.out.println(Arrays.toString(sort(new int[]{1, 3, 4, 2, 7, 5})));
 
   }
 
@@ -38,7 +38,7 @@ public class BinaryInsertionSort {
           low = mid + 1;
         }
       }
-      for(int j = i - 1; j >= low; j--) {
+      for (int j = i - 1; j >= low; j--) {
         arr[j + 1] = arr[j];
       }
       arr[low] = temp;

@@ -26,7 +26,7 @@ public class BST<E extends Comparable<E>> {
   }
 
   public Node getLeft(Node node) {
-     return node.left;
+    return node.left;
   }
 
   public Node getRight(Node node) {
@@ -173,6 +173,7 @@ public class BST<E extends Comparable<E>> {
     preOrderNR(root, sb);
     System.out.println(sb.toString());
   }
+
   private void preOrderNR(Node node, StringBuilder sb) {
     Stack<Node> stack = new Stack<>();
     stack.push(root);
@@ -223,8 +224,9 @@ public class BST<E extends Comparable<E>> {
   }
 
   public E minNode() {
-    if(size == 0)
+    if (size == 0) {
       throw new IllegalArgumentException("BST is empty");
+    }
 
     return minNode(root).e;
   }
@@ -237,8 +239,9 @@ public class BST<E extends Comparable<E>> {
   }
 
   public E maxNode() {
-    if(size == 0)
+    if (size == 0) {
       throw new IllegalArgumentException("BST is empty");
+    }
 
     return maxNode(root).e;
   }
@@ -252,7 +255,7 @@ public class BST<E extends Comparable<E>> {
   }
 
   // 从二分搜索树中删除最小值所在节点, 返回最小值
-  public E removeMin(){
+  public E removeMin() {
     E ret = minNode();
     root = removeMin(root);
     return ret;
@@ -260,12 +263,12 @@ public class BST<E extends Comparable<E>> {
 
   // 删除掉以node为根的二分搜索树中的最小节点
   // 返回删除节点后新的二分搜索树的根
-  private Node removeMin(Node node){
+  private Node removeMin(Node node) {
 
-    if(node.left == null){
+    if (node.left == null) {
       Node rightNode = node.right;
       node.right = null;
-      size --;
+      size--;
       return rightNode;
     }
 
@@ -293,34 +296,33 @@ public class BST<E extends Comparable<E>> {
 
   // 删除掉以node为根的二分搜索树中值为e的节点, 递归算法
   // 返回删除节点后新的二分搜索树的根
-  private Node remove(Node node, E e){
+  private Node remove(Node node, E e) {
 
-    if( node == null )
+    if (node == null) {
       return null;
-
-    if( e.compareTo(node.e) < 0 ){
-      node.left = remove(node.left , e);
-      return node;
     }
-    else if(e.compareTo(node.e) > 0 ){
+
+    if (e.compareTo(node.e) < 0) {
+      node.left = remove(node.left, e);
+      return node;
+    } else if (e.compareTo(node.e) > 0) {
       node.right = remove(node.right, e);
       return node;
-    }
-    else{   // e.compareTo(node.e) == 0
+    } else {   // e.compareTo(node.e) == 0
 
       // 待删除节点左子树为空的情况
-      if(node.left == null){
+      if (node.left == null) {
         Node rightNode = node.right;
         node.right = null;
-        size --;
+        size--;
         return rightNode;
       }
 
       // 待删除节点右子树为空的情况
-      if(node.right == null){
+      if (node.right == null) {
         Node leftNode = node.left;
         node.left = null;
-        size --;
+        size--;
         return leftNode;
       }
 

@@ -35,7 +35,7 @@ public abstract class MaxPQ<E extends Comparable<E>> {
 
   public abstract E max();
 
-  public abstract E delMax() ;
+  public abstract E delMax();
 
   public int size() {
     return size;

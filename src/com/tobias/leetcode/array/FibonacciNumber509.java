@@ -28,17 +28,17 @@ public class FibonacciNumber509 {
   private static int fib(int N) {
 
     return Stream.iterate(new int[]{0, 1}, t -> new int[]{t[1], t[0] + t[1]}).parallel()
-       .limit(N).map(ints -> ints[1]).reduce(0, Integer::max);
+                 .limit(N).map(ints -> ints[1]).reduce(0, Integer::max);
   }
 
   public int fib1(int N) {
-    if(N <= 1)
+    if (N <= 1) {
       return N;
+    }
 
     int a = 0, b = 1;
 
-    while(N-- > 1)
-    {
+    while (N-- > 1) {
       int sum = a + b;
       a = b;
       b = sum;

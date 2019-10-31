@@ -7,20 +7,16 @@ import java.util.Set;
 /**
  * Given an array of integers, find if the array contains any duplicates.
  *
- * Your function should return true if any value appears at least twice in the array, and it should return false if every element is distinct.
+ * Your function should return true if any value appears at least twice in the array, and it should
+ * return false if every element is distinct.
  *
  * Example 1:
  *
- * Input: [1,2,3,1]
- * Output: true
- * Example 2:
+ * Input: [1,2,3,1] Output: true Example 2:
  *
- * Input: [1,2,3,4]
- * Output: false
- * Example 3:
+ * Input: [1,2,3,4] Output: false Example 3:
  *
- * Input: [1,1,1,3,3,4,3,2,4,2]
- * Output: true
+ * Input: [1,1,1,3,3,4,3,2,4,2] Output: true
  */
 public class ContainsDuplicate217 {
 
@@ -34,21 +30,21 @@ public class ContainsDuplicate217 {
       if (i < 0) {
         i = i * -1;
       }
-      int j = i/8;
-      int k = i%8;
-      int check = 1<<k;
+      int j = i / 8;
+      int k = i % 8;
+      int check = 1 << k;
       if ((mark[j] & check) != 0) {
         return true;
       }
-      mark[j]|=check;
+      mark[j] |= check;
     }
     return false;
   }
 
 
   /**
-   * Runtime: 5 ms, faster than 96.78% of Java online submissions for Contains Duplicate.
-   * Memory Usage: 42 MB, less than 98.28% of Java online submissions for Contains Duplicate.
+   * Runtime: 5 ms, faster than 96.78% of Java online submissions for Contains Duplicate. Memory
+   * Usage: 42 MB, less than 98.28% of Java online submissions for Contains Duplicate.
    */
   public boolean containsDuplicateOrderArray(int[] nums) {
     Arrays.sort(nums);
@@ -61,8 +57,8 @@ public class ContainsDuplicate217 {
   }
 
   /**
-   * Runtime: 9 ms, faster than 60.78% of Java online submissions for Contains Duplicate.
-   * Memory Usage: 43 MB, less than  80.28% of Java online submissions for Contains Duplicate.
+   * Runtime: 9 ms, faster than 60.78% of Java online submissions for Contains Duplicate. Memory
+   * Usage: 43 MB, less than  80.28% of Java online submissions for Contains Duplicate.
    */
   public boolean containsDuplicateBySet(int[] nums) {
     Set<Integer> map = new HashSet<>();
@@ -77,6 +73,6 @@ public class ContainsDuplicate217 {
 
   public static void main(String[] args) {
     ContainsDuplicate217 containsDuplicate217 = new ContainsDuplicate217();
-    System.out.println(containsDuplicate217.containsDuplicate(new int[]{-1200000005,-1200000005}));
+    System.out.println(containsDuplicate217.containsDuplicate(new int[]{-1200000005, -1200000005}));
   }
 }
