@@ -45,7 +45,7 @@ public class S_91DecodeWays {
     return cur;
   }
 
-  public int numDecodingsByDynamicAttribute(String s) {
+  public int numDecodingsByDP(String s) {
     int[] dp = new int[3];
     dp[s.length() % 3] = 1;
     // 如果字符串字符串不等于0，那么必须初始化为1
@@ -136,8 +136,11 @@ public class S_91DecodeWays {
 
   public static void main(String[] args) {
     S_91DecodeWays decodeWays = new S_91DecodeWays();
-    System.out.println(decodeWays.numDecodingsByDoublePointer("12"));
-    System.out.println(decodeWays.numDecodingsByDoublePointer("226"));
-    System.out.println(decodeWays.numDecodingsByDoublePointer("10226"));
+//    System.out.println(decodeWays.numDecodingsByDoublePointer("12"));
+//    System.out.println(decodeWays.numDecodingsByDoublePointer("226"));
+//    System.out.println(decodeWays.numDecodingsByDoublePointer("10226"));
+
+
+
   }
 }
