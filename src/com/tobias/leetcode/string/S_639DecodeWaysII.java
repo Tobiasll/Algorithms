@@ -27,7 +27,68 @@ package com.tobias.leetcode.string;
  */
 public class S_639DecodeWaysII {
 
+  private int mod = (int) 1e9 + 7;
+
   public int numDecodings(String s) {
+    return (int) dfs(s.toCharArray(), 0, new long[s.length()]);
+  }
+
+  private long dfs(char[] s, int start, long[] memo) {
+    if (start >= s.length) {
+      return 1;
+    }
+    if (memo[start] != 0) {
+      return memo[start];
+    }
+
+    if (start == s.length - 1) {
+      memo[start] = count(s[start]);
+    } else {
+      memo[start] = (((count(s[start]) * dfs(s, start + 1, memo)) + (count(s[start], s[start + 1]) *
+          dfs(s, start + 2, memo)))) % mod;
+    }
+    return memo[start];
+  }
+
+  private int count(char first, char second) {
+    if (first == '0') {
+      return 0;
+    }
+    if (first == '*' && second == '*') {
+      return 15;
+    }
+    if (first == '*') {
+      if (second<= '6') {
+        return 2;
+      }
+      return 1;
+    }
+    if (second == '*') {
+      if (first == '1') {
+        return 9;
+      }
+      if (first == '2') {
+        return 6;
+      }
+      return 0;
+    }
+    if (first == '1') {
+      return 1;
+    }
+    if (first == '2' && second <= '6') {
+      return 1;
+    }
+    return 0;
+  }
+
+  private int count(char c) {
+    if (c == '0') {
+      return 0;
+    }
+    return c == '*' ? 9 : 1;
+  }
+
+  public int numDecodings1(String s) {
     int[] dp = new int[s.length() + 1];
     dp[s.length()] = 1;
     if (s.charAt(s.length() - 1) != '0') {
@@ -63,5 +124,7 @@ public class S_639DecodeWaysII {
     System.out.println(decodeWaysII.numDecodings("*"));
     System.out.println(decodeWaysII.numDecodings("1*"));
     System.out.println(decodeWaysII.numDecodings("**"));
+    System.out.println(decodeWaysII.numDecodings("*1*1*0"));
+    System.out.println(decodeWaysII.numDecodings("*10*1"));
   }
 }
