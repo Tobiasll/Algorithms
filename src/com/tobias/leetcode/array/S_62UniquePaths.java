@@ -56,7 +56,7 @@ public class S_62UniquePaths {
   }
 
 
-    public int uniquePathsByRecursive(int m, int n) {
+  public int uniquePathsByRecursive(int m, int n) {
     Map<String, Integer> memo = new HashMap<>();
     return uniquePaths(0, 0, m - 1, n - 1, memo);
   }

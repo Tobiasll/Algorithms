@@ -33,9 +33,41 @@ import java.util.Map;
 public class S_63UniquePathsII {
 
   public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+    int m = obstacleGrid.length;
+    int n = obstacleGrid[0].length;
 
+    if (obstacleGrid[0][0] == 1) {
+      return 0;
+    }
 
-    return 0;
+    int[] dp = new int[n];
+    int i = 0;
+    for (; i < dp.length; i++) {
+      if (obstacleGrid[0][i] == 1) {
+        dp[i] = 0;
+        break;
+      } else {
+        dp[i] = 1;
+      }
+    }
+
+    for (; i < dp.length; i++) {
+      dp[i] = 0;
+    }
+
+    for (int x = 1; x < m; x++) {
+      for (int y = 0; y < n; y++) {
+        if (obstacleGrid[x][y] == 1) {
+          dp[y] = 0;
+        } else {
+          if (y != 0) {
+            dp[y] += dp[y - 1];
+          }
+        }
+      }
+    }
+
+    return dp[n - 1];
   }
 
 
@@ -78,5 +110,6 @@ public class S_63UniquePathsII {
     S_63UniquePathsII uniquePathsII = new S_63UniquePathsII();
     System.out.println(uniquePathsII.uniquePathsWithObstacles(new int[][]{{0,0,0}, {0, 1, 0}, {0,0,0}}));
     System.out.println(uniquePathsII.uniquePathsWithObstacles(new int[][]{{1}}));
+    System.out.println(uniquePathsII.uniquePathsWithObstacles(new int[][]{{0, 1}}));
   }
 }
