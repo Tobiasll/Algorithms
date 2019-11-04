@@ -1,6 +1,7 @@
 package com.tobias.leetcode.array;
 
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +33,30 @@ import java.util.Map;
 public class S_62UniquePaths {
 
   public int uniquePaths(int m, int n) {
+    int[] dp = new int[n];
+    Arrays.fill(dp,1);
+    for (int i = 1; i < m; i++) {
+      for (int j = 1; j < n; j++) {
+        dp[j] += dp[j - 1];
+      }
+    }
+    return dp[n - 1];
+  }
+
+
+    public int uniquePathsByM(int m, int n) {
+    int[] dp = new int[m];
+    Arrays.fill(dp, 1);
+    for (int i = n - 2; i >= 0; i--) {
+      for (int j = m - 2; j >= 0; j--) {
+        dp[j] = dp[j + 1] + dp[j];
+      }
+    }
+    return dp[0];
+  }
+
+
+    public int uniquePathsByRecursive(int m, int n) {
     Map<String, Integer> memo = new HashMap<>();
     return uniquePaths(0, 0, m - 1, n - 1, memo);
   }
@@ -70,6 +95,6 @@ public class S_62UniquePaths {
   public static void main(String[] args) {
     S_62UniquePaths uniquePaths = new S_62UniquePaths();
     System.out.println(uniquePaths.uniquePaths(7, 3));
-    System.out.println(uniquePaths.uniquePaths(3, 2));
+    System.out.println(uniquePaths.uniquePaths(3, 3));
   }
 }
