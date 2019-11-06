@@ -23,6 +23,23 @@ import java.util.Map;
 public class S_64MinimumPathSum {
 
   public int minPathSum(int[][] grid) {
+
+    for (int i = 1; i < grid.length; i++) {
+      grid[i][0] += grid[i - 1][0];
+    }
+    for (int i = 1; i < grid[0].length; i++) {
+      grid[0][i] += grid[0][i - 1];
+    }
+
+    for (int x = 1; x < grid.length; x++) {
+      for (int y = 1; y < grid[x].length; y++) {
+        grid[x][y] = Math.min(grid[x][y - 1], grid[x - 1][y]) + grid[x][y];
+      }
+    }
+    return grid[grid.length - 1][grid[0].length - 1];
+  }
+
+  public int minPathSumByRecursive(int[][] grid) {
     Map<String, Integer> memo = new HashMap<>();
     return minPathSum(0, 0, grid.length - 1, grid[0].length - 1, memo, grid);
   }
