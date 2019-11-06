@@ -38,6 +38,7 @@ public class S_64MinimumPathSum {
     if (memo.containsKey(keyX)) {
       n1 =  memo.get(keyX);
     } else {
+      // 判断边界，x 要加1，以保证索引不会越界
       if (x + 1 <= m) {
         n1 = minPathSum(x + 1, y, m, n, memo, grid);
       }
@@ -47,6 +48,7 @@ public class S_64MinimumPathSum {
     if (memo.containsKey(keyY)) {
       n2 = memo.get(keyY);
     } else {
+      // 判断边界，y 要加1，以保证索引不会越界
       if (y + 1 <= n) {
         n2 = minPathSum(x, y + 1, m, n, memo, grid);
       }
@@ -58,6 +60,8 @@ public class S_64MinimumPathSum {
 
   public static void main(String[] args) {
     S_64MinimumPathSum minimumPathSum = new S_64MinimumPathSum();
-    System.out.println(minimumPathSum.minPathSum(new int[][]{{1, 3, 1}, {1, 5, 1}, {4, 2, 1}}));
+    System.out.println(minimumPathSum.minPathSum(new int[][]{{1, 3, 1}, {1, 5, 1},{4, 2, 1}}));
+    System.out.println(minimumPathSum.minPathSum(new int[][]{{1, 2, 5}, {3, 2, 1}}));
+
   }
 }
