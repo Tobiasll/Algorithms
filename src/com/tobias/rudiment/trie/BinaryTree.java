@@ -31,6 +31,14 @@ public class BinaryTree {
     }
   }
 
+  public int getSize() {
+    return size;
+  }
+
+  public boolean isEmpty() {
+    return size == 0;
+  }
+
   public void add(int value) {
     root = add(value, root);
   }
@@ -63,7 +71,8 @@ public class BinaryTree {
     return sb.toString();
   }
 
-  private void levelTraversal(TreeNode root, StringBuilder sb) {
+
+    private void levelTraversal(TreeNode root, StringBuilder sb) {
     if (root != null) {
       LinkedList<TreeNode> queue = new LinkedList<>();
       queue.add(root);
