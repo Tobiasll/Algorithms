@@ -52,11 +52,18 @@ public class BinaryTree {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    preorderTraversalByIterator(root, sb);
+//    midOrderTraversalByIterator(root, sb);
     return sb.toString();
   }
 
-  private void preorderTraversalByIterator(TreeNode root, StringBuilder sb) {
+
+  public String print() {
+    StringBuilder sb = new StringBuilder();
+    preOrderTraversalByRecursive(root, sb);
+    return sb.toString();
+  }
+
+  private void preOrderTraversalByIterator(TreeNode root, StringBuilder sb) {
     Stack<TreeNode> stack = new Stack<>();
 
     while (root != null || !stack.isEmpty()) {
@@ -73,17 +80,31 @@ public class BinaryTree {
 
   }
 
-  private void preorderTraversalByRecursive(TreeNode node, StringBuilder sb) {
+  private void midOrderTraversalByIterator (TreeNode root, StringBuilder sb) {
+    Stack<TreeNode> stack = new Stack<>();
+    while (root != null || !stack.isEmpty()) {
+      if (root != null) {
+        stack.push(root);
+        root = root.left;
+      } else {
+        TreeNode pop = stack.pop();
+        sb.append(pop.val).append(" -> ");
+        root = pop.right;
+      }
+    }
+  }
+
+  private void preOrderTraversalByRecursive(TreeNode node, StringBuilder sb) {
     if (node != null) {
+      preOrderTraversalByRecursive(node.left, sb);
+      preOrderTraversalByRecursive(node.right, sb);
       sb.append(node.val).append(" -> ");
-      preorderTraversalByRecursive(node.left, sb);
-      preorderTraversalByRecursive(node.right, sb);
     }
   }
 
   public static void main(String[] args) {
     BinaryTree binaryTree = new BinaryTree(new int[]{6, 4, 8, 2, 5, 7, 9, 1, 3});
 
-    System.out.println(binaryTree);
+    System.out.println(binaryTree.print());
   }
 }
