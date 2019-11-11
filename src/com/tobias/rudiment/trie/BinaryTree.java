@@ -9,13 +9,13 @@ public class BinaryTree {
   private TreeNode root;
   private int size;
 
-  public class TreeNode {
+  public static class TreeNode {
 
     public int val;
     public TreeNode left;
     public TreeNode right;
 
-    TreeNode(int x) {
+    public TreeNode(int x) {
       val = x;
     }
 
