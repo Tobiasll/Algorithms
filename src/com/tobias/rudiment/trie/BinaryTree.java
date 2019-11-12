@@ -25,7 +25,11 @@ public class BinaryTree {
   }
 
   public BinaryTree() {
-    root = null;
+
+  }
+
+  public BinaryTree(TreeNode root) {
+    this.root = root;
   }
 
   public BinaryTree(int[] array) {
