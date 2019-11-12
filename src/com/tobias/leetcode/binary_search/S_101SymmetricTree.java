@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
@@ -30,19 +31,52 @@ import java.util.Queue;
  */
 public class S_101SymmetricTree {
 
+
+  /**
+   * Runtime: 1 ms, faster than 47.43% of Java online submissions for Symmetric Tree.
+   * Memory Usage: 39.4 MB, less than 31.97% of Java online submissions for Symmetric Tree.
+   */
   public boolean isSymmetric(TreeNode root) {
     if (root == null) {
       return true;
     }
+    Stack<TreeNode> leftStack = new Stack<>();
+    Stack<TreeNode> rightStack = new Stack<>();
+    TreeNode leftRoot = root.left;
+    TreeNode rightRoot = root.right;
 
-    return isSymmetric(root.left, root.right);
+    while (leftRoot != null || rightRoot != null || !leftStack.isEmpty() || !rightStack.isEmpty()) {
+      while (leftRoot != null) {
+        leftStack.push(leftRoot);
+        leftRoot = leftRoot.left;
+      }
+
+      while (rightRoot != null) {
+        rightStack.push(rightRoot);
+        rightRoot = rightRoot.right;
+      }
+
+      if (leftStack.size() != rightStack.size()) {
+        return false;
+      }
+
+      leftRoot = leftStack.pop();
+      rightRoot = rightStack.pop();
+
+      if (leftRoot.val != rightRoot.val) {
+        return false;
+      }
+
+      leftRoot = leftRoot.right;
+      rightRoot = rightRoot.left;
+    }
+    return true;
   }
 
   public boolean isSymmetricByRecursive(TreeNode root) {
     if (root == null) {
       return true;
     }
-
     return isSymmetric(root.left, root.right);
   }
 
@@ -50,13 +84,10 @@ public class S_101SymmetricTree {
     if (left == null && right != null || left != null && right == null) {
       return false;
     }
-    if (left != null && right != null) {
-      if (left.val != right.val) {
-        return false;
-      }
-      return isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
+    if (left == null && right == null) {
+      return true;
     }
-    return true;
+    return left.val == right.val && isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
   }
 
   public boolean isSymmetricByBFS1(TreeNode root) {
@@ -116,6 +147,7 @@ public class S_101SymmetricTree {
     System.out.println(binaryTree);
     S_101SymmetricTree symmetricTree = new S_101SymmetricTree();
     System.out.println(symmetricTree.isSymmetric(root1));
+
     TreeNode root2 = new TreeNode(1);
     root2.left = new TreeNode(2);
     root2.right = new TreeNode(2);
