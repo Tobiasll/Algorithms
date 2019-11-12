@@ -31,12 +31,41 @@ import java.util.Stack;
  */
 public class S_101SymmetricTree {
 
-
-  /**
-   * Runtime: 1 ms, faster than 47.43% of Java online submissions for Symmetric Tree.
-   * Memory Usage: 39.4 MB, less than 31.97% of Java online submissions for Symmetric Tree.
-   */
   public boolean isSymmetric(TreeNode root) {
+    if (root == null) {
+      return true;
+    }
+    Queue<TreeNode> leftQueue = new LinkedList<>();
+    Queue<TreeNode> rightQueue = new LinkedList<>();
+    leftQueue.offer(root.left);
+    rightQueue.offer(root.right);
+
+    while (!leftQueue.isEmpty() && !rightQueue.isEmpty()) {
+      TreeNode leftRoot = leftQueue.poll();
+      TreeNode rightRoot = rightQueue.poll();
+      if (leftRoot == null && rightRoot != null || leftRoot != null && rightRoot == null) {
+        return false;
+      }
+      if (leftRoot != null && rightRoot != null) {
+        if (leftRoot.val != rightRoot.val) {
+          return false;
+        }
+        leftQueue.offer(leftRoot.left);
+        rightQueue.offer(rightRoot.right);
+
+        leftQueue.offer(leftRoot.right);
+        rightQueue.offer(rightRoot.left);
+      }
+    }
+    return true;
+  }
+
+
+    /**
+     * Runtime: 1 ms, faster than 47.43% of Java online submissions for Symmetric Tree.
+     * Memory Usage: 39.4 MB, less than 31.97% of Java online submissions for Symmetric Tree.
+     */
+  public boolean isSymmetricByDFS(TreeNode root) {
     if (root == null) {
       return true;
     }
