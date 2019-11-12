@@ -12,9 +12,20 @@ import java.util.LinkedList;
  *
  * Input:
  *
- * 4 /   \ 2     7 / \   / \ 1   3 6   9 Output:
  *
- * 4 /   \ 7     2 / \   / \ 9   6 3   1 Trivia: This problem was inspired by this original tweet by
+ *         4
+ *       /   \
+ *      2     7
+ *    / \   / \
+ *   1   3 6   9
+ *   Output:
+ *
+ *         4
+ *      /   \
+ *    7     2
+ *  / \   / \
+ * 9   6 3   1
+ * Trivia: This problem was inspired by this original tweet by
  * Max Howell:
  *
  * Google: 90% of our engineers use the software you wrote (Homebrew), but you can’t invert a binary
@@ -33,12 +44,7 @@ public class S_226InvertBinaryTree {
       TreeNode temp = pollNode.left;
       pollNode.left = pollNode.right;
       pollNode.right = temp;
-      if (pollNode.left != null) {
-        queue.add(pollNode.left);
-      }
-      if (pollNode.right != null) {
-        queue.add(pollNode.right);
-      }
+      BinaryTree.addLeftAndRightNodeToQueue(queue, pollNode);
     }
     return root;
   }

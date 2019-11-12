@@ -1,8 +1,6 @@
 package com.tobias.rudiment.bst;
 
 
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Stack;
 
 public class BST<E extends Comparable<E>> {
@@ -190,20 +188,7 @@ public class BST<E extends Comparable<E>> {
     }
   }
 
-  private void levelOrder() {
-    Queue<Node> queue = new LinkedList<>();
-    queue.add(root);
-    while (!queue.isEmpty()) {
-      Node node = queue.remove();
-      System.out.print(node.e + "-->");
-      if (node.left != null) {
-        queue.add(node.left);
-      }
-      if (node.right != null) {
-        queue.add(node.right);
-      }
-    }
-  }
+
 
   private void inOrder(Node node, StringBuilder sb) {
     if (node == null) {
@@ -362,7 +347,7 @@ public class BST<E extends Comparable<E>> {
     bst.preOrderNR();
     bst.inOrder();
     bst.postOrder();
-    bst.levelOrder();
+
     System.out.println();
     System.out.println(bst);
 

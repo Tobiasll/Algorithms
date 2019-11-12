@@ -2,6 +2,7 @@ package com.tobias.rudiment.trie;
 
 
 import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class BinaryTree {
@@ -82,15 +83,31 @@ public class BinaryTree {
       while (!queue.isEmpty()) {
         root = queue.pollFirst();
         sb.append(root.val).append(" -> ");
-        if (root.left != null) {
-          queue.add(root.left);
-        }
-        if (root.right != null) {
-          queue.add(root.right);
-        }
+        addLeftAndRightNodeToQueue(queue, root);
       }
     }
   }
+
+  public static void addLeftAndRightNodeToQueue(Queue<TreeNode> tempQueue, TreeNode pollNode) {
+    if (pollNode.left != null) {
+      tempQueue.add(pollNode.left);
+    }
+    if (pollNode.right != null) {
+      tempQueue.add(pollNode.right);
+    }
+  }
+
+  public static void offerLeftAndRightNodeToQueue(Queue<TreeNode> queue, TreeNode pollNode) {
+    if (pollNode != null) {
+      if (pollNode.left != null) {
+        queue.offer(pollNode.left);
+      }
+      if (pollNode.right != null) {
+        queue.offer(pollNode.right);
+      }
+    }
+  }
+
 
   private void postOrderTraversalByIterator(TreeNode root, StringBuilder sb) {
     Stack<TreeNode> stack = new Stack<>();
@@ -156,5 +173,6 @@ public class BinaryTree {
   public static void main(String[] args) {
     BinaryTree binaryTree = new BinaryTree(new int[]{6, 4, 8, 2, 5, 7, 9, 1, 3});
     System.out.println(binaryTree);
+
   }
 }
