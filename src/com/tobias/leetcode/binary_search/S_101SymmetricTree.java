@@ -31,6 +31,35 @@ import java.util.Queue;
 public class S_101SymmetricTree {
 
   public boolean isSymmetric(TreeNode root) {
+    if (root == null) {
+      return true;
+    }
+
+    return isSymmetric(root.left, root.right);
+  }
+
+  public boolean isSymmetricByRecursive(TreeNode root) {
+    if (root == null) {
+      return true;
+    }
+
+    return isSymmetric(root.left, root.right);
+  }
+
+  private boolean isSymmetric(TreeNode left, TreeNode right) {
+    if (left == null && right != null || left != null && right == null) {
+      return false;
+    }
+    if (left != null && right != null) {
+      if (left.val != right.val) {
+        return false;
+      }
+      return isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
+    }
+    return true;
+  }
+
+  public boolean isSymmetricByBFS1(TreeNode root) {
     if (root != null) {
       Queue<TreeNode> queue = new LinkedList<>();
       queue.offer(root);
@@ -53,8 +82,7 @@ public class S_101SymmetricTree {
             } else {
               list.add(-1);
             }
-//            queue.offer(Objects.requireNonNullElseGet(pollNode.left, () -> new TreeNode(-1)));
-//            queue.offer(Objects.requireNonNullElseGet(pollNode.right, () -> new TreeNode(-1)));
+
           }
         }
         System.out.println(list);
