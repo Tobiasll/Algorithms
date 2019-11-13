@@ -79,54 +79,53 @@ public class BinaryTree {
     return handleLevelTraversalList(levelTraversal(root));
   }
 
-  private String handleLevelTraversalList(List<StringBuilder> list) {
+  private String handleLevelTraversalList(List<List<String>> list) {
     if (list.isEmpty()) {
       return "";
     }
     StringBuilder result = new StringBuilder();
-    for (int i = list.size() - 2, blank = 2; i >= 0; i--, blank = 2 + (2 * blank)) {
-      StringBuilder sb = list.get(i);
+    for (int i = list.size() - 2, blank = 1; i >= 0; i--, blank = 1 + (2 * blank)) {
+      List<String> insideList = list.get(i);
       char[] blankChars = new char[blank];
       Arrays.fill(blankChars, ' ');
       String blankString = String.valueOf(blankChars);
-
-      int j = 0;
-      while (sb.charAt(j) != '\n') {
-        if (sb.charAt(j) != ' ') {
-          sb.insert(j, blankString);
-          j += blank + 1;
-        } else {
-          j++;
-        }
+      for (int j = 0; j < insideList.size(); j++) {
+        insideList.set(j, blankString + insideList.get(j));
       }
-
     }
-    for (StringBuilder sb : list) {
-      result.append(sb);
+
+    for (List<String> strings : list) {
+      for (String s : strings) {
+        result.append(s);
+      }
     }
     return result.toString();
   }
 
-  private List<StringBuilder> levelTraversal(TreeNode root) {
-    List<StringBuilder> list = new ArrayList<>();
+  private List<List<String>> levelTraversal(TreeNode root) {
+    List<List<String>> list = new ArrayList<>();
     if (root != null) {
       Queue<TreeNode> queue = new LinkedList<>();
       queue.offer(root);
 
       while (!queue.isEmpty()) {
-        StringBuilder sb = new StringBuilder();
+        List<String> insideList = new ArrayList<>();
         int queueSize = queue.size();
         boolean isAllNull = true;
+        boolean addBar = true;
         for (int i = 0; i < queueSize; i++) {
           root = queue.poll();
           if (root.val != Integer.MIN_VALUE) {
-            sb.append(root.val);
+            insideList.add(root.val + "");
           } else {
-            sb.append('n');
+            insideList.add("n");
           }
-          if (i != queueSize - 1) {
-            sb.append(" - ");
+          if (addBar && i != queueSize - 1) {
+            insideList.add("-");
+          } else {
+            insideList.add(" ");
           }
+          addBar = !addBar;
           if (root.left != null) {
             isAllNull = false;
             queue.add(root.left);
@@ -141,8 +140,8 @@ public class BinaryTree {
           }
 
         }
-        sb.append("\n");
-        list.add(sb);
+        insideList.add("\n");
+        list.add(insideList);
         if (isAllNull) {
           break;
         }
