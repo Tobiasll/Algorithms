@@ -155,7 +155,7 @@ public class S_101SymmetricTree {
   }
 
 
-  public boolean judge(List<Integer> list) {
+  private boolean judge(List<Integer> list) {
     for (int i = 0, j = list.size() - 1; i <= j; i++, j--) {
       if (!list.get(i).equals(list.get(j))) {
         return false;
@@ -172,8 +172,7 @@ public class S_101SymmetricTree {
     root1.left.right = new TreeNode(4);
     root1.right.left = new TreeNode(4);
     root1.right.right = new TreeNode(3);
-    BinaryTree binaryTree = new BinaryTree(root1);
-    System.out.println(binaryTree);
+
     S_101SymmetricTree symmetricTree = new S_101SymmetricTree();
     System.out.println(symmetricTree.isSymmetric(root1));
 
@@ -182,6 +181,12 @@ public class S_101SymmetricTree {
     root2.right = new TreeNode(2);
     root2.left.right = new TreeNode(3);
     root2.right.right = new TreeNode(3);
+    root2.right.right.left = new TreeNode(3);
+    root2.right.right.left.right = new TreeNode(3);
     System.out.println(symmetricTree.isSymmetric(root2));
+
+    BinaryTree binaryTree = new BinaryTree(root2);
+    System.out.println(binaryTree);
+    System.out.println("n - n - n - n - n - n - 3 - n".length());
   }
 }

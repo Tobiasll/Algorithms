@@ -227,4 +227,15 @@ public class ForEachTest {
   }
 
 
+  @Test
+  public void test13() {
+    List<StringBuilder> list = new ArrayList<>();
+    for (int i = 0; i < 10; i++) {
+      StringBuilder sb = new StringBuilder();
+      sb.append("1");
+      System.out.println(sb);
+      list.add(sb);
+    }
+  }
+
 }

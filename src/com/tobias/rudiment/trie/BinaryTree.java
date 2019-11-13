@@ -1,7 +1,10 @@
 package com.tobias.rudiment.trie;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -73,23 +76,79 @@ public class BinaryTree {
 
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder();
-    levelTraversal(root, sb);
-    return sb.toString();
+    return handleLevelTraversalList(levelTraversal(root));
   }
 
+  private String handleLevelTraversalList(List<StringBuilder> list) {
+    if (list.isEmpty()) {
+      return "";
+    }
+    StringBuilder result = new StringBuilder();
+    for (int i = list.size() - 2, blank = 2; i >= 0; i--, blank = 2 + (2 * blank)) {
+      StringBuilder sb = list.get(i);
+      char[] blankChars = new char[blank];
+      Arrays.fill(blankChars, ' ');
+      String blankString = String.valueOf(blankChars);
 
-  private void levelTraversal(TreeNode root, StringBuilder sb) {
+      int j = 0;
+      while (sb.charAt(j) != '\n') {
+        if (sb.charAt(j) != ' ') {
+          sb.insert(j, blankString);
+          j += blank + 1;
+        } else {
+          j++;
+        }
+      }
+
+    }
+    for (StringBuilder sb : list) {
+      result.append(sb);
+    }
+    return result.toString();
+  }
+
+  private List<StringBuilder> levelTraversal(TreeNode root) {
+    List<StringBuilder> list = new ArrayList<>();
     if (root != null) {
-      LinkedList<TreeNode> queue = new LinkedList<>();
-      queue.add(root);
+      Queue<TreeNode> queue = new LinkedList<>();
+      queue.offer(root);
 
       while (!queue.isEmpty()) {
-        root = queue.pollFirst();
-        sb.append(root.val).append(" -> ");
-        addLeftAndRightNodeToQueue(queue, root);
+        StringBuilder sb = new StringBuilder();
+        int queueSize = queue.size();
+        boolean isAllNull = true;
+        for (int i = 0; i < queueSize; i++) {
+          root = queue.poll();
+          if (root.val != Integer.MIN_VALUE) {
+            sb.append(root.val);
+          } else {
+            sb.append('n');
+          }
+          if (i != queueSize - 1) {
+            sb.append(" - ");
+          }
+          if (root.left != null) {
+            isAllNull = false;
+            queue.add(root.left);
+          } else {
+            queue.offer(new TreeNode(Integer.MIN_VALUE));
+          }
+          if (root.right != null) {
+            isAllNull = false;
+            queue.add(root.right);
+          } else {
+            queue.offer(new TreeNode(Integer.MIN_VALUE));
+          }
+
+        }
+        sb.append("\n");
+        list.add(sb);
+        if (isAllNull) {
+          break;
+        }
       }
     }
+    return list;
   }
 
   public static void addLeftAndRightNodeToQueue(Queue<TreeNode> tempQueue, TreeNode pollNode) {
