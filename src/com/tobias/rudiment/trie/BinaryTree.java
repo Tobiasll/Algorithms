@@ -98,6 +98,7 @@ public class BinaryTree {
       for (String s : strings) {
         result.append(s);
       }
+      result.append('\n');
     }
     return result.toString();
   }
@@ -140,7 +141,6 @@ public class BinaryTree {
           }
 
         }
-        insideList.add("\n");
         list.add(insideList);
         if (isAllNull) {
           break;
