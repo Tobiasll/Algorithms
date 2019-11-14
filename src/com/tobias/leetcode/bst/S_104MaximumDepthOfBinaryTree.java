@@ -1,4 +1,4 @@
-package com.tobias.leetcode.binary_search;
+package com.tobias.leetcode.bst;
 
 
 import com.tobias.rudiment.trie.BinaryTree;

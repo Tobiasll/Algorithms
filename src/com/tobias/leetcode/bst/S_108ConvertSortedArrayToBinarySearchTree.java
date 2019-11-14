@@ -29,13 +29,16 @@ public class S_108ConvertSortedArrayToBinarySearchTree {
       return null;
     }
     int haft = nums.length / 2;
-    TreeNode root = addTreeNode(null, nums[haft]);
-    for (int l = haft - 1, r = nums.length - 1; l >= 0 || r > haft - 1; l--, r--) {
-      if (l >= 0) {
-        addTreeNode(root, nums[l]);
+    TreeNode root = null;
+    if (nums.length % 2 != 0) {
+      root = addTreeNode(null, nums[haft]);
+    }
+    for (int l = haft - 1, r = nums.length - 1; l >= 0 && r >= haft - 1; l--, r--) {
+      if (r > 0) {
+        root = addTreeNode(root, nums[r]);
       }
-      if (r >= 0) {
-        addTreeNode(root, nums[r]);
+      if (l >= 0) {
+        root = addTreeNode(root, nums[l]);
       }
     }
     return root;
@@ -57,6 +60,7 @@ public class S_108ConvertSortedArrayToBinarySearchTree {
   public static void main(String[] args) {
     S_108ConvertSortedArrayToBinarySearchTree convertSortedArrayToBinarySearchTree = new S_108ConvertSortedArrayToBinarySearchTree();
     System.out.println(new BinaryTree(convertSortedArrayToBinarySearchTree.sortedArrayToBST(new int[]{-10,-3,0,5,9})));
+    System.out.println(new BinaryTree(convertSortedArrayToBinarySearchTree.sortedArrayToBST(new int[]{1,3})));
   }
 
 }
