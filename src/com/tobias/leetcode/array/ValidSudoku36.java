@@ -49,6 +49,7 @@ public class ValidSudoku36 {
       for (int j = 0; j < 9; j++) {
         if (board[i][j] != '.') {
           idx = 1 << (board[i][j] - '0');
+
           if ((hset[i] & idx) > 0 ||
               (vset[j] & idx) > 0 ||
               (bckt[(i / 3) * 3 + j / 3] & idx) > 0) {

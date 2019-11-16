@@ -5,6 +5,7 @@ import com.tobias.rudiment.trie.BinaryTree;
 import com.tobias.rudiment.trie.BinaryTree.TreeNode;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * Given preorder and inorder traversal of a tree, construct the binary tree.
@@ -26,7 +27,48 @@ import java.util.Map;
  */
 public class S_105ConstructBinaryTreeFromPreorderAndInorderTraversal {
 
+
   public TreeNode buildTree(int[] preorder, int[] inorder) {
+    if (preorder.length == 0) {
+      return null;
+    }
+    Stack<TreeNode> roots = new Stack<>();
+    int pre = 0;
+    int in = 0;
+    //先序遍历第一个值作为根节点
+    TreeNode curRoot = new TreeNode(preorder[pre]);
+    TreeNode root = curRoot;
+    roots.push(curRoot);
+    pre++;
+    //遍历前序遍历的数组
+    while (pre < preorder.length) {
+      //出现了当前节点的值和中序遍历数组的值相等，寻找是谁的右子树
+      if (curRoot.val == inorder[in]) {
+        //每次进行出栈，实现倒着遍历
+        while (!roots.isEmpty() && roots.peek().val == inorder[in]) {
+          curRoot = roots.peek();
+          roots.pop();
+          in++;
+        }
+        //设为当前的右孩子
+        curRoot.right = new TreeNode(preorder[pre]);
+        //更新 curRoot
+        curRoot = curRoot.right;
+        roots.push(curRoot);
+        pre++;
+      } else {
+        //否则的话就一直作为左子树
+        curRoot.left = new TreeNode(preorder[pre]);
+        curRoot = curRoot.left;
+        roots.push(curRoot);
+        pre++;
+      }
+    }
+    return root;
+  }
+
+
+  public TreeNode buildTree2(int[] preorder, int[] inorder) {
     return buildTreeHelper(preorder, inorder, Integer.MAX_VALUE);
   }
   private int pre;
