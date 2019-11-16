@@ -4,6 +4,8 @@ package com.tobias.leetcode.bst;
 import com.tobias.rudiment.trie.BinaryTree;
 import com.tobias.rudiment.trie.BinaryTree.TreeNode;
 import java.lang.reflect.Field;
+import java.util.LinkedList;
+import java.util.Queue;
 import sun.misc.Unsafe;
 
 /**
@@ -25,7 +27,7 @@ import sun.misc.Unsafe;
  */
 public class S_111MinimumDepthOfBinaryTree {
 
-  public int minDepth(TreeNode root) {
+  public int minDepthByRecursive(TreeNode root) {
     if (root == null) {
       return 0;
     }
@@ -35,12 +37,43 @@ public class S_111MinimumDepthOfBinaryTree {
     if (root.right == null) {
       return minDepth(root.left) + 1;
     }
-    return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
+    return Math.min(minDepthByRecursive(root.left), minDepthByRecursive(root.right)) + 1;
   }
 
 
+  public int minDepth(TreeNode root) {
+    if (root == null) {
+      return 0;
+    }
+    Queue<TreeNode> queue = new LinkedList<>();
+    queue.offer(root);
+    int level = 0;
+    boolean stopWhile = false;
+    while (!queue.isEmpty()) {
+      int queueSize = queue.size();
+      for (int i = 0; i < queueSize; i++) {
+        TreeNode node = queue.poll();
+        if (node.left == null && node.right == null) {
+          stopWhile = true;
+          break;
+        }
+        if (node.left != null) {
+          queue.offer(node.left);
+        }
+        if (node.right != null) {
+          queue.offer(node.right);
+        }
+      }
+      level++;
+      if (stopWhile) {
+        break;
+      }
+    }
+    return level;
+  }
 
-  public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
+
+  public static void main(String[] args) {
     TreeNode root = new TreeNode(3);
     root.left = new TreeNode(9);
     root.right = new TreeNode(20);
@@ -48,10 +81,13 @@ public class S_111MinimumDepthOfBinaryTree {
     root.right.right = new TreeNode(7);
     BinaryTree binaryTree = new BinaryTree(root);
     System.out.println(binaryTree);
-
     S_111MinimumDepthOfBinaryTree minimumDepthOfBinaryTree = new S_111MinimumDepthOfBinaryTree();
     System.out.println(minimumDepthOfBinaryTree.minDepth(root));
-
+    TreeNode treeNode = new TreeNode(1);
+    treeNode.right = new TreeNode(2);
+    binaryTree.setRoot(treeNode);
+    System.out.println(binaryTree);
+    System.out.println(minimumDepthOfBinaryTree.minDepth(treeNode));
   }
 }
 
