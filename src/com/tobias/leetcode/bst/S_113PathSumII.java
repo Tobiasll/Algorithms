@@ -33,7 +33,7 @@ import java.util.Queue;
  */
 public class S_113PathSumII {
 
-  public List<List<Integer>> pathSum(TreeNode root, int sum) {
+  public List<List<Integer>> pathSumByBFS(TreeNode root, int sum) {
     List<List<Integer>> result = new ArrayList<>();
     if (root == null) {
       return result;
@@ -73,6 +73,46 @@ public class S_113PathSumII {
     }
     return result;
   }
+
+  public List<List<Integer>> pathSum(TreeNode root, int sum) {
+    List<List<Integer>> result = new ArrayList<>();
+    if (root == null) {
+      return result;
+    }
+    pathSum(root, sum, result, new ArrayList<>());
+    return result;
+  }
+
+  private void pathSum(TreeNode root, int sum, List<List<Integer>> result, List<Integer> tempList) {
+    if (root.left == null && root.right == null) {
+      if (sum == root.val) {
+        List<Integer> insideList = new ArrayList<>(tempList);
+        insideList.add(root.val);
+        result.add(insideList);
+      }
+      return;
+    }
+
+    if (root.left == null) {
+      tempList.add(root.val);
+      pathSum(root.right, sum - root.val, result, tempList);
+      tempList.remove(tempList.size() - 1);
+      return;
+    }
+    if (root.right == null) {
+      tempList.add(root.val);
+      pathSum(root.left, sum - root.val, result, tempList);
+      tempList.remove(tempList.size() - 1);
+      return;
+    }
+    tempList.add(root.val);
+    pathSum(root.left, sum - root.val, result, tempList);
+    tempList.remove(tempList.size() - 1);
+    tempList.add(root.val);
+    pathSum(root.right, sum - root.val, result, tempList);
+    tempList.remove(tempList.size() - 1);
+  }
+
 
   public static void main(String[] args) {
     BinaryTree binaryTree = buildBinaryTree();

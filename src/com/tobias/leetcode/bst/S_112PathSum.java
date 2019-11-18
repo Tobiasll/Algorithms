@@ -108,13 +108,13 @@ public class S_112PathSum {
     BinaryTree binaryTree = S_113PathSumII.buildBinaryTree();
     System.out.println(binaryTree);
     S_112PathSum pathSum = new S_112PathSum();
-    System.out.println(pathSum.hasPathSumByPostDFS(binaryTree.getRoot(), 22));
+    System.out.println(pathSum.hasPathSum(binaryTree.getRoot(), 22));
 
     TreeNode root = new TreeNode(1);
     root.right = new TreeNode(3);
     binaryTree.setRoot(root);
     System.out.println(binaryTree);
-    System.out.println(pathSum.hasPathSumByPostDFS(root, 1));
+    System.out.println(pathSum.hasPathSum(root, 1));
   }
 
 }
