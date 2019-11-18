@@ -5,6 +5,7 @@ import com.tobias.rudiment.trie.BinaryTree;
 import com.tobias.rudiment.trie.BinaryTree.TreeNode;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
@@ -25,11 +26,38 @@ import java.util.Queue;
  */
 public class S_112PathSum {
 
+  public boolean hasPathSumByPostDFS(TreeNode root, int sum) {
+
+    Stack<TreeNode> stack = new Stack<>();
+    TreeNode last = null;
+    int rootSum = 0;
+    while (root != null || !stack.isEmpty()) {
+      if (root != null) {
+        stack.push(root);
+        rootSum += root.val;
+        root = root.left;
+      } else {
+        TreeNode peek = stack.peek();
+        if (sum == rootSum && peek.left == null && peek.right == null) {
+          return true;
+        }
+        if (peek.right != null && peek.right != last) {
+          root = peek.right;
+        } else {
+          TreeNode pollNode = stack.pop();
+          rootSum -= pollNode.val;
+          last = pollNode;
+        }
+      }
+    }
+    return false;
+  }
+
+
   public boolean hasPathSum(TreeNode root, int sum) {
     if (root == null) {
       return false;
     }
-
     return hasPathSumHelper(root, sum);
   }
 
@@ -77,22 +105,16 @@ public class S_112PathSum {
   }
 
   public static void main(String[] args) {
-    BinaryTree binaryTree = new BinaryTree(new int[]{5,4,8});
-    binaryTree.getRoot().left.left = new TreeNode(11);
-    binaryTree.getRoot().right.left = new TreeNode(13);
-    binaryTree.getRoot().right.right = new TreeNode(4);
-    binaryTree.getRoot().left.left.left = new TreeNode(7);
-    binaryTree.getRoot().left.left.right = new TreeNode(2);
-    binaryTree.getRoot().right.right.right = new TreeNode(1);
+    BinaryTree binaryTree = S_113PathSumII.buildBinaryTree();
     System.out.println(binaryTree);
     S_112PathSum pathSum = new S_112PathSum();
-    System.out.println(pathSum.hasPathSum(binaryTree.getRoot(), 22));
+    System.out.println(pathSum.hasPathSumByPostDFS(binaryTree.getRoot(), 22));
 
     TreeNode root = new TreeNode(1);
     root.right = new TreeNode(3);
     binaryTree.setRoot(root);
     System.out.println(binaryTree);
-    System.out.println(pathSum.hasPathSum(root, 1));
+    System.out.println(pathSum.hasPathSumByPostDFS(root, 1));
   }
 
 }
