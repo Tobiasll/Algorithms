@@ -68,7 +68,7 @@ public class S_110BalancedBinaryTree {
       return false;
     }
 
-    return isBalanced(root.left) && isBalanced(root.right);
+    return isBalanced1(root.left) && isBalanced1(root.right);
   }
 
   private int getMaxDeep1(TreeNode root) {
