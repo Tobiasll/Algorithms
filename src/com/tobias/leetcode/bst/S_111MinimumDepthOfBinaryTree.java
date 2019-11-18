@@ -82,12 +82,12 @@ public class S_111MinimumDepthOfBinaryTree {
     BinaryTree binaryTree = new BinaryTree(root);
     System.out.println(binaryTree);
     S_111MinimumDepthOfBinaryTree minimumDepthOfBinaryTree = new S_111MinimumDepthOfBinaryTree();
-    System.out.println(minimumDepthOfBinaryTree.minDepth(root));
+    System.out.println(minimumDepthOfBinaryTree.minDepthByRecursive(root));
     TreeNode treeNode = new TreeNode(1);
     treeNode.right = new TreeNode(2);
     binaryTree.setRoot(treeNode);
     System.out.println(binaryTree);
-    System.out.println(minimumDepthOfBinaryTree.minDepth(treeNode));
+    System.out.println(minimumDepthOfBinaryTree.minDepthByRecursive(treeNode));
   }
 }
 

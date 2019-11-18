@@ -29,6 +29,28 @@ public class S_112PathSum {
     if (root == null) {
       return false;
     }
+
+    return hasPathSumHelper(root, sum);
+  }
+
+  private boolean hasPathSumHelper(TreeNode root, int sum) {
+    if (root.left == null && root.right == null) {
+      return root.val == sum;
+    }
+    if (root.left == null) {
+      return hasPathSumHelper(root.right, sum - root.val);
+    }
+    if (root.right == null) {
+      return hasPathSumHelper(root.left, sum - root.val);
+    }
+    return hasPathSumHelper(root.left, sum - root.val) || hasPathSumHelper(root.right, sum - root.val);
+  }
+
+
+  public boolean hasPathSumByBFS(TreeNode root, int sum) {
+    if (root == null) {
+      return false;
+    }
     Queue<TreeNode> queue = new LinkedList<>();
     Queue<Integer> queueNum = new LinkedList<>();
     queue.offer(root);
@@ -67,8 +89,7 @@ public class S_112PathSum {
     System.out.println(pathSum.hasPathSum(binaryTree.getRoot(), 22));
 
     TreeNode root = new TreeNode(1);
-    root.left = new TreeNode(-2);
-    root.right = new TreeNode(-3);
+    root.right = new TreeNode(3);
     binaryTree.setRoot(root);
     System.out.println(binaryTree);
     System.out.println(pathSum.hasPathSum(root, 1));
