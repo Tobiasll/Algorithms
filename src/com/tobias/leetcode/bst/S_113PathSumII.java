@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
@@ -32,6 +33,40 @@ import java.util.Queue;
  * ]
  */
 public class S_113PathSumII {
+
+  public List<List<Integer>> pathSumByDFS(TreeNode root, int sum) {
+    List<List<Integer>> result = new ArrayList<>();
+    if (root == null) {
+      return result;
+    }
+    Stack<TreeNode> stack = new Stack<>();
+    int pathSum = 0;
+    TreeNode lastNode = null;
+    Stack<Integer> insideLitStack = new Stack<>();
+    while (root != null ||!stack.isEmpty()) {
+      if (root != null) {
+        pathSum += root.val;
+        insideLitStack.push(root.val);
+        stack.push(root);
+        root = root.left;
+      } else {
+        TreeNode peek = stack.peek();
+        if (peek.left == null && peek.right == null && sum == pathSum) {
+          result.add(new ArrayList<>(insideLitStack));
+        }
+        if (peek.right != null && peek.right != lastNode) {
+          root = peek.right;
+        } else {
+          TreeNode popNode = stack.pop();
+          insideLitStack.pop();
+          pathSum -= popNode.val;
+          lastNode = popNode;
+        }
+      }
+    }
+    return result;
+  }
+
 
   public List<List<Integer>> pathSumByBFS(TreeNode root, int sum) {
     List<List<Integer>> result = new ArrayList<>();
@@ -119,7 +154,7 @@ public class S_113PathSumII {
     binaryTree.getRoot().right.right.left = new TreeNode(5);
     System.out.println(binaryTree);
     S_113PathSumII pathSumII = new S_113PathSumII();
-    List<List<Integer>> list = pathSumII.pathSum(binaryTree.getRoot(), 22);
+    List<List<Integer>> list = pathSumII.pathSumByDFS(binaryTree.getRoot(), 22);
     for (List<Integer> integers : list) {
       System.out.println(integers);
     }
