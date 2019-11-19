@@ -96,13 +96,13 @@ public class S_257BinaryTreePaths {
   }
 
 
-  public List<String> binaryTreePaths(TreeNode root) {
+  public List<String> binaryTreePathsByRecusive(TreeNode root) {
     List<String> result = new ArrayList<>();
     binaryTreePaths(root, result, new ArrayList<>());
     return result;
   }
 
-  private  void binaryTreePaths(TreeNode root, List<String> result, List<Integer> tempList) {
+  private void binaryTreePaths(TreeNode root, List<String> result, List<Integer> tempList) {
     if (root.left == null && root.right == null) {
       StringBuilder sb = new StringBuilder();
       for (Integer value : tempList) {
@@ -132,6 +132,26 @@ public class S_257BinaryTreePaths {
     tempList.add(root.val);
     binaryTreePaths(root.right, result, tempList);
     tempList.remove(tempList.size() - 1);
+  }
+
+  public List<String> binaryTreePaths(TreeNode root) {
+    List<String> answer = new ArrayList<>();
+    if (root != null) {
+      searchBT(root, "", answer);
+    }
+    return answer;
+  }
+
+  private void searchBT(TreeNode root, String path, List<String> answer) {
+    if (root.left == null && root.right == null) {
+      answer.add(path + root.val);
+    }
+    if (root.left != null) {
+      searchBT(root.left, path + root.val + "->", answer);
+    }
+    if (root.right != null){
+      searchBT(root.right, path + root.val + "->", answer);
+    }
   }
 
   public static void main(String[] args) {
