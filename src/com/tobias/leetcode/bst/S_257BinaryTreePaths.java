@@ -61,21 +61,54 @@ public class S_257BinaryTreePaths {
     return result;
   }
 
-  public List<String> binaryTreePaths(TreeNode root) {
+  public List<String> binaryTreePathsByDFS(TreeNode root) {
     List<String> result = new ArrayList<>();
     if (root == null) {
       return result;
     }
     Stack<TreeNode> stack = new Stack<>();
-    StringBuilder sb = new StringBuilder();
+    TreeNode last = null;
+    Stack<Integer> valueStack = new Stack<>();
     while (root != null || !stack.isEmpty()) {
-
+      if (root != null) {
+        stack.push(root);
+        valueStack.push(root.val);
+        root = root.left;
+      } else {
+        TreeNode peek = stack.peek();
+        if (peek.left == null && peek.right == null) {
+          StringBuilder sb = new StringBuilder();
+          for (Integer value : valueStack) {
+            sb.append(value).append("->");
+          }
+          result.add(sb.substring(0, sb.length() - 2));
+        }
+        if (peek.right != null && peek.right != last) {
+          root = peek.right;
+        } else {
+          TreeNode popNode = stack.pop();
+          valueStack.pop();
+          last = popNode;
+        }
+      }
     }
-
     return result;
   }
 
-    public static void main(String[] args) {
+
+  public List<String> binaryTreePaths(TreeNode root) {
+    List<String> result = new ArrayList<>();
+    binaryTreePaths(root, result, new ArrayList<>());
+    return result;
+  }
+
+  private  void binaryTreePaths(TreeNode root, List<String> result, List<Integer> tempList) {
+    if (root.left == null && root.right == null) {
+
+    }
+  }
+
+  public static void main(String[] args) {
     BinaryTree binaryTree = new BinaryTree(new int[]{1,3});
     binaryTree.getRoot().left = new TreeNode(2);
     binaryTree.getRoot().left.right = new TreeNode(5);
