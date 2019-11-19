@@ -122,7 +122,7 @@ public class BinaryTree {
             insideList.add("n");
           }
           if (addBar && i != queueSize - 1) {
-            insideList.add("-");
+            insideList.add("'");
           } else {
             insideList.add(" ");
           }
