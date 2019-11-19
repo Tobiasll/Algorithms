@@ -104,8 +104,34 @@ public class S_257BinaryTreePaths {
 
   private  void binaryTreePaths(TreeNode root, List<String> result, List<Integer> tempList) {
     if (root.left == null && root.right == null) {
-
+      StringBuilder sb = new StringBuilder();
+      for (Integer value : tempList) {
+        sb.append(value).append("->");
+      }
+      sb.append(root.val);
+      result.add(sb.toString());
+      return;
     }
+    if (root.left == null) {
+      tempList.add(root.val);
+      binaryTreePaths(root.right, result, tempList);
+      tempList.remove(tempList.size() - 1);
+      return;
+    }
+    if (root.right == null) {
+      tempList.add(root.val);
+      binaryTreePaths(root.left, result, tempList);
+      tempList.remove(tempList.size() - 1);
+      return;
+    }
+
+    tempList.add(root.val);
+    binaryTreePaths(root.left, result, tempList);
+    tempList.remove(tempList.size() - 1);
+
+    tempList.add(root.val);
+    binaryTreePaths(root.right, result, tempList);
+    tempList.remove(tempList.size() - 1);
   }
 
   public static void main(String[] args) {
