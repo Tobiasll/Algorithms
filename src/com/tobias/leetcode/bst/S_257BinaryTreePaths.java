@@ -57,7 +57,6 @@ public class S_257BinaryTreePaths {
         }
       }
     }
-
     return result;
   }
 
