@@ -30,7 +30,20 @@ import com.tobias.rudiment.trie.BinaryTree.TreeNode;
  */
 public class S_114FlattenBinaryTreeToLinkedList {
 
-  public TreeNode flatten(TreeNode root) {
+  private TreeNode pre;
+
+  public void flatten(TreeNode root) {
+    if (root == null) {
+      return;
+    }
+    flatten1(root.right);
+    flatten1(root.left);
+    root.right = pre;
+    root.left = null;
+    pre = root;
+  }
+
+  public TreeNode flatten1(TreeNode root) {
     TreeNode currentRoot = root;
 
     while (currentRoot != null) {
@@ -55,7 +68,7 @@ public class S_114FlattenBinaryTreeToLinkedList {
     binaryTree.getRoot().left.right = new TreeNode(4);
     System.out.println(binaryTree);
     S_114FlattenBinaryTreeToLinkedList flattenBinaryTreeToLinkedList = new S_114FlattenBinaryTreeToLinkedList();
-    binaryTree.setRoot(flattenBinaryTreeToLinkedList.flatten(binaryTree.getRoot()));
+    flattenBinaryTreeToLinkedList.flatten(binaryTree.getRoot());
     System.out.println(binaryTree);
   }
 
