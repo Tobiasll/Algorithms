@@ -3,6 +3,7 @@ package com.tobias.leetcode.bst;
 
 import com.tobias.rudiment.trie.BinaryTree;
 import com.tobias.rudiment.trie.BinaryTree.TreeNode;
+import java.util.Stack;
 
 /**
  *Given a binary tree, flatten it to a linked list in-place.
@@ -32,12 +33,41 @@ public class S_114FlattenBinaryTreeToLinkedList {
 
   private TreeNode pre;
 
-  public void flatten(TreeNode root) {
+  public TreeNode flatten(TreeNode root1) {
+    TreeNode root = root1;
+    if (root == null) {
+      return null;
+    }
+    Stack<TreeNode> stack = new Stack<>();
+    TreeNode last = null;
+
+    while (root != null || !stack.isEmpty()) {
+      if (root != null) {
+        stack.push(root);
+        root = root.right;
+      } else {
+        TreeNode peek = stack.peek();
+        if (peek.left != null && peek.left != last) {
+          root = peek.left;
+        } else {
+          TreeNode pop = stack.pop();
+          peek.right = last;
+          peek.left = null;
+          last = peek;
+        }
+      }
+    }
+    return root1;
+  }
+
+
+
+  public void flattenByRecursive(TreeNode root) {
     if (root == null) {
       return;
     }
-    flatten1(root.right);
-    flatten1(root.left);
+    flattenByRecursive(root.right);
+    flattenByRecursive(root.left);
     root.right = pre;
     root.left = null;
     pre = root;
@@ -68,7 +98,8 @@ public class S_114FlattenBinaryTreeToLinkedList {
     binaryTree.getRoot().left.right = new TreeNode(4);
     System.out.println(binaryTree);
     S_114FlattenBinaryTreeToLinkedList flattenBinaryTreeToLinkedList = new S_114FlattenBinaryTreeToLinkedList();
-    flattenBinaryTreeToLinkedList.flatten(binaryTree.getRoot());
+    TreeNode flatten = flattenBinaryTreeToLinkedList.flatten(binaryTree.getRoot());
+    binaryTree.setRoot(flatten);
     System.out.println(binaryTree);
   }
 
