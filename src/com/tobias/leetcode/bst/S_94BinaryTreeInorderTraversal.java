@@ -82,8 +82,8 @@ public class S_94BinaryTreeInorderTraversal {
 
 
   public static void main(String[] args) {
-    BinaryTree binaryTree = new BinaryTree(new int[]{1, 2});
-    binaryTree.getRoot().right.left = new TreeNode(3);
+    BinaryTree binaryTree = new BinaryTree(new int[]{6, 4, 8, 2, 5, 7, 9, 1, 3});
+
     S_94BinaryTreeInorderTraversal binaryTreeInorderTraversal = new S_94BinaryTreeInorderTraversal();
     System.out.println(binaryTreeInorderTraversal.inorderTraversal(binaryTree.getRoot()));
     System.out.println(binaryTree);
