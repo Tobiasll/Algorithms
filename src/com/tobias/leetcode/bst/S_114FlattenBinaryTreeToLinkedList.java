@@ -39,6 +39,32 @@ public class S_114FlattenBinaryTreeToLinkedList {
       return null;
     }
     Stack<TreeNode> stack = new Stack<>();
+    stack.push(root);
+    while (!stack.isEmpty()) {
+      TreeNode pop = stack.pop();
+      if (root != null && root != pop) {
+        root.right = pop;
+        root.left = null;
+        root = root.right;
+      } else {
+        root = pop;
+      }
+      if (pop.right != null) {
+        stack.push(pop.right);
+      }
+      if (pop.left != null) {
+        stack.push(pop.left);
+      }
+    }
+    return root1;
+  }
+
+    public TreeNode flatten2(TreeNode root1) {
+    TreeNode root = root1;
+    if (root == null) {
+      return null;
+    }
+    Stack<TreeNode> stack = new Stack<>();
     TreeNode last = null;
 
     while (root != null || !stack.isEmpty()) {
@@ -98,8 +124,8 @@ public class S_114FlattenBinaryTreeToLinkedList {
     binaryTree.getRoot().left.right = new TreeNode(4);
     System.out.println(binaryTree);
     S_114FlattenBinaryTreeToLinkedList flattenBinaryTreeToLinkedList = new S_114FlattenBinaryTreeToLinkedList();
-    TreeNode flatten = flattenBinaryTreeToLinkedList.flatten(binaryTree.getRoot());
-    binaryTree.setRoot(flatten);
+    flattenBinaryTreeToLinkedList.flatten(binaryTree.getRoot());
+
     System.out.println(binaryTree);
   }
 

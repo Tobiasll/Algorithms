@@ -18,7 +18,7 @@ public class BinaryTree {
     public int val;
     public TreeNode left;
     public TreeNode right;
-    int level;
+
 
     public TreeNode(int x) {
       val = x;
@@ -72,6 +72,30 @@ public class BinaryTree {
 
   public void setRoot(TreeNode root) {
     this.root = root;
+  }
+
+  public void morrisTravel(TreeNode root, StringBuilder sb) {
+
+    while (root != null) {
+      if (root.left == null) {
+        sb.append(root.val).append("->");
+        root = root.right;
+      } else {
+        TreeNode pre= root.left;
+        while (pre.right != null && pre.right != root) {
+          pre = pre.right;
+        }
+        if (pre.right == null) {
+          pre.right = root;
+          root = root.left;
+        }
+        if (pre.right == root) {
+          pre.right = null;
+          sb.append(root.val).append("->");
+          root = root.right;
+        }
+      }
+    }
   }
 
   @Override
@@ -234,7 +258,9 @@ public class BinaryTree {
 
   public static void main(String[] args) {
     BinaryTree binaryTree = new BinaryTree(new int[]{6, 4, 8, 2, 5, 7, 9, 1, 3});
-    System.out.println(binaryTree);
+    StringBuilder sb = new StringBuilder();
+    binaryTree.morrisTravel(binaryTree.getRoot(), sb);
+    System.out.println(sb.toString());
 
   }
 }
