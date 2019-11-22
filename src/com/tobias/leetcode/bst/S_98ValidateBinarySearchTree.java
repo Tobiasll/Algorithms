@@ -153,7 +153,6 @@ public class S_98ValidateBinarySearchTree {
         root = root.left;
       } else {
         TreeNode pop = stack.pop();
-        System.out.println(pop.val);
         if (pre != null && pop.val <= pre.val) {
           return false;
         } else {
@@ -165,7 +164,53 @@ public class S_98ValidateBinarySearchTree {
     return true;
   }
 
+  public boolean isValidBSTByPreOrder(TreeNode root) {
+    if (root == null) {
+      return true;
+    }
+    Stack<TreeNode> stack = new Stack<>();
+    Stack<Integer> minStack = new Stack<>();
+    Stack<Integer> maxStack = new Stack<>();
 
+    stack.push(root);
+    minStack.push(null);
+    maxStack.push(null);
+
+    while (root != null || !stack.isEmpty()) {
+      if (root != null) {
+        TreeNode peek = stack.peek();
+        Integer minPeek = minStack.peek();
+        Integer maxPeek = maxStack.peek();
+
+        if (judge(peek, minPeek, maxPeek)) {
+          return false;
+        }
+        if (root.left != null) {
+          stack.push(root.left);
+          minStack.push(minPeek);
+          maxStack.push(root.val);
+        }
+        root = root.left;
+      } else {
+        TreeNode pop = stack.pop();
+        minStack.pop();
+        Integer max = maxStack.pop();
+        if (pop.right != null) {
+          stack.push(pop.right);
+          minStack.push(pop.val);
+          maxStack.push(max);
+        }
+        root = pop.right;
+      }
+    }
+    return true;
+  }
+
+
+  /**
+   * Runtime: 6 ms, faster than 7.31% of Java online submissions for Validate Binary Search Tree.
+   * Memory Usage: 39.7 MB, less than 77.68% of Java online submissions for Validate Binary Search Tree.
+   */
   public boolean isValidBSTByBFS(TreeNode root) {
     if (root == null ){
       return true;
@@ -214,7 +259,7 @@ public class S_98ValidateBinarySearchTree {
     binaryTree.getRoot().right.right = new TreeNode(20);
     System.out.println(binaryTree);
     S_98ValidateBinarySearchTree validateBinarySearchTree = new S_98ValidateBinarySearchTree();
-    System.out.println(validateBinarySearchTree.isValidBSTByBFS(binaryTree.getRoot()));
+    System.out.println(validateBinarySearchTree.isValidBSTByPreOrder(binaryTree.getRoot()));
 
   }
 
