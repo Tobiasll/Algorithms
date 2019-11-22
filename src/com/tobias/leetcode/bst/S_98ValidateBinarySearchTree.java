@@ -130,10 +130,7 @@ public class S_98ValidateBinarySearchTree {
     if (root == null) {
       return true;
     }
-    if (min != null && root.val <= min) {
-      return false;
-    }
-    if (max != null && root.val >= max) {
+    if (judge(root, min, max)) {
       return false;
     }
     return isValidBST(root.left, min, root.val) && isValidBST(root.right, root.val, max);
@@ -169,26 +166,45 @@ public class S_98ValidateBinarySearchTree {
   }
 
 
-    public boolean isValidBST1(TreeNode root) {
+  public boolean isValidBSTByBFS(TreeNode root) {
+    if (root == null ){
+      return true;
+    }
     Queue<TreeNode> queue = new LinkedList<>();
+    Queue<Integer> minValueQueue = new LinkedList<>();
+    Queue<Integer> maxValueQueue = new LinkedList<>();
     queue.offer(root);
-    if (!queue.isEmpty()) {
+    minValueQueue.offer(null);
+    maxValueQueue.offer(null);
+    while (!queue.isEmpty()) {
       int queueSize = queue.size();
       for (int i = 0; i < queueSize; i++) {
         TreeNode poll = queue.poll();
-        if (poll.left != null && poll.left.val <= poll.val) {
-          queue.offer(poll.left);
-        } else {
+        Integer min = minValueQueue.poll();
+        Integer max = maxValueQueue.poll();
+        if (judge(poll, min, max)) {
           return false;
         }
-        if (poll.right != null && poll.right.val >= poll.val) {
+        if (poll.left != null) {
+          queue.offer(poll.left);
+          minValueQueue.offer(min);
+          maxValueQueue.offer(poll.val);
+        }
+        if (poll.right != null) {
           queue.offer(poll.right);
-        } else {
-          return false;
+          minValueQueue.offer(poll.val);
+          maxValueQueue.offer(max);
         }
       }
     }
     return true;
+  }
+
+  private boolean judge(TreeNode poll, Integer min, Integer max) {
+    if (min != null && poll.val <= min) {
+      return true;
+    }
+    return max != null && poll.val >= max;
   }
 
   public static void main(String[] args) {
@@ -198,7 +214,7 @@ public class S_98ValidateBinarySearchTree {
     binaryTree.getRoot().right.right = new TreeNode(20);
     System.out.println(binaryTree);
     S_98ValidateBinarySearchTree validateBinarySearchTree = new S_98ValidateBinarySearchTree();
-    System.out.println(validateBinarySearchTree.isValidBST(binaryTree.getRoot()));
+    System.out.println(validateBinarySearchTree.isValidBSTByBFS(binaryTree.getRoot()));
 
   }
 
