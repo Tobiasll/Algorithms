@@ -40,10 +40,57 @@ import java.util.Stack;
 public class S_98ValidateBinarySearchTree {
 
 
+  public boolean isValidBST(TreeNode root) {
+    if (root == null || root.left == null && root.right == null) {
+      return true;
+    }
+    if (isValidBST(root.left)) {
+      if (root.left != null) {
+        int max = getMaxValue(root.left);
+        if (root.val <= max) {
+          return false;
+        }
+      }
+    } else {
+      return false;
+    }
+    if (isValidBST(root.right)) {
+      if (root.right != null) {
+        int min = getMinValue(root.right);
+        return root.val < min;
+      }
+    } else {
+      return false;
+    }
+    return true;
+  }
+
+  private int getMaxValue(TreeNode root) {
+    int max = root.val;
+    while (root.right != null) {
+      if (root.right.val > max) {
+        max = root.right.val;
+      }
+      root = root.right;
+    }
+    return max;
+  }
+
+  private int getMinValue(TreeNode root) {
+    int min = root.val;
+    while (root.left != null) {
+      if (root.left.val < min) {
+        min = root.left.val;
+      }
+      root = root.left;
+    }
+    return min;
+  }
+
   /**
-   * Runtime: 1 ms, faster than 48.85% of Java online submissions for Validate Binary Search Tree.
-   * Memory Usage: 38.8 MB, less than 82.33% of Java online submissions for Validate Binary Search Tree
-   */
+     * Runtime: 1 ms, faster than 48.85% of Java online submissions for Validate Binary Search Tree.
+     * Memory Usage: 38.8 MB, less than 82.33% of Java online submissions for Validate Binary Search Tree
+     */
   public boolean isValidBSTByMorris(TreeNode root) {
 
     TreeNode last = null;
@@ -75,7 +122,7 @@ public class S_98ValidateBinarySearchTree {
     return true;
   }
 
-    public boolean isValidBST(TreeNode root) {
+    public boolean isValidBSTByRecursive(TreeNode root) {
     return isValidBST(root, null, null);
   }
 
@@ -145,13 +192,13 @@ public class S_98ValidateBinarySearchTree {
   }
 
   public static void main(String[] args) {
-    BinaryTree binaryTree = new BinaryTree(new int[]{5, 1});
+    BinaryTree binaryTree = new BinaryTree(new int[]{10, 5, 15});
+
+    binaryTree.getRoot().right.left = new TreeNode(6);
+    binaryTree.getRoot().right.right = new TreeNode(20);
     System.out.println(binaryTree);
-    binaryTree.getRoot().right = new TreeNode(4);
-    binaryTree.getRoot().right.left = new TreeNode(3);
-    binaryTree.getRoot().right.right = new TreeNode(6);
     S_98ValidateBinarySearchTree validateBinarySearchTree = new S_98ValidateBinarySearchTree();
-    System.out.println(validateBinarySearchTree.isValidBSTByMorris(binaryTree.getRoot()));
+    System.out.println(validateBinarySearchTree.isValidBST(binaryTree.getRoot()));
 
   }
 
