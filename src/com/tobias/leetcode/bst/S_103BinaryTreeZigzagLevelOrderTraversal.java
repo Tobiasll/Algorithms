@@ -33,8 +33,37 @@ public class S_103BinaryTreeZigzagLevelOrderTraversal {
     if (root == null) {
       return result;
     }
-
-
+    Stack<TreeNode> stackA = new Stack<>();
+    Stack<TreeNode> stackB = new Stack<>();
+    stackA.push(root);
+    while (!stackA.isEmpty() || !stackB.isEmpty()) {
+      List<Integer> insideList = new ArrayList<>();
+      while (!stackA.isEmpty()) {
+        TreeNode pop = stackA.pop();
+        insideList.add(pop.val);
+        if (pop.left !=  null) {
+          stackB.push(pop.left);
+        }
+        if (pop.right !=  null) {
+          stackB.push(pop.right);
+        }
+      }
+      result.add(insideList);
+      insideList = new ArrayList<>();
+      while (!stackB.isEmpty()) {
+        TreeNode pop = stackB.pop();
+        insideList.add(pop.val);
+        if (pop.right != null) {
+          stackA.push(pop.right);
+        }
+        if (pop.left != null) {
+          stackA.push(pop.left);
+        }
+      }
+      if (!insideList.isEmpty()) {
+        result.add(insideList);
+      }
+    }
     return result;
   }
 
@@ -137,7 +166,7 @@ public class S_103BinaryTreeZigzagLevelOrderTraversal {
 //    binaryTree.getRoot().left.left.left.left = new TreeNode(5);
     System.out.println(binaryTree);
     S_103BinaryTreeZigzagLevelOrderTraversal binaryTreeZigzagLevelOrderTraversal = new S_103BinaryTreeZigzagLevelOrderTraversal();
-    List<List<Integer>> results = binaryTreeZigzagLevelOrderTraversal.zigzagLevelOrderByBFS(binaryTree.getRoot());
+    List<List<Integer>> results = binaryTreeZigzagLevelOrderTraversal.zigzagLevelOrder(binaryTree.getRoot());
     for (List<Integer> result : results) {
       System.out.println(result);
     }
