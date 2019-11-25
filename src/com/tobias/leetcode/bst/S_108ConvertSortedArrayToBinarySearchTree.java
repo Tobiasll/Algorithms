@@ -3,6 +3,8 @@ package com.tobias.leetcode.bst;
 
 import com.tobias.rudiment.trie.BinaryTree;
 import com.tobias.rudiment.trie.BinaryTree.TreeNode;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 
@@ -27,6 +29,35 @@ public class S_108ConvertSortedArrayToBinarySearchTree {
 
 
   public TreeNode sortedArrayToBST(int[] nums) {
+    if (nums == null || nums.length == 0) {
+      return null;
+    }
+    Queue<MyTreeNode> queue = new LinkedList<>();
+    TreeNode root = new TreeNode(0);
+    queue.offer(new MyTreeNode(root, 0, nums.length));
+
+    while (!queue.isEmpty()) {
+      int queueSize = queue.size();
+      for (int i = 0; i < queueSize; i++) {
+        MyTreeNode poll = queue.poll();
+        int start = poll.start;
+        int end = poll.end;
+        int mid = (start + end) >>> 1;
+        poll.root.val = nums[mid];
+        if (start < mid) {
+          poll.root.left = new TreeNode(0);
+          queue.offer(new MyTreeNode(poll.root.left, start, mid));
+        }
+        if (mid + 1 < end) {
+          poll.root.right = new TreeNode(0);
+          queue.offer(new MyTreeNode(poll.root.right, mid + 1, end));
+        }
+      }
+    }
+    return root;
+  }
+
+    public TreeNode sortedArrayToBSTByDFS(int[] nums) {
     if (nums == null || nums.length == 0) {
       return null;
     }
