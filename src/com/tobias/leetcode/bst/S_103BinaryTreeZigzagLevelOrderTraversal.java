@@ -28,8 +28,19 @@ import java.util.Stack;
  */
 public class S_103BinaryTreeZigzagLevelOrderTraversal {
 
-
   private List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+    List<List<Integer>> result = new ArrayList<>();
+    if (root == null) {
+      return result;
+    }
+
+
+    return result;
+  }
+
+
+
+    private List<List<Integer>> zigzagLevelOrder1(TreeNode root) {
     List<List<Integer>> result = new ArrayList<>();
     if (root == null) {
       return result;
@@ -80,37 +91,13 @@ public class S_103BinaryTreeZigzagLevelOrderTraversal {
     zigzagLevelOrderByRecursiveDFS(root.right, level + 1, result);
   }
 
-  public List<List<Integer>> zigzagLevelOrder2(TreeNode root) {
-    List<List<Integer>> result = new ArrayList<>();
-    if (root == null) {
-      return result;
+  public static void offerValueToQueue(Queue<TreeNode> queue, TreeNode treeNode) {
+    if (treeNode.left != null) {
+      queue.offer(treeNode.left);
     }
-    Queue<TreeNode> queue = new LinkedList<>();
-    boolean getValueFromStack = false;
-    queue.offer(root);
-
-    while (!queue.isEmpty()) {
-      int queueSize = queue.size();
-      List<Integer> insideList = new ArrayList<>();
-      for (int i = 0; i < queueSize; i++) {
-        TreeNode treeNode = queue.poll();
-        if (getValueFromStack) {
-          insideList.add(0, treeNode.val);
-        } else {
-          insideList.add(treeNode.val);
-        }
-        if (treeNode.left != null) {
-          queue.offer(treeNode.left);
-        }
-        if (treeNode.right != null) {
-          queue.offer(treeNode.right);
-        }
-      }
-      result.add(insideList);
-      getValueFromStack = !getValueFromStack;
+    if (treeNode.right != null) {
+      queue.offer(treeNode.right);
     }
-
-    return result;
   }
 
   public List<List<Integer>> zigzagLevelOrderByBFS(TreeNode root) {
@@ -121,30 +108,23 @@ public class S_103BinaryTreeZigzagLevelOrderTraversal {
 
     Queue<TreeNode> queue = new LinkedList<>();
     queue.offer(root);
+    int level = 0;
     while (!queue.isEmpty()) {
       int queueSize = queue.size();
       List<Integer> insideList = new ArrayList<>();
       for (int i = 0; i < queueSize; i++) {
         TreeNode poll = queue.poll();
+        if (level % 2 == 0) {
           insideList.add(poll.val);
-          if (poll.left != null) {
-            queue.offer(poll.left);
-          }
-          if (poll.right != null) {
-            queue.offer(poll.right);
-          }
+        }else {
+          insideList.add(0, poll.val);
+        }
+        offerValueToQueue(queue, poll);
       }
+      level++;
       result.add(insideList);
     }
-    for (int i = 0; i < result.size(); i++) {
-      if (i % 2 != 0) {
-        for (int start = 0, end = result.get(i).size() - 1; start <= end; start++, end--) {
-          Integer temp = result.get(i).get(start);
-          result.get(i).set(start, result.get(i).get(end));
-          result.get(i).set(end, temp);
-        }
-      }
-    }
+
     return result;
   }
 
@@ -157,7 +137,7 @@ public class S_103BinaryTreeZigzagLevelOrderTraversal {
 //    binaryTree.getRoot().left.left.left.left = new TreeNode(5);
     System.out.println(binaryTree);
     S_103BinaryTreeZigzagLevelOrderTraversal binaryTreeZigzagLevelOrderTraversal = new S_103BinaryTreeZigzagLevelOrderTraversal();
-    List<List<Integer>> results = binaryTreeZigzagLevelOrderTraversal.zigzagLevelOrder2(binaryTree.getRoot());
+    List<List<Integer>> results = binaryTreeZigzagLevelOrderTraversal.zigzagLevelOrderByBFS(binaryTree.getRoot());
     for (List<Integer> result : results) {
       System.out.println(result);
     }

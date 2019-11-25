@@ -1,6 +1,7 @@
 package com.tobias.rudiment.trie;
 
 
+import com.tobias.leetcode.bst.S_103BinaryTreeZigzagLevelOrderTraversal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -185,12 +186,7 @@ public class BinaryTree {
 
   public static void offerLeftAndRightNodeToQueue(Queue<TreeNode> queue, TreeNode pollNode) {
     if (pollNode != null) {
-      if (pollNode.left != null) {
-        queue.offer(pollNode.left);
-      }
-      if (pollNode.right != null) {
-        queue.offer(pollNode.right);
-      }
+      S_103BinaryTreeZigzagLevelOrderTraversal.offerValueToQueue(queue, pollNode);
     }
   }
 

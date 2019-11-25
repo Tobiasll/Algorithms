@@ -57,12 +57,7 @@ public class S_111MinimumDepthOfBinaryTree {
           stopWhile = true;
           break;
         }
-        if (node.left != null) {
-          queue.offer(node.left);
-        }
-        if (node.right != null) {
-          queue.offer(node.right);
-        }
+        S_103BinaryTreeZigzagLevelOrderTraversal.offerValueToQueue(queue, node);
       }
       level++;
       if (stopWhile) {
