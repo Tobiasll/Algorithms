@@ -114,7 +114,7 @@ public class S_129SumRootToLeafNumbers {
     return sum;
   }
 
-    public int sumNumbersByBacktrack(TreeNode root) {
+  public int sumNumbersByBacktrack(TreeNode root) {
     if (root != null) {
       sumNumbers(root, new ArrayList<>());
     }
