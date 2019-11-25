@@ -3,7 +3,9 @@ package com.tobias.leetcode.bst;
 
 import com.tobias.rudiment.trie.BinaryTree;
 import com.tobias.rudiment.trie.BinaryTree.TreeNode;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -43,7 +45,9 @@ import java.util.Queue;
  */
 public class S_129SumRootToLeafNumbers {
 
-  public int sumNumbers(TreeNode root) {
+  int sum = 0;
+
+  public int sumNumbersByBFS(TreeNode root) {
     int sum = 0;
     if (root == null) {
       return sum;
@@ -72,6 +76,70 @@ public class S_129SumRootToLeafNumbers {
     }
 
     return sum;
+  }
+
+
+  public int sumNumbers(TreeNode root) {
+    if (root != null) {
+      sumNumbers(root, new ArrayList<>());
+    }
+    return sum;
+  }
+
+  private void sumNumbers(TreeNode root, List<Integer> tempList) {
+    if (root.left == null && root.right == null) {
+      int factor = 10;
+      for (int i = tempList.size() - 1; i >= 0; i--) {
+        sum += tempList.get(i) * factor;
+        factor *= 10;
+      }
+      sum += root.val;
+      return;
+    }
+
+    if (root.left == null) {
+      tempList.add(root.val);
+      sumNumbers(root.right, tempList);
+      tempList.remove(tempList.size() - 1);
+      return;
+    }
+    if (root.right == null) {
+      tempList.add(root.val);
+      sumNumbers(root.right, tempList);
+      tempList.remove(tempList.size() - 1);
+      return;
+    }
+
+    tempList.add(root.val);
+    sumNumbers(root.left, tempList);
+    tempList.remove(tempList.size() - 1);
+
+    tempList.add(root.val);
+    sumNumbers(root.right, tempList);
+    tempList.remove(tempList.size() - 1);
+
+  }
+
+    public int sumNumbersByRecursive(TreeNode root) {
+    if (root != null) {
+      sumNumbers(root, 0);
+    }
+    return sum;
+  }
+
+  private void sumNumbers(TreeNode root, int value) {
+
+    if (root.left == null && root.right == null) {
+      sum += value * 10 + root.val;
+    }
+    value = value == 0 ? 0 : (value * 10);
+    if (root.left != null) {
+      sumNumbers(root.left,  value + root.val);
+    }
+
+    if (root.right != null) {
+      sumNumbers(root.right, value + root.val);
+    }
   }
 
 
