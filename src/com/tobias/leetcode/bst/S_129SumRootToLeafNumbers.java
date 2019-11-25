@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Given a binary tree containing digits from 0-9 only, each root-to-leaf path could represent a number.
@@ -45,7 +46,7 @@ import java.util.Queue;
  */
 public class S_129SumRootToLeafNumbers {
 
-  int sum = 0;
+  private int sum = 0;
 
   public int sumNumbersByBFS(TreeNode root) {
     int sum = 0;
@@ -80,6 +81,40 @@ public class S_129SumRootToLeafNumbers {
 
 
   public int sumNumbers(TreeNode root) {
+    int sum = 0;
+    if (root == null) {
+      return sum;
+    }
+    Stack<TreeNode> stack = new Stack<>();
+    Stack<Integer> valStack = new Stack<>();
+    TreeNode last = null;
+
+    while (root != null || !stack.isEmpty()) {
+      if (root != null) {
+        stack.push(root);
+        valStack.push(root.val);
+        root = root.left;
+      } else {
+        TreeNode peek = stack.peek();
+        if (peek.left == null && peek.right == null) {
+          int factor = 1;
+          for (int i = valStack.size() - 1; i >= 0; i--) {
+            sum += valStack.get(i) * factor;
+            factor *= 10;
+          }
+        }
+        if (peek.right != null && peek.right != last) {
+          root = peek.right;
+        } else {
+          valStack.pop();
+          last = stack.pop();
+        }
+      }
+    }
+    return sum;
+  }
+
+    public int sumNumbersByBacktrack(TreeNode root) {
     if (root != null) {
       sumNumbers(root, new ArrayList<>());
     }
@@ -144,8 +179,11 @@ public class S_129SumRootToLeafNumbers {
 
 
   public static void main(String[] args) {
-    BinaryTree binaryTree = new BinaryTree(new int[]{1, 3});
-    binaryTree.getRoot().left = new TreeNode(2);
+    BinaryTree binaryTree = new BinaryTree(new int[]{4});
+    binaryTree.getRoot().left = new TreeNode(9);
+    binaryTree.getRoot().right = new TreeNode(0);
+    binaryTree.getRoot().left.left = new TreeNode(5);
+    binaryTree.getRoot().left.right = new TreeNode(1);
     System.out.println(binaryTree);
     S_129SumRootToLeafNumbers sumRootToLeafNumbers = new S_129SumRootToLeafNumbers();
     System.out.println(sumRootToLeafNumbers.sumNumbers(binaryTree.getRoot()));
