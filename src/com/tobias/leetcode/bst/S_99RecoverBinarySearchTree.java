@@ -3,6 +3,7 @@ package com.tobias.leetcode.bst;
 
 import com.tobias.rudiment.trie.BinaryTree;
 import com.tobias.rudiment.trie.BinaryTree.TreeNode;
+import java.util.Stack;
 
 /**
  * Two elements of a binary search tree (BST) are swapped by mistake.
@@ -51,7 +52,107 @@ import com.tobias.rudiment.trie.BinaryTree.TreeNode;
 @SuppressWarnings("all")
 public class S_99RecoverBinarySearchTree {
 
-  public void recoverTree(TreeNode root) {
+  private TreeNode first;
+  private TreeNode second;
+  private TreeNode pre;
+
+
+  public void recoverTreeInOrderTraversalByRecursive(TreeNode root) {
+//    inOrderTraversalByRecursive(root);
+//    inOrderTraversalByIterator(root);
+    inOrderTraversalByMorris(root);
+    if (first != null && second != null) {
+      int temp = first.val;
+      first.val = second.val;
+      second.val = temp;
+    }
+  }
+
+  private void inOrderTraversalByMorris (TreeNode root) {
+    while (root != null) {
+      if (root.left == null) {
+        if (pre != null && pre.val > root.val) {
+          if (first == null) {
+            first = pre;
+            second = root;
+          } else {
+            second = root;
+          }
+        }
+        pre = root;
+        root = root.right;
+      } else {
+        TreeNode last = root.left;
+        while (last.right != null && last.right != root) {
+          last = last.right;
+        }
+        if (last.right == null) {
+          last.right = root;
+          root = root.left;
+        }
+        if (last.right == root) {
+          last.right = null;
+          if (pre != null && pre.val > root.val) {
+            if (first == null) {
+              first = pre;
+              second = root;
+            } else {
+              second = root;
+            }
+          }
+          pre = root;
+          root = root.right;
+        }
+      }
+    }
+  }
+
+  private void inOrderTraversalByIterator (TreeNode root) {
+    if (root == null) {
+      return;
+    }
+    Stack<TreeNode> stack = new Stack<>();
+    while (root != null || !stack.isEmpty()) {
+      if (root != null) {
+        stack.push(root);
+        root = root.left;
+      } else {
+        TreeNode pop = stack.pop();
+        if (pre != null && pre.val > pop.val) {
+          if (first == null) {
+            first = pre;
+            second = pop;
+          } else {
+            second = pop;
+          }
+        }
+        pre = pop;
+        root = pop.right;
+      }
+      byte[] bytes = new byte[1024];
+      String s = new String(bytes);
+    }
+  }
+
+
+  private void inOrderTraversalByRecursive (TreeNode root) {
+    if (root == null) {
+      return;
+    }
+    inOrderTraversalByRecursive(root.left);
+    if (pre != null && pre.val > root.val) {
+      if (first == null) {
+        first = pre;
+        second = root;
+      } else {
+        second = root;
+      }
+    }
+    pre = root;
+    inOrderTraversalByRecursive(root.right);
+  }
+
+  public void recoverTreeByRecursive (TreeNode root) {
     if (root == null) {
       return;
     }
@@ -81,12 +182,12 @@ public class S_99RecoverBinarySearchTree {
       }
     }
 
-    recoverTree(root.left);
-    recoverTree(root.right);
+    recoverTreeByRecursive(root.left);
+    recoverTreeByRecursive(root.right);
   }
 
 
-  private TreeNode getMinNode(TreeNode root) {
+  private TreeNode getMinNode (TreeNode root) {
     if (root == null) {
       return null;
     }
@@ -102,7 +203,7 @@ public class S_99RecoverBinarySearchTree {
     return min;
   }
 
-  private TreeNode getMaxNode(TreeNode root) {
+  private TreeNode getMaxNode (TreeNode root) {
     if (root == null) {
       return null;
     }
@@ -121,11 +222,12 @@ public class S_99RecoverBinarySearchTree {
 
 
   public static void main(String[] args) {
+
     BinaryTree binaryTree = new BinaryTree(new int[]{3, 1 ,4});
     binaryTree.getRoot().right.left = new TreeNode(2);
     System.out.println(binaryTree);
     S_99RecoverBinarySearchTree recoverBinarySearchTree = new S_99RecoverBinarySearchTree();
-    recoverBinarySearchTree.recoverTree(binaryTree.getRoot());
+    recoverBinarySearchTree.recoverTreeInOrderTraversalByRecursive(binaryTree.getRoot());
     System.out.println(binaryTree);
   }
 }
