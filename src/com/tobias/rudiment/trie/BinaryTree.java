@@ -75,7 +75,30 @@ public class BinaryTree {
     this.root = root;
   }
 
-  public void morrisTravel(TreeNode root, StringBuilder sb) {
+  public void morrisPreOrderTravel(TreeNode root, StringBuilder sb) {
+    while (root != null) {
+      if (root.left == null) {
+        sb.append(root.val).append("->");
+        root = root.right;
+      } else {
+        TreeNode pre = root.left;
+        while (pre.right != null && pre.right != root) {
+          pre = pre.right;
+        }
+        if (pre.right == null) {
+          sb.append(root.val).append("->");
+          pre.right = root;
+          root = root.left;
+        }
+        if (pre.right == root) {
+          pre.right = null;
+          root = root.right;
+        }
+      }
+    }
+  }
+
+  public void morrisInOrderTravel(TreeNode root, StringBuilder sb) {
 
     while (root != null) {
       if (root.left == null) {
@@ -255,7 +278,7 @@ public class BinaryTree {
   public static void main(String[] args) {
     BinaryTree binaryTree = new BinaryTree(new int[]{6, 4, 8, 2, 5, 7, 9, 1, 3});
     StringBuilder sb = new StringBuilder();
-    binaryTree.morrisTravel(binaryTree.getRoot(), sb);
+    binaryTree.morrisInOrderTravel(binaryTree.getRoot(), sb);
     System.out.println(sb.toString());
 
   }
