@@ -69,7 +69,7 @@ public class S_103BinaryTreeZigzagLevelOrderTraversal {
 
 
 
-    private List<List<Integer>> zigzagLevelOrder1(TreeNode root) {
+  private List<List<Integer>> zigzagLevelOrder1(TreeNode root) {
     List<List<Integer>> result = new ArrayList<>();
     if (root == null) {
       return result;
