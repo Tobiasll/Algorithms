@@ -130,11 +130,11 @@ public class S_114FlattenBinaryTreeToLinkedList {
 //    binaryTree.getRoot().left.right = new TreeNode(4);
 //    binaryTree.getRoot().left.right.left = new TreeNode(2);
 //    binaryTree.getRoot().left.right.right = new TreeNode(3);
-    BinaryTree binaryTree = new BinaryTree(new int[]{10, 5, 19, 4, 8, 13, 24});
-//    BinaryTree binaryTree = new BinaryTree(new int[]{1, 5, 6});
-//    binaryTree.getRoot().left = new TreeNode(2);
-//    binaryTree.getRoot().left.left = new TreeNode(3);
-//    binaryTree.getRoot().left.right = new TreeNode(4);
+//    BinaryTree binaryTree = new BinaryTree(new int[]{10, 5, 19, 4, 8, 13, 24});
+    BinaryTree binaryTree = new BinaryTree(new int[]{1, 5, 6});
+    binaryTree.getRoot().left = new TreeNode(2);
+    binaryTree.getRoot().left.left = new TreeNode(3);
+    binaryTree.getRoot().left.right = new TreeNode(4);
     System.out.println(binaryTree);
     S_114FlattenBinaryTreeToLinkedList flattenBinaryTreeToLinkedList = new S_114FlattenBinaryTreeToLinkedList();
     flattenBinaryTreeToLinkedList.flatten2(binaryTree.getRoot());
