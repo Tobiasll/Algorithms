@@ -76,50 +76,115 @@ public class BinaryTree {
   }
 
   public void morrisPreOrderTravel(TreeNode root, StringBuilder sb) {
-    while (root != null) {
-      if (root.left == null) {
-        sb.append(root.val).append("->");
-        root = root.right;
+    TreeNode cur = root;
+    while (cur != null) {
+      if (cur.left == null) {
+        sb.append(cur.val).append("->");
+        cur = cur.right;
       } else {
-        TreeNode pre = root.left;
-        while (pre.right != null && pre.right != root) {
+        TreeNode pre = cur.left;
+        while (pre.right != null && pre.right != cur) {
           pre = pre.right;
         }
         if (pre.right == null) {
-          sb.append(root.val).append("->");
-          pre.right = root;
-          root = root.left;
+          sb.append(cur.val).append("->");
+          pre.right = cur;
+          cur = cur.left;
         }
-        if (pre.right == root) {
+        if (pre.right == cur) {
           pre.right = null;
-          root = root.right;
+          cur = cur.right;
         }
       }
     }
   }
 
   public void morrisInOrderTravel(TreeNode root, StringBuilder sb) {
-
-    while (root != null) {
-      if (root.left == null) {
-        sb.append(root.val).append("->");
-        root = root.right;
+    TreeNode cur = root;
+    while (cur != null) {
+      if (cur.left == null) {
+        sb.append(cur.val).append("->");
+        cur = cur.right;
       } else {
-        TreeNode pre= root.left;
-        while (pre.right != null && pre.right != root) {
+        TreeNode pre = cur.left;
+        while (pre.right != null && pre.right != cur) {
           pre = pre.right;
         }
         if (pre.right == null) {
-          pre.right = root;
-          root = root.left;
+          pre.right = cur;
+          cur = cur.left;
         }
-        if (pre.right == root) {
+        if (pre.right == cur) {
           pre.right = null;
-          sb.append(root.val).append("->");
-          root = root.right;
+          sb.append(cur.val).append("->");
+          cur = cur.right;
         }
       }
     }
+  }
+
+  public void postOrderMorrisTraversal(TreeNode root) {
+    TreeNode dump = new TreeNode(0);
+    dump.left = root;
+    TreeNode cur = dump;
+    while (cur != null) {
+      // 情况 1
+      if (cur.left == null) {
+        cur = cur.right;
+      } else {
+        // 找左子树最右边的节点
+        TreeNode pre = cur.left;
+        while (pre.right != null && pre.right != cur) {
+          pre = pre.right;
+        }
+        // 情况 2.1
+        if (pre.right == null) {
+          pre.right = cur;
+          cur = cur.left;
+        }
+        // 情况 2.2,第二次遍历节点
+        if (pre.right == cur){
+          // 与其他三种遍历不同的地方，反转打印，图中的1-1、2-2、5-3、6-6、9-7
+          printReverse(cur.left, pre);
+          pre.right = null;
+          cur = cur.right;
+        }
+      }
+    }
+  }
+
+  private void printReverse(TreeNode from, TreeNode to) {
+    // 将to 变成 form的反转节点 例如 from为5.right->4.r->3.r->9.r->.... to为3.right->9.r->8.r->...
+    // 反转完，form的根节点还是5，from = 5.r->4.r->5.r->4.r->5.r->... to为from刚刚反转后的内容to = 3.r->4.r->5.r->4.r->...
+    reverse(from, to, from.right);
+    // 用一个临时遍历来保存to，并不断右移
+    TreeNode tempNode = to;
+    while (true) {
+      // 打印to的内容，例如第一次，3，第二次，4，第三次，5
+      System.out.println(tempNode.val);
+      // 为了保证不会死循环打印下去，所以当to移到from的节点也就是5时，就结束掉整个循环
+      if (tempNode == from) {
+        break;
+      }
+      // 不断右移
+      tempNode = tempNode.right;
+    }
+    // 将to 变成 from 的反转节点，反转后 from = 5.r->4.r->3.r->4.r->3.r->.... to = 3.r->4.r->3.r->4.r->....
+    reverse(to, from, from.right);
+  }
+
+  private void reverse(TreeNode from, TreeNode to, TreeNode fromRight) {
+    // 如果都是同一个节点的情况，例如图中的1，2，6
+    if (from == to) {
+      return;
+    }
+    // 遍历并反转
+    do {
+      TreeNode temp = fromRight.right;
+      fromRight.right = from;
+      from = fromRight;
+      fromRight = temp;
+    } while (from != to);
   }
 
   @Override
@@ -250,6 +315,9 @@ public class BinaryTree {
   }
 
   private void preOrderTraversalByIterator(TreeNode root, StringBuilder sb) {
+    if (root == null) {
+      return;
+    }
     Stack<TreeNode> stack = new Stack<>();
 
     while (root != null || !stack.isEmpty()) {
@@ -278,7 +346,7 @@ public class BinaryTree {
   public static void main(String[] args) {
     BinaryTree binaryTree = new BinaryTree(new int[]{6, 4, 8, 2, 5, 7, 9, 1, 3});
     StringBuilder sb = new StringBuilder();
-    binaryTree.morrisInOrderTravel(binaryTree.getRoot(), sb);
+    binaryTree.postOrderTraversalByIterator(binaryTree.getRoot(), sb);
     System.out.println(sb.toString());
 
   }

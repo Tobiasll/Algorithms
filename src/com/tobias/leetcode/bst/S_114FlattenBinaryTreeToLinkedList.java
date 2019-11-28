@@ -39,15 +39,17 @@ public class S_114FlattenBinaryTreeToLinkedList {
       return null;
     }
     Stack<TreeNode> stack = new Stack<>();
+    // 将根节点入栈
     stack.push(root);
+    // 初始化上一个节点
+    TreeNode last = null;
     while (!stack.isEmpty()) {
+      // 出栈
       TreeNode pop = stack.pop();
-      if (root != null && root != pop) {
-        root.right = pop;
-        root.left = null;
-        root = root.right;
-      } else {
-        root = pop;
+      if(last != null){
+        // 将上一个节点的右节点赋值为当前出栈节点，并且断开左边的节点
+        last.right = pop;
+        last.left = null;
       }
       if (pop.right != null) {
         stack.push(pop.right);
@@ -55,6 +57,8 @@ public class S_114FlattenBinaryTreeToLinkedList {
       if (pop.left != null) {
         stack.push(pop.left);
       }
+      // 将当前节点赋值给last
+      last = pop;
     }
     return root1;
   }
@@ -77,9 +81,9 @@ public class S_114FlattenBinaryTreeToLinkedList {
           root = peek.left;
         } else {
           TreeNode pop = stack.pop();
-          peek.right = last;
-          peek.left = null;
-          last = peek;
+          pop.right = last;
+          pop.left = null;
+          last = pop;
         }
       }
     }
@@ -117,14 +121,23 @@ public class S_114FlattenBinaryTreeToLinkedList {
     return root;
   }
 
+
   public static void main(String[] args) {
-    BinaryTree binaryTree = new BinaryTree(new int[]{1, 5, 6});
-    binaryTree.getRoot().left = new TreeNode(2);
-    binaryTree.getRoot().left.left = new TreeNode(3);
-    binaryTree.getRoot().left.right = new TreeNode(4);
+//    BinaryTree binaryTree = new BinaryTree(new int[]{9, 5, 1});
+//    binaryTree.getRoot().right = new TreeNode(8);
+//    binaryTree.getRoot().right.right = new TreeNode(7);
+//    binaryTree.getRoot().right.right.left = new TreeNode(6);
+//    binaryTree.getRoot().left.right = new TreeNode(4);
+//    binaryTree.getRoot().left.right.left = new TreeNode(2);
+//    binaryTree.getRoot().left.right.right = new TreeNode(3);
+    BinaryTree binaryTree = new BinaryTree(new int[]{10, 5, 19, 4, 8, 13, 24});
+//    BinaryTree binaryTree = new BinaryTree(new int[]{1, 5, 6});
+//    binaryTree.getRoot().left = new TreeNode(2);
+//    binaryTree.getRoot().left.left = new TreeNode(3);
+//    binaryTree.getRoot().left.right = new TreeNode(4);
     System.out.println(binaryTree);
     S_114FlattenBinaryTreeToLinkedList flattenBinaryTreeToLinkedList = new S_114FlattenBinaryTreeToLinkedList();
-    flattenBinaryTreeToLinkedList.flatten(binaryTree.getRoot());
+    flattenBinaryTreeToLinkedList.flatten2(binaryTree.getRoot());
 
     System.out.println(binaryTree);
   }
