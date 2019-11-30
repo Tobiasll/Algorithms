@@ -2,7 +2,11 @@ package com.tobias.rudiment.string;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Given a non-empty string s and a dictionary wordDict containing a list of non-empty words, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
@@ -29,25 +33,61 @@ import java.util.List;
  */
 public class S_139WordBreak {
 
+
   public boolean wordBreak(String s, List<String> wordDict) {
+    Set<String> set = new HashSet<>(wordDict);
 
-    int index = 1;
-    while (s.length() > 0 && index != -1) {
+    return wordBreak(s, set);
+  }
 
-      for (int i = 0; i < wordDict.size(); i++) {
-        index = s.indexOf(wordDict.get(i));
-        if (index != -1) {
-          String preStr = s.substring(0, index);
-          String postStr = s.substring(index + wordDict.get(i).length());
-          s = preStr + postStr;
-          break;
-        }
+  private boolean wordBreak(String s, Set<String> set) {
+    if (s.length() == 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  public boolean wordBreakByBacktrack(String s, List<String> wordDict) {
+    Set<Character> set = new HashSet<>();
+    for (String word : wordDict) {
+      for (int i = 0; i < word.length(); i++) {
+        set.add(word.charAt(i));
       }
-      if (s.length() == 0) {
-        return true;
+    }
+    for (int i = 0; i < s.length(); i++) {
+      if (!set.contains(s.charAt(i))) {
+        return false;
       }
     }
 
+
+    return wordBreak(s, wordDict, "", new HashMap<>());
+  }
+
+  private boolean wordBreak(String s, List<String> wordDict, String temp, Map<String, Boolean> memo) {
+    if (temp.length() > s.length()) {
+      return false;
+    }
+    if (memo.containsKey(temp)) {
+      return memo.get(temp);
+    }
+    for (int i = 0; i < temp.length(); i++) {
+      if (s.charAt(i) != temp.charAt(i)) {
+        return false;
+      }
+    }
+    if (temp.length() == s.length()) {
+      return true;
+    }
+    for (int i = 0; i < wordDict.size(); i++) {
+      boolean result = wordBreak(s, wordDict, temp + wordDict.get(i), memo);
+      if (result) {
+        memo.put(temp, result);
+        return true;
+      }
+    }
+    memo.put(temp, false);
     return false;
   }
 
@@ -55,11 +95,11 @@ public class S_139WordBreak {
   public static void main(String[] args) {
     S_139WordBreak wordBreak = new S_139WordBreak();
     List<String> wordDict = new ArrayList<>();
-    wordDict.add("cats");
-    wordDict.add("dog");
-    wordDict.add("sand");
-    wordDict.add("and");
-    wordDict.add("cat");
-    System.out.println(wordBreak.wordBreak("catsandog", wordDict));
+    wordDict.add("leet");
+    wordDict.add("code");
+//    wordDict.add("sand");
+//    wordDict.add("and");
+//    wordDict.add("cat");
+    System.out.println(wordBreak.wordBreak("leetcode", wordDict));
   }
 }
