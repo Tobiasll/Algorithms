@@ -74,7 +74,7 @@ public class Dijkstra {
       sb.append(end).append(" -> ");
       end = parent[end - 'A'];
     }
-    result.put("path", sb.substring(0, sb.length() - 3).toString());
+    result.put("path", sb.substring(0, sb.length() - 3));
     return result;
   }
 
