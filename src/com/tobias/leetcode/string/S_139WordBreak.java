@@ -1,4 +1,4 @@
-package com.tobias.rudiment.string;
+package com.tobias.leetcode.string;
 
 
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class S_139WordBreak {
     return dp[s.length()];
   }
 
-  public boolean wordBreakByRecursive(String s, List<String> wordDict) {
+  public boolean wordBreakByDivideAndRule(String s, List<String> wordDict) {
     Set<String> set = new HashSet<>(wordDict);
 
     return wordBreak(s, set, new HashMap<>());
@@ -119,11 +119,11 @@ public class S_139WordBreak {
   public static void main(String[] args) {
     S_139WordBreak wordBreak = new S_139WordBreak();
     List<String> wordDict = new ArrayList<>();
-    wordDict.add("leet");
-    wordDict.add("code");
-//    wordDict.add("sand");
-//    wordDict.add("and");
-//    wordDict.add("cat");
-    System.out.println(wordBreak.wordBreak("leetcode", wordDict));
+    wordDict.add("cat");
+    wordDict.add("cats");
+    wordDict.add("and");
+    wordDict.add("sand");
+    wordDict.add("dog");
+    System.out.println(wordBreak.wordBreakByDivideAndRule("catsanddog", wordDict));
   }
 }
