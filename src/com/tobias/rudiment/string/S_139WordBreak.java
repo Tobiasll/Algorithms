@@ -36,15 +36,40 @@ public class S_139WordBreak {
 
   public boolean wordBreak(String s, List<String> wordDict) {
     Set<String> set = new HashSet<>(wordDict);
+    boolean[] dp = new boolean[s.length() + 1];
+    dp[0] = true;
 
-    return wordBreak(s, set);
+    for (int i = 1; i <= s.length(); i++) {
+      for (int j = 0; j < i; j++) {
+        dp[i] = dp[j] && set.contains(s.substring(j, i));
+        if (dp[i]) {
+          break;
+        }
+      }
+    }
+    return dp[s.length()];
   }
 
-  private boolean wordBreak(String s, Set<String> set) {
+  public boolean wordBreakByRecursive(String s, List<String> wordDict) {
+    Set<String> set = new HashSet<>(wordDict);
+
+    return wordBreak(s, set, new HashMap<>());
+  }
+
+  private boolean wordBreak(String s, Set<String> set, Map<String, Boolean> memo) {
     if (s.length() == 0) {
       return true;
     }
-
+    if (memo.containsKey(s)) {
+      return memo.get(s);
+    }
+    for (int i = 0; i < s.length(); i++) {
+      if (set.contains(s.substring(i)) && wordBreak(s.substring(0, i), set, memo)) {
+        memo.put(s, true);
+        return true;
+      }
+    }
+    memo.put(s, false);
     return false;
   }
 
@@ -60,7 +85,6 @@ public class S_139WordBreak {
         return false;
       }
     }
-
 
     return wordBreak(s, wordDict, "", new HashMap<>());
   }
