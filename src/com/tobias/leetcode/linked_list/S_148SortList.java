@@ -37,7 +37,9 @@ public class S_148SortList {
       slow = slow.next;
       fast = fast.next.next;
     }
+    // 拿到中点后面的一截链表1->3
     ListNode head2 = slow.next;
+    // 断开head中点后面的内容，得到4->2
     slow.next = null;
     head = mergeSorted(head);
     head2 = mergeSorted(head2);
