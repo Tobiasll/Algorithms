@@ -19,7 +19,58 @@ import java.util.List;
  */
 public class S_148SortList {
 
+
   public ListNode sortList(ListNode head) {
+    return mergeSorted(head);
+  }
+
+  private ListNode mergeSorted(ListNode head) {
+    if (head == null || head.next == null) {
+      return head;
+    }
+    ListNode dummy = new ListNode(0);
+    dummy.next = head;
+    ListNode slow = dummy;
+    ListNode fast = dummy;
+
+    while (fast != null && fast.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+    ListNode head2 = slow.next;
+    slow.next = null;
+    head = mergeSorted(head);
+    head2 = mergeSorted(head2);
+    return merge(head, head2);
+  }
+
+  private ListNode merge(ListNode head1, ListNode head2) {
+    ListNode dummy = new ListNode(0);
+    ListNode tail = dummy;
+    while (head1 != null && head2 != null) {
+      if (head1.val < head2.val) {
+        tail.next = new ListNode(head1.val);
+        tail = tail.next;
+        head1 = head1.next;
+      } else {
+        tail.next = new ListNode(head2.val);
+        tail = tail.next;
+        head2 = head2.next;
+      }
+    }
+    if (head1 != null) {
+      tail.next = head1;
+    }
+    if (head2 != null) {
+      tail.next = head2;
+    }
+    return dummy.next;
+  }
+
+  /**
+   * 类似于冒泡排序O(n²) Time Limit Exceeded
+   */
+  public ListNode sortList2(ListNode head) {
     if (head == null || head.next == null) {
       return head;
     }
