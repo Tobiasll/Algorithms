@@ -21,6 +21,46 @@ public class S_143ReorderList {
 
 
   public void reorderList(ListNode head) {
+
+  }
+
+
+  public void reorderList3(ListNode head) {
+    if (head == null) {
+      return;
+    }
+    ListNode slow = head;
+    ListNode fast = head;
+    while (fast.next != null && fast.next.next != null) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+    ListNode secondHead = slow.next;
+    slow.next = null;
+    secondHead = reverseListNode(secondHead);
+
+    while (secondHead != null) {
+      ListNode temp = secondHead.next;
+      secondHead.next = head.next;
+      head.next = secondHead;
+      head = secondHead.next;
+      secondHead = temp;
+    }
+  }
+
+  private ListNode reverseListNode(ListNode head) {
+
+    ListNode tail = null;
+    while (head != null) {
+      ListNode next = head.next;
+      head.next = tail;
+      tail = head;
+      head = next;
+    }
+    return tail;
+  }
+
+  public void reorderList2(ListNode head) {
     List<ListNode> list = new ArrayList<>();
     while (head != null) {
       list.add(head);
@@ -60,7 +100,7 @@ public class S_143ReorderList {
 
   public static void main(String[] args) {
     S_143ReorderList reorderList = new S_143ReorderList();
-    ListNode listNode = new ListNode(new int[]{1, 2, 3, 4, 5});
+    ListNode listNode = new ListNode(new int[]{1, 2, 3, 4, 5, 6, 7, 8});
 //    ListNode listNode = new ListNode(new int[]{1, 2});
     reorderList.reorderList(listNode);
     System.out.println(listNode);
