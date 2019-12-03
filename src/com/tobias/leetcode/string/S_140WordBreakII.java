@@ -48,45 +48,43 @@ import java.util.Set;
 public class S_140WordBreakII {
 
   public List<String> wordBreak(String s, List<String> wordDict) {
-    List<String> result = new ArrayList<>();
-    Set<Character> set = new HashSet<>();
-    for (String word : wordDict) {
-      for (int i = 0; i < word.length(); i++) {
-        set.add(word.charAt(i));
-      }
-    }
-    for (int i = 0; i < s.length(); i++) {
-      if (!set.contains(s.charAt(i))) {
-        return result;
-      }
-    }
+    Set<String> set = new HashSet<>(wordDict);
+    return wordBreak(set, s, new HashMap<>());
+  }
 
-    wordDict(s, wordDict, "", "", result, new HashMap<>());
+  private List<String> wordBreak(Set<String> set, String s, Map<String, List<String>> memo) {
+    if (s.length() == 0) {
+      return new ArrayList<>();
+    }
+    if (memo.containsKey(s)) {
+      return memo.get(s);
+    }
+    List<String> result = new ArrayList<>();
+    for (int i = 0; i < s.length(); i++) {
+      if (set.contains(s.substring(i))) {
+        if (i == 0) {
+          result.add(s.substring(i));
+        } else {
+          List<String> list = wordBreak(set, s.substring(0, i), memo);
+          for (String word : list) {
+            result.add(word + " " + s.substring(i));
+          }
+        }
+      }
+    }
+    memo.put(s, result);
     return result;
   }
 
-  private boolean wordDict(String s, List<String> wordDict, String temp, String resultStr, List<String> result, Map<String, Boolean> memo) {
-    if (temp.length() > s.length()) {
-      return false;
-    }
-    if (memo.containsKey(temp)) {
-      resultStr += temp;
-      return memo.get(temp);
-    }
-    for (int i = 0; i < temp.length(); i++) {
-      if (temp.charAt(i) != s.charAt(i)) {
-        return false;
-      }
-    }
-    if (temp.length() == s.length()) {
-      result.add(resultStr);
-      return true;
-    }
-
-    return false;
-  }
 
   public static void main(String[] args) {
-
+   S_140WordBreakII wordBreakII = new S_140WordBreakII();
+   List<String> wordDict = new ArrayList<>();
+   wordDict.add("cat");
+   wordDict.add("cats");
+   wordDict.add("and");
+   wordDict.add("sand");
+   wordDict.add("dog");
+    System.out.println(wordBreakII.wordBreak("catsanddog", wordDict));
   }
 }
