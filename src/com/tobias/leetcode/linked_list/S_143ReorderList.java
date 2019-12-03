@@ -16,6 +16,11 @@ package com.tobias.leetcode.linked_list;
  */
 public class S_143ReorderList {
 
+
+  /**
+   * Runtime: 755 ms, faster than 5.02% of Java online submissions for Reorder List.
+   * Memory Usage: 38.9 MB, less than 100.00% of Java online submissions for Reorder List.
+   */
   public void reorderList(ListNode head) {
 
     ListNode curRoot = head;
