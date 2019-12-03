@@ -73,8 +73,8 @@ public class IntersectionOfTwoLinkedLists160 {
   }
 
   public static void main(String[] args) throws Exception {
-//    IntersectionOfTwoLinkedLists160 intersectionOfTwoLinkedLists160 = new IntersectionOfTwoLinkedLists160();
-//    System.out.println(intersectionOfTwoLinkedLists160.getIntersectionNode(new ListNode(new int[]{4,1,8,4,5}), new ListNode(new int[]{5,0,1,8,4,5})));
+    IntersectionOfTwoLinkedLists160 intersectionOfTwoLinkedLists160 = new IntersectionOfTwoLinkedLists160();
+    System.out.println(intersectionOfTwoLinkedLists160.getIntersectionNode(new ListNode(new int[]{0,9,1,2,4}), new ListNode(new int[]{3,2,4})));
 
     // 测试并行流执行是否会出现join
     List<Thread> list = new ArrayList<>();
