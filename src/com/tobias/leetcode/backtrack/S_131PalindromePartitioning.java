@@ -21,6 +21,31 @@ import java.util.List;
 public class S_131PalindromePartitioning {
 
   public List<List<String>> partition(String s) {
+
+    return divideAndConquer(s, 0);
+  }
+
+  private List<List<String>> divideAndConquer(String s, int start) {
+    if (start == s.length()) {
+      List<List<String>> result = new ArrayList<>();
+      result.add(new ArrayList<>());
+      return result;
+    }
+    List<List<String>> result = new ArrayList<>();
+    for (int i = start; i < s.length(); i++) {
+      if (isPalindrome(s.substring(start, i + 1))) {
+        String substring = s.substring(start, i + 1);
+        for (List<String> list : divideAndConquer(s, i + 1)) {
+          list.add(0, substring);
+          result.add(list);
+        }
+      }
+    }
+    return result;
+  }
+
+
+  public List<List<String>> partitionByBacktrack(String s) {
     List<List<String>> result = new ArrayList<>();
     backtrack(s, 0, result, new ArrayList<>());
     return result;
@@ -55,7 +80,7 @@ public class S_131PalindromePartitioning {
 
   public static void main(String[] args) {
     S_131PalindromePartitioning palindromePartitioning = new S_131PalindromePartitioning();
-    List<List<String>> lists = palindromePartitioning.partition("ababababababababababababcbabababab");
+    List<List<String>> lists = palindromePartitioning.partition("aab");
     for (List<String> list : lists) {
       System.out.println(list);
     }
