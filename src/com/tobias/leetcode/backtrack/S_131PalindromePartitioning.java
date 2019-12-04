@@ -55,7 +55,7 @@ public class S_131PalindromePartitioning {
 
   public static void main(String[] args) {
     S_131PalindromePartitioning palindromePartitioning = new S_131PalindromePartitioning();
-    List<List<String>> lists = palindromePartitioning.partition("aab");
+    List<List<String>> lists = palindromePartitioning.partition("ababababababababababababcbabababab");
     for (List<String> list : lists) {
       System.out.println(list);
     }
