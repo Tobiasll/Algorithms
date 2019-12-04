@@ -21,11 +21,22 @@ import java.util.List;
 public class S_131PalindromePartitioning {
 
   public List<List<String>> partition(String s) {
-
-    return divideAndConquer(s, 0);
+    boolean[][] dp = getDP(s);
+    return divideAndConquer(s, 0, dp);
   }
 
-  private List<List<String>> divideAndConquer(String s, int start) {
+  private boolean[][] getDP(String s) {
+    boolean[][] dp = new boolean[s.length()][s.length()];
+    for (int len = 1; len <= s.length(); len++) {
+      for (int i = 0; i <= s.length() - len; i++) {
+        int j = i +  len - 1;
+        dp[i][j] = s.charAt(i) == s.charAt(j) && (len < 3 || dp[i + 1][j - 1]);
+      }
+    }
+    return dp;
+  }
+
+  private List<List<String>> divideAndConquer(String s, int start, boolean[][] dp) {
     if (start == s.length()) {
       List<List<String>> result = new ArrayList<>();
       result.add(new ArrayList<>());
@@ -33,9 +44,9 @@ public class S_131PalindromePartitioning {
     }
     List<List<String>> result = new ArrayList<>();
     for (int i = start; i < s.length(); i++) {
-      if (isPalindrome(s.substring(start, i + 1))) {
+      if (dp[start][i]) {
         String substring = s.substring(start, i + 1);
-        for (List<String> list : divideAndConquer(s, i + 1)) {
+        for (List<String> list : divideAndConquer(s, i + 1, dp)) {
           list.add(0, substring);
           result.add(list);
         }
@@ -47,22 +58,23 @@ public class S_131PalindromePartitioning {
 
   public List<List<String>> partitionByBacktrack(String s) {
     List<List<String>> result = new ArrayList<>();
-    backtrack(s, 0, result, new ArrayList<>());
+    backtrack(s, 0, result, new ArrayList<>(), getDP(s));
     return result;
   }
 
-  private void backtrack(String s, int start, List<List<String>> result, List<String> tempList) {
+  private void backtrack(String s, int start, List<List<String>> result, List<String> tempList,
+      boolean[][] dp) {
     if (tempList.size() > 0 && start >= s.length()) {
       result.add(new ArrayList<>(tempList));
     }
     for (int i = start; i < s.length(); i++) {
-      if (isPalindrome(s.substring(start, i + 1))) {
+      if (dp[start][i]) {
         if (i == start) {
           tempList.add(Character.toString(s.charAt(i)));
         } else {
           tempList.add(s.substring(start, i + 1));
         }
-        backtrack(s, i + 1, result, tempList);
+        backtrack(s, i + 1, result, tempList, dp);
         tempList.remove(tempList.size() - 1);
       }
     }
@@ -80,7 +92,7 @@ public class S_131PalindromePartitioning {
 
   public static void main(String[] args) {
     S_131PalindromePartitioning palindromePartitioning = new S_131PalindromePartitioning();
-    List<List<String>> lists = palindromePartitioning.partition("aab");
+    List<List<String>> lists = palindromePartitioning.partitionByBacktrack("aab");
     for (List<String> list : lists) {
       System.out.println(list);
     }
