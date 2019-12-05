@@ -23,14 +23,24 @@ package com.tobias.leetcode.array;
  */
 public class S_1232CheckIfItIsAStraightLine {
 
-
-
   public boolean checkStraightLine(int[][] coordinates) {
+
+    double slope = ( 1.0 * coordinates[1][1] - coordinates[0][1]) / (1.0 * coordinates[1][0] - coordinates[0][0]);
+
+    for (int i = 2; i < coordinates.length; i++) {
+      double b = (1.0 * coordinates[i][1] - coordinates[i - 1][1]) / (1.0 * coordinates[i][0] - coordinates[i - 1][0]);
+      if (slope != b) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public boolean checkStraightLine1(int[][] coordinates) {
     // y = kx + b;
     // b = y - kx;
     double k = ( 1.0 * coordinates[1][1] - coordinates[0][1]) / (1.0 * coordinates[1][0] - coordinates[0][0]);
     double b = coordinates[0][1]  - coordinates[0][0] * k;
-    System.out.println(k);
     for (int i = 2; i < coordinates.length; i++) {
       if (coordinates[i][1] != k * coordinates[i][0] + b) {
         return false;
