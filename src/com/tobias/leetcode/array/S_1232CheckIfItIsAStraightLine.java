@@ -27,7 +27,7 @@ public class S_1232CheckIfItIsAStraightLine {
 
   public boolean checkStraightLine(int[][] coordinates) {
     // y = kx + b;
-    // b =
+    // b = y - kx;
     double k = ( 1.0 * coordinates[1][1] - coordinates[0][1]) / (1.0 * coordinates[1][0] - coordinates[0][0]);
     double b = coordinates[0][1]  - coordinates[0][0] * k;
     System.out.println(k);
@@ -42,7 +42,6 @@ public class S_1232CheckIfItIsAStraightLine {
   public static void main(String[] args) {
     S_1232CheckIfItIsAStraightLine checkIfItIsAStraightLine = new S_1232CheckIfItIsAStraightLine();
 //    int[][] arr = {{1,2},{2,3},{3,4},{4,5},{5,6},{6,7}};
-    int[][] arr = {{1,2},{2,3},{3,4},{4,5},{5,6},{6,7}};
     int[][] arr1 = {{-3,-2}, {-1,-2}, {2,-2}, {-2,-2},{0,-2}};
     System.out.println(checkIfItIsAStraightLine.checkStraightLine(arr1));
   }
