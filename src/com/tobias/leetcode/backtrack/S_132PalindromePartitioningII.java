@@ -13,42 +13,38 @@ package com.tobias.leetcode.backtrack;
  */
 public class S_132PalindromePartitioningII {
 
-  private int min = 0;
-  private int tempMin = 0;
-
+  private int min = Integer.MAX_VALUE;
 
   /**
    * Time Limit Exceeded : Last executed input = "ababababababababababababcbabababababababababababa"
    */
   public int minCut(String s) {
-    backtrack(s, 0);
+    boolean[][] dp = new boolean[s.length()][s.length()];
+    for (int len = 1; len <= s.length(); len++) {
+      for (int i = 0; i <= s.length() - len; i++) {
+        int j = i + len - 1;
+        dp[i][j] = s.charAt(i) == s.charAt(j) && (len < 3 || dp[i + 1][j - 1]);
+      }
+    }
+    backtrack(s, 0, dp, 0);
     return min;
   }
 
-  private void backtrack(String s, int start) {
-    if (tempMin > 0 && start >= s.length()) {
-      min = min == 0 ? tempMin - 1 : Math.min(min, tempMin - 1);
+  private void backtrack(String s, int start, boolean[][] dp, int num) {
+    if (dp[start][s.length() - 1]) {
+      min = Math.min(min, num);
     }
-    for (int i = start; i < s.length(); i++) {
-      if (isPalindrom(s.substring(start, i + 1))) {
-        tempMin++;
-        backtrack(s, i + 1);
-        tempMin--;
+    for (int i = start; i < s.length() - 1; i++) {
+      if (dp[start][i]) {
+        backtrack(s, i + 1, dp, num + 1);
       }
     }
   }
 
-  private boolean isPalindrom(String substring) {
-    for (int i = 0, j = substring.length() - 1; i < j; i++, j--) {
-      if (substring.charAt(i) != substring.charAt(j)) {
-        return false;
-      }
-    }
-    return true;
-  }
+
 
   public static void main(String[] args) {
     S_132PalindromePartitioningII palindromePartitioningII = new S_132PalindromePartitioningII();
-    System.out.println(palindromePartitioningII.minCut("ababababababababababababcbabababababababababa"));
+    System.out.println(palindromePartitioningII.minCut("ababababababababababababcbabababababababababababa"));
   }
 }

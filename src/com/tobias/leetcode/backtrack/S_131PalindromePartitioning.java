@@ -92,7 +92,7 @@ public class S_131PalindromePartitioning {
 
   public static void main(String[] args) {
     S_131PalindromePartitioning palindromePartitioning = new S_131PalindromePartitioning();
-    List<List<String>> lists = palindromePartitioning.partitionByBacktrack("aab");
+    List<List<String>> lists = palindromePartitioning.partitionByBacktrack("ababababababababababababcbababababa");
     for (List<String> list : lists) {
       System.out.println(list);
     }
