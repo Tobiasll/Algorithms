@@ -29,11 +29,25 @@ package com.tobias.leetcode.other;
 public class S_263UglyNumber {
 
   public boolean isUgly(int num) {
+    int[] primeFactors = new int[]{2, 3, 5};
 
-    return true;
+    while (num > 0) {
+      boolean flag = true;
+      for (int factor : primeFactors) {
+        while (num % factor == 0) {
+          num /= factor;
+          flag = false;
+        }
+      }
+      if (flag) {
+        break;
+      }
+    }
+    return num == 1;
   }
 
   public static void main(String[] args) {
-
+    S_263UglyNumber uglyNumber = new S_263UglyNumber();
+    System.out.println(uglyNumber.isUgly(1000));
   }
 }
