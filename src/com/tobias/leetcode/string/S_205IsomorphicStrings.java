@@ -1,6 +1,9 @@
 package com.tobias.leetcode.string;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Given two strings s and t, determine if they are isomorphic.
  *
@@ -23,7 +26,26 @@ package com.tobias.leetcode.string;
  */
 public class S_205IsomorphicStrings {
 
+
   public boolean isIsomorphic(String s, String t) {
+
+
+    return true;
+  }
+
+  public boolean isIsomorphic2(String s, String t) {
+
+    Map map = new HashMap();
+
+    for (Integer i = 0; i < s.length(); i++) {
+      if (map.put(s.charAt(i), i) != map.put(t.charAt(i) + "", i)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public boolean isIsomorphic1(String s, String t) {
     if (s.length() != t.length()) {
       return false;
     }
@@ -50,5 +72,7 @@ public class S_205IsomorphicStrings {
   public static void main(String[] args) {
     S_205IsomorphicStrings isomorphicStrings = new S_205IsomorphicStrings();
     System.out.println(isomorphicStrings.isIsomorphic("paperp", "titlet"));
+
+
   }
 }
