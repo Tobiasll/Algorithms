@@ -26,9 +26,31 @@ import java.util.Map;
  */
 public class S_205IsomorphicStrings {
 
-
+  /**
+   * Runtime: 3 ms, faster than 95.93% of Java online submissions for Isomorphic Strings.
+   * Memory Usage: 35.8 MB, less than 100.00% of Java online submissions for Isomorphic Strings.
+   *
+   *  过程 例如 ：paper  那么 p = t\a = i\p = t\e = l\r = e    sChars[sChar] = t == tChar] = t 则成立
+   *              title
+   *              bab  b = a\ a = b\ 然后拿出 b = a ，发现 tChar = b ，sChars[sChar]::a 不等于 tChar::b
+   *              abb
+   */
   public boolean isIsomorphic(String s, String t) {
+    char[] sChars = new char[256];
+    char[] tChars = new char[256];
 
+    for (int i = 0; i < s.length(); i++) {
+      char sChar = s.charAt(i);
+      char tChar = t.charAt(i);
+      if (sChars[sChar] == 0 && tChars[tChar] == 0) {
+        tChars[tChar] = sChar;
+        sChars[sChar] = tChar;
+      } else {
+        if (tChars[tChar] != sChar || sChars[sChar] != tChar) {
+          return false;
+        }
+      }
+    }
 
     return true;
   }
@@ -71,7 +93,7 @@ public class S_205IsomorphicStrings {
 
   public static void main(String[] args) {
     S_205IsomorphicStrings isomorphicStrings = new S_205IsomorphicStrings();
-    System.out.println(isomorphicStrings.isIsomorphic("paperp", "titlet"));
+    System.out.println(isomorphicStrings.isIsomorphic("paper", "title"));
 
 
   }
