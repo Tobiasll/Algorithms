@@ -48,6 +48,10 @@ public class S_263UglyNumber {
 
   public static void main(String[] args) {
     S_263UglyNumber uglyNumber = new S_263UglyNumber();
-    System.out.println(uglyNumber.isUgly(1000));
+    for (int i = 0; i < 1000; i++) {
+      if (uglyNumber.isUgly(i)) {
+        System.out.println(i);
+      }
+    }
   }
 }
