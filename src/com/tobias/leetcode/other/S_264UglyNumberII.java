@@ -21,7 +21,27 @@ import java.util.PriorityQueue;
 public class S_264UglyNumberII {
 
 
+
   public int nthUglyNumber(int n) {
+    int[] dp = new int[n];
+    dp[0] = 1;
+    int two = 0, three = 0, five = 0;
+    for (int i = 1; i < n; i++) {
+      dp[i] = Math.min(dp[two] * 2, Math.min(dp[three] * 3, dp[five] * 5));
+      if (dp[i] == dp[two] * 2) {
+        two++;
+      }
+      if (dp[i] == dp[three] * 3) {
+        three++;
+      }
+      if (dp[i] == dp[five] * 5) {
+        five++;
+      }
+    }
+    return dp[n - 1];
+  }
+
+  public int nthUglyNumberByPriorityQueue(int n) {
     if (n == 1) {
       return 1;
     }
@@ -65,7 +85,11 @@ public class S_264UglyNumberII {
 
   public static void main(String[] args) {
     S_264UglyNumberII uglyNumberII = new S_264UglyNumberII();
-    System.out.println(uglyNumberII.nthUglyNumber(19));
+    for (int i = 0; i <= 1690; i++) {
+      System.out.print(uglyNumberII.nthUglyNumber(19));
+      System.out.print(" , ");
+
+    }
 
   }
 }
