@@ -66,5 +66,6 @@ public class S_264UglyNumberII {
   public static void main(String[] args) {
     S_264UglyNumberII uglyNumberII = new S_264UglyNumberII();
     System.out.println(uglyNumberII.nthUglyNumber(19));
+
   }
 }
