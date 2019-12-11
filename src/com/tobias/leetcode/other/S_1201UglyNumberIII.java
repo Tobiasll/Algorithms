@@ -29,26 +29,26 @@ package com.tobias.leetcode.other;
 public class S_1201UglyNumberIII {
 
   public int nthUglyNumber(int n, int a, int b, int c) {
-    int[] dp = new int[n + 1];
+    int result = 0;
 
     int ai = 1, bi = 1, ci = 1;
     for (int i = 1; i <= n; i++) {
-      dp[i] = Math.min(ai * a, Math.min(bi * b, ci * c));
-      if (dp[i] == ai * a) {
+      result = Math.min(ai * a, Math.min(bi * b, ci * c));
+      if (result == ai * a) {
         ai++;
       }
-      if (dp[i] == bi * b) {
+      if (result == bi * b) {
         bi++;
       }
-      if (dp[i] == ci * c) {
+      if (result == ci * c) {
         ci++;
       }
     }
-    return dp[n];
+    return result;
   }
 
   public static void main(String[] args) {
     S_1201UglyNumberIII uglyNumberIII = new S_1201UglyNumberIII();
-    System.out.println(uglyNumberIII.nthUglyNumber(1000000000, 2, 217983653, 217983653));
+    System.out.println(uglyNumberIII.nthUglyNumber(5, 2, 11, 13));
   }
 }
