@@ -54,6 +54,56 @@ public class S_126WordLadderII {
     if (!wordList.contains(endWord)) {
       return result;
     }
+
+    bfs(beginWord, endWord, wordList, result);
+    return result;
+  }
+
+  private void bfs(String beginWord, String endWord, List<String> wordList, List<List<String>> result) {
+    List<String> insideList = new ArrayList<>();
+    insideList.add(beginWord);
+    Queue<List<String>> queue = new LinkedList<>();
+    queue.offer(insideList);
+    Set<String> dict = new HashSet<>(wordList);
+    Set<String> visited = new HashSet<>();
+    visited.add(beginWord);
+    boolean isFound = false;
+
+    while (!queue.isEmpty()) {
+      int queueSize = queue.size();
+      Set<String> subVisited = new HashSet<>();
+      for (int i = 0; i < queueSize; i++) {
+        List<String> pollList = queue.poll();
+        String lastStr = pollList.get(pollList.size() - 1);
+        List<String> neighbors = getNeighbor(lastStr, dict);
+        for (String neighbor : neighbors) {
+          if (!visited.contains(neighbor)) {
+            if (neighbor.equals(endWord)) {
+              isFound = true;
+              pollList.add(neighbor);
+              result.add(new ArrayList<>(pollList));
+              pollList.remove(pollList.size() - 1);
+            }
+            pollList.add(neighbor);
+            queue.offer(new ArrayList<>(pollList));
+            pollList.remove(pollList.size() - 1);
+            subVisited.add(neighbor);
+          }
+        }
+      }
+      visited.addAll(subVisited);
+      if (isFound) {
+        break;
+      }
+    }
+  }
+
+
+  public List<List<String>> findLaddersByDFS(String beginWord, String endWord, List<String> wordList) {
+    List<List<String>> result = new ArrayList<>();
+    if (!wordList.contains(endWord)) {
+      return result;
+    }
     Map<String, List<String>> map = new HashMap<>();
     bfs(beginWord, endWord, map, wordList);
     List<String> tempList = new ArrayList<>();
@@ -140,7 +190,7 @@ public class S_126WordLadderII {
   public static void main(String[] args) {
     S_126WordLadderII wordLadderII = new S_126WordLadderII();
 
-    List<List<String>> ladders = wordLadderII.findLadders("hot", "dog", Arrays.asList("hot", "dog", "dot"));
+    List<List<String>> ladders = wordLadderII.findLadders("hit", "cog", Arrays.asList("hot","dot","dog","lot","log","cog"));
     for (List<String> ladder : ladders) {
       System.out.println(ladder);
     }
