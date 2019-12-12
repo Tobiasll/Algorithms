@@ -167,7 +167,7 @@ public class S_126WordLadderII {
     }
   }
 
-  private List<String> getNeighbor(String pollStr, Set<String> dict) {
+  public static List<String> getNeighbor(String pollStr, Set<String> dict) {
     List<String> result = new ArrayList<>();
     char[] chars = pollStr.toCharArray();
     for (char ch = 'a'; ch <= 'z'; ch++) {
