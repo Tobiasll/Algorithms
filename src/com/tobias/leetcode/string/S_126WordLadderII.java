@@ -49,6 +49,7 @@ import java.util.Set;
  */
 public class S_126WordLadderII {
 
+  private int depth;
 
   public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
     List<List<String>> result = new ArrayList<>();
@@ -65,10 +66,7 @@ public class S_126WordLadderII {
 
   private void findLadders(String beginWord, String endWord, List<String> tempList,
       List<List<String>> result, Map<String, List<String>> memo) {
-    if (beginWord.equals(endWord)) {
-      result.add(new ArrayList<>(tempList));
-      return;
-    }
+
     List<String> neighborWords = memo.getOrDefault(beginWord, new ArrayList<>());
     for (String neighborWord : neighborWords) {
       tempList.add(neighborWord);
@@ -88,7 +86,7 @@ public class S_126WordLadderII {
   }
 
   private boolean doubleSearchBFS(Set<String> beginSet, Set<String> endSet, Set<String> dict, boolean direction, Map<String, List<String>> memo) {
-
+    depth++;
     if (beginSet.isEmpty()) {
       return false;
     }
@@ -276,11 +274,11 @@ public class S_126WordLadderII {
   public static void main(String[] args) {
     S_126WordLadderII wordLadderII = new S_126WordLadderII();
 
-    List<List<String>> ladders = wordLadderII.findLadders("talk", "tail", Arrays.asList("talk","tons","fall","tail","gale","hall","negs"));
+    List<List<String>> ladders = wordLadderII.findLadders("hit", "cog", Arrays.asList("hot","dot","dog","lot","log","cog"));
     for (List<String> ladder : ladders) {
       System.out.println(ladder);
     }
-
+    System.out.println(wordLadderII.depth + 1);
 
 
   }
