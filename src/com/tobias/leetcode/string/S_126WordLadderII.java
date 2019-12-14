@@ -49,7 +49,93 @@ import java.util.Set;
  */
 public class S_126WordLadderII {
 
+
   public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
+    List<List<String>> result = new ArrayList<>();
+    if (!wordList.contains(endWord)) {
+      return result;
+    }
+    Map<String, List<String>> memo = new HashMap<>();
+    doubleSearchBFS(beginWord, endWord, wordList, memo);
+    List<String> tempList = new ArrayList<>();
+    tempList.add(beginWord);
+    findLadders(beginWord, endWord, tempList, result, memo);
+    return result;
+  }
+
+  private void findLadders(String beginWord, String endWord, List<String> tempList,
+      List<List<String>> result, Map<String, List<String>> memo) {
+    if (beginWord.equals(endWord)) {
+      result.add(new ArrayList<>(tempList));
+      return;
+    }
+    List<String> neighborWords = memo.getOrDefault(beginWord, new ArrayList<>());
+    for (String neighborWord : neighborWords) {
+      tempList.add(neighborWord);
+      findLadders(neighborWord, endWord, tempList, result, memo);
+      tempList.remove(tempList.size() - 1);
+    }
+  }
+
+  private void doubleSearchBFS(String beginWord, String endWord, List<String> wordList, Map<String, List<String>> memo) {
+    Set<String> beginSet = new HashSet<>();
+    beginSet.add(beginWord);
+    Set<String> endSet = new HashSet<>();
+    endSet.add(endWord);
+    Set<String> dict  = new HashSet<>(wordList);
+    doubleSearchBFS(beginSet, endSet, dict, true, memo);
+
+  }
+
+  private boolean doubleSearchBFS(Set<String> beginSet, Set<String> endSet, Set<String> dict, boolean direction, Map<String, List<String>> memo) {
+
+    if (beginSet.isEmpty()) {
+      return false;
+    }
+    if (beginSet.size() > endSet.size()) {
+      return doubleSearchBFS(endSet, beginSet, dict, !direction, memo);
+    }
+    dict.removeAll(beginSet);
+    dict.removeAll(endSet);
+
+    boolean isDone = false;
+
+    Set<String> extendSet = new HashSet<>();
+    for (String beginWord : beginSet) {
+      for (int i = 0; i < beginWord.length(); i++) {
+        char[] chars = beginWord.toCharArray();
+        for (char ch = 'a'; ch <= 'z'; ch++) {
+          if (ch == chars[i]) {
+            continue;
+          }
+          chars[i] = ch;
+          String word = new String(chars);
+
+          String key = direction ? beginWord : word;
+          String value = direction ? word : beginWord;
+
+          List<String> list = memo.containsKey(key) ? memo.get(key) : new ArrayList<>();
+
+          if (endSet.contains(word)) {
+            isDone = true;
+            list.add(value);
+            memo.put(key, list);
+          }
+
+          if (!isDone && dict.contains(word)) {
+            extendSet.add(word);
+            list.add(value);
+            memo.put(key, list);
+          }
+        }
+      }
+
+    }
+    return isDone || doubleSearchBFS(endSet, extendSet, dict, !direction, memo);
+  }
+
+
+  public List<List<String>> findLaddersByBFS(String beginWord, String endWord, List<String> wordList) {
     List<List<String>> result = new ArrayList<>();
     if (!wordList.contains(endWord)) {
       return result;
@@ -167,7 +253,7 @@ public class S_126WordLadderII {
     }
   }
 
-  public static List<String> getNeighbor(String pollStr, Set<String> dict) {
+  static List<String> getNeighbor(String pollStr, Set<String> dict) {
     List<String> result = new ArrayList<>();
     char[] chars = pollStr.toCharArray();
     for (char ch = 'a'; ch <= 'z'; ch++) {
@@ -190,7 +276,7 @@ public class S_126WordLadderII {
   public static void main(String[] args) {
     S_126WordLadderII wordLadderII = new S_126WordLadderII();
 
-    List<List<String>> ladders = wordLadderII.findLadders("hit", "cog", Arrays.asList("hot","dot","dog","lot","log","cog"));
+    List<List<String>> ladders = wordLadderII.findLadders("talk", "tail", Arrays.asList("talk","tons","fall","tail","gale","hall","negs"));
     for (List<String> ladder : ladders) {
       System.out.println(ladder);
     }
