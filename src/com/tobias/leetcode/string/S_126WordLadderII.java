@@ -60,19 +60,8 @@ public class S_126WordLadderII {
     doubleSearchBFS(beginWord, endWord, wordList, memo);
     List<String> tempList = new ArrayList<>();
     tempList.add(beginWord);
-    findLadders(beginWord, endWord, tempList, result, memo);
+    findLadders(beginWord, endWord, tempList, memo, result);
     return result;
-  }
-
-  private void findLadders(String beginWord, String endWord, List<String> tempList,
-      List<List<String>> result, Map<String, List<String>> memo) {
-
-    List<String> neighborWords = memo.getOrDefault(beginWord, new ArrayList<>());
-    for (String neighborWord : neighborWords) {
-      tempList.add(neighborWord);
-      findLadders(neighborWord, endWord, tempList, result, memo);
-      tempList.remove(tempList.size() - 1);
-    }
   }
 
   private void doubleSearchBFS(String beginWord, String endWord, List<String> wordList, Map<String, List<String>> memo) {
@@ -190,10 +179,15 @@ public class S_126WordLadderII {
     }
     Map<String, List<String>> map = new HashMap<>();
     bfs(beginWord, endWord, map, wordList);
+    getResult(beginWord, endWord, result, map);
+    return result;
+  }
+
+  private void getResult(String beginWord, String endWord, List<List<String>> result,
+      Map<String, List<String>> map) {
     List<String> tempList = new ArrayList<>();
     tempList.add(beginWord);
     findLadders(beginWord, endWord, tempList, map, result);
-    return result;
   }
 
   private void findLadders(String beginWord, String endWord,
