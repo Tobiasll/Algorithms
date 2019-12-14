@@ -70,8 +70,8 @@ public class S_126WordLadderII {
     Set<String> endSet = new HashSet<>();
     endSet.add(endWord);
     Set<String> dict  = new HashSet<>(wordList);
-    doubleSearchBFS(beginSet, endSet, dict, true, memo);
-
+    boolean b = doubleSearchBFS(beginSet, endSet, dict, true, memo);
+    System.out.println(b);
   }
 
   private boolean doubleSearchBFS(Set<String> beginSet, Set<String> endSet, Set<String> dict, boolean direction, Map<String, List<String>> memo) {
@@ -268,7 +268,7 @@ public class S_126WordLadderII {
   public static void main(String[] args) {
     S_126WordLadderII wordLadderII = new S_126WordLadderII();
 
-    List<List<String>> ladders = wordLadderII.findLadders("hit", "cog", Arrays.asList("hot","dot","dog","lot","log","cog"));
+    List<List<String>> ladders = wordLadderII.findLadders("hit", "cog", Arrays.asList("hot","dot","dog","lot","log"));
     for (List<String> ladder : ladders) {
       System.out.println(ladder);
     }

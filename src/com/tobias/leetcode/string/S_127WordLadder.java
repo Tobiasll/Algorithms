@@ -44,7 +44,54 @@ import java.util.Set;
  */
 public class S_127WordLadder {
 
+  private int depth;
+
   public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+    Set<String> beginSet = new HashSet<>();
+    beginSet.add(beginWord);
+    Set<String> endSet = new HashSet<>();
+    endSet.add(endWord);
+    Set<String> dict = new HashSet<>(wordList);
+
+    return doubleWeySearchBFS(beginSet, endSet, dict, true) ? depth + 1 : 0;
+  }
+
+  private boolean doubleWeySearchBFS(Set<String> beginSet, Set<String> endSet, Set<String> dict, boolean direction) {
+    depth++;
+    if (beginSet.isEmpty()) {
+      return false;
+    }
+    if (beginSet.size() > endSet.size()) {
+      return doubleWeySearchBFS(endSet, beginSet, dict, !direction);
+    }
+    dict.removeAll(beginSet);
+    dict.removeAll(endSet);
+    boolean isDone = false;
+    Set<String> extendSet = new HashSet<>();
+
+    for (String beginWord : beginSet) {
+      for (int i = 0; i < beginWord.length(); i++) {
+        char[] chars = beginWord.toCharArray();
+        for (char ch = 'a'; ch <= 'z'; ch++) {
+          if (ch == chars[i]) {
+            continue;
+          }
+          chars[i] = ch;
+          String word = new String(chars);
+
+          if (endSet.contains(word)) {
+            isDone = true;
+          }
+          if (!isDone && dict.contains(word)) {
+            extendSet.add(word);
+          }
+        }
+      }
+    }
+    return isDone || doubleWeySearchBFS(endSet, extendSet, dict, !direction);
+  }
+
+  public int ladderLengthByBFS(String beginWord, String endWord, List<String> wordList) {
     int depth = 0;
     boolean isFound = false;
     Queue<String> queue = new LinkedList<>();
