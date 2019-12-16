@@ -44,29 +44,31 @@ import java.util.Set;
  */
 public class S_127WordLadder {
 
-  private int depth;
+  private int depth = 2;
 
   public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+    if (!wordList.contains(endWord)) {
+      return 0;
+    }
     Set<String> beginSet = new HashSet<>();
     beginSet.add(beginWord);
     Set<String> endSet = new HashSet<>();
     endSet.add(endWord);
     Set<String> dict = new HashSet<>(wordList);
-
-    return doubleWeySearchBFS(beginSet, endSet, dict, true) ? depth + 1 : 0;
+    return doubleWeySearchBFS(beginSet, endSet, dict) ? depth : 0;
   }
 
-  private boolean doubleWeySearchBFS(Set<String> beginSet, Set<String> endSet, Set<String> dict, boolean direction) {
-    depth++;
+  private boolean doubleWeySearchBFS(Set<String> beginSet, Set<String> endSet, Set<String> dict) {
+
     if (beginSet.isEmpty()) {
       return false;
     }
     if (beginSet.size() > endSet.size()) {
-      return doubleWeySearchBFS(endSet, beginSet, dict, !direction);
+      return doubleWeySearchBFS(endSet, beginSet, dict);
     }
     dict.removeAll(beginSet);
     dict.removeAll(endSet);
-    boolean isDone = false;
+
     Set<String> extendSet = new HashSet<>();
 
     for (String beginWord : beginSet) {
@@ -80,15 +82,18 @@ public class S_127WordLadder {
           String word = new String(chars);
 
           if (endSet.contains(word)) {
-            isDone = true;
+            return true;
           }
-          if (!isDone && dict.contains(word)) {
+          if (dict.contains(word)) {
             extendSet.add(word);
           }
         }
       }
     }
-    return isDone || doubleWeySearchBFS(endSet, extendSet, dict, !direction);
+    if (extendSet.size() > 0) {
+      depth++;
+    }
+    return doubleWeySearchBFS(endSet, extendSet, dict);
   }
 
   public int ladderLengthByBFS(String beginWord, String endWord, List<String> wordList) {
@@ -129,6 +134,6 @@ public class S_127WordLadder {
 
   public static void main(String[] args) {
     S_127WordLadder wordLadder = new S_127WordLadder();
-    System.out.println(wordLadder.ladderLength("hit", "cog", Arrays.asList("hot","dot","dog","lot","log","cog")));
+    System.out.println(wordLadder.ladderLength("a", "c", Arrays.asList("a","b","c")));
   }
 }
