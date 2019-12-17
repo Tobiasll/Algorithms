@@ -53,9 +53,25 @@ public class S_230KthSmallestElementInBST {
   }
 
   public int kthSmallest(TreeNode root, int k) {
-    Stack<TreeNode> stack = new Stack<>();
 
-    return result;
+    int count = 0;
+
+    Stack<TreeNode> stack = new Stack<>();
+    while (root != null || !stack.isEmpty()) {
+      if (root != null) {
+        stack.push(root);
+        root = root.left;
+      } else {
+        TreeNode pop = stack.pop();
+
+        if (++count == k) {
+          return pop.val;
+        }
+        System.out.println(pop.val);
+        root = pop.right;
+      }
+    }
+    return 0;
   }
 
   public static void main(String[] args) {
