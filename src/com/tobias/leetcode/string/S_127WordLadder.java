@@ -51,10 +51,50 @@ public class S_127WordLadder {
       return 0;
     }
     Set<String> beginSet = new HashSet<>();
+    Set<String> endSet = new HashSet<>();
+    Set<String> visited = new HashSet<>();
     beginSet.add(beginWord);
+    endSet.add(endWord);
+
+    int depth = 1;
+    while (!beginSet.isEmpty() && !endSet.isEmpty()) {
+      if (beginSet.size() > endSet.size()) {
+        Set<String> temp = beginSet;
+        beginSet = endSet;
+        endSet = temp;
+      }
+      Set<String> extendSet = new HashSet<>();
+      for (String word : beginSet) {
+        for (int i = 0; i < word.length(); i++) {
+          char[] chars = word.toCharArray();
+          for (char ch = 'a'; ch <= 'z'; ch++) {
+            chars[i] = ch;
+            String newWord = new String(chars);
+            if (endSet.contains(newWord)) {
+              return depth + 1;
+            }
+            if (!visited.contains(newWord) && wordList.contains(newWord)) {
+              extendSet.add(newWord);
+              visited.add(newWord);
+            }
+          }
+        }
+      }
+      depth++;
+      beginSet = extendSet;
+    }
+
+    return 0;
+  }
+  public int ladderLengthByDoubleWeySearch(String beginWord, String endWord, List<String> wordList) {
+    if (!wordList.contains(endWord)) {
+      return 0;
+    }
+    Set<String> beginSet = new HashSet<>();
+    beginSet.add(beginWord);
+    Set<String> dict = new HashSet<>(wordList);
     Set<String> endSet = new HashSet<>();
     endSet.add(endWord);
-    Set<String> dict = new HashSet<>(wordList);
     return doubleWeySearchBFS(beginSet, endSet, dict) ? depth : 0;
   }
 
@@ -134,6 +174,11 @@ public class S_127WordLadder {
 
   public static void main(String[] args) {
     S_127WordLadder wordLadder = new S_127WordLadder();
-    System.out.println(wordLadder.ladderLength("a", "c", Arrays.asList("a","b","c")));
+    System.out.println(wordLadder.ladderLength("hit", "cog", Arrays.asList("hot","dot","dog","lot","log","cog")));
+
+
+
+
+
   }
 }
