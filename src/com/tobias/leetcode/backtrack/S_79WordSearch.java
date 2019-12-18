@@ -26,11 +26,9 @@ public class S_79WordSearch {
     if (board.length == 0) {
       return false;
     }
-
-    boolean[][] visited = new boolean[board.length][board[0].length];
     for (int row = 0; row < board.length; row++) {
       for (int col = 0; col < board[row].length; col++) {
-        if (exist(board, word, row, col, 0, visited)) {
+        if (exist(board, word, row, col, 0)) {
           return true;
         }
       }
@@ -39,35 +37,35 @@ public class S_79WordSearch {
     return false;
   }
 
-  private boolean exist(char[][] board, String word, int row, int col, int index,
-      boolean[][] visited) {
+  private boolean exist(char[][] board, String word, int row, int col, int index) {
     if (row < 0 || row >= board.length || col < 0 || col >= board[0].length) {
       return false;
     }
-    if (visited[row][col] || board[row][col] != word.charAt(index)) {
+    if (board[row][col] >= 194 || board[row][col] != word.charAt(index)) {
       return false;
     }
     if (index == word.length() - 1) {
       return true;
     }
-    visited[row][col] = true;
-    boolean up = exist(board, word, row - 1, col, index + 1, visited);
+
+    board[row][col] ^= 128;
+    boolean up = exist(board, word, row - 1, col, index + 1);
     if (up) {
       return true;
     }
-    boolean down = exist(board, word, row + 1, col, index + 1, visited);
+    boolean down = exist(board, word, row + 1, col, index + 1);
     if (down) {
       return true;
     }
-    boolean left = exist(board, word, row, col - 1, index + 1, visited);
+    boolean left = exist(board, word, row, col - 1, index + 1);
     if (left) {
       return true;
     }
-    boolean right = exist(board, word, row, col + 1, index + 1, visited);
+    boolean right = exist(board, word, row, col + 1, index + 1);
     if (right) {
       return true;
     }
-    visited[row][col] = false;
+    board[row][col] ^= 128;
     return false;
   }
 
@@ -82,5 +80,7 @@ public class S_79WordSearch {
         {'C','A','A'},
         {'A','A','A'},
         {'B','C','D'}}, "AAB"));
+
+    System.out.println((int) ( 'B' ^ 128));
   }
 }
