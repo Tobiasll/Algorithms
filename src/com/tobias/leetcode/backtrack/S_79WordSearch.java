@@ -81,6 +81,6 @@ public class S_79WordSearch {
         {'A','A','A'},
         {'B','C','D'}}, "AAB"));
 
-    System.out.println((int) ( 'B' ^ 128));
+    System.out.println(( 'A' ^ 128));
   }
 }
