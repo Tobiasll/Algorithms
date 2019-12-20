@@ -37,6 +37,69 @@ public class S_212WordSearchII {
     if (board.length == 0) {
       return result;
     }
+    TreeNode treeNode = buildTreeNodeByWords(words);
+    for (int row = 0; row < board.length; row++) {
+      for (int col = 0; col < board[row].length; col++) {
+        dfs(board, row, col, treeNode, result);
+      }
+    }
+    return result;
+  }
+
+  private void dfs(char[][] board, int row, int col, TreeNode root, List<String> result) {
+    char c = board[row][col];
+    if (c == '#' || root.next[c - 'a'] == null) {
+      return;
+    }
+    root = root.next[c - 'a'];
+    if (root.word != null) {
+      result.add(root.word);
+      root.word = null;
+    }
+    board[row][col] = '#';
+    if (row > 0) {
+      dfs(board, row - 1, col, root, result);
+    }
+    if (col > 0) {
+      dfs(board, row, col - 1, root, result);
+    }
+    if (row < board.length - 1) {
+      dfs(board, row + 1, col, root, result);
+    }
+    if (col < board[0].length - 1) {
+      dfs(board, row, col + 1, root, result);
+    }
+
+    board[row][col] = c;
+  }
+
+
+  private TreeNode buildTreeNodeByWords(String[] words) {
+    TreeNode root = new TreeNode();
+    for (String word : words) {
+      TreeNode node = root;
+      for (char c : word.toCharArray()) {
+        int i = c - 'a';
+        if (node.next[i] == null) {
+          node.next[i] = new TreeNode();
+        }
+        node = node.next[i];
+      }
+      node.word = word;
+    }
+    return root;
+  }
+
+  class TreeNode {
+    TreeNode[] next = new TreeNode[26];
+    String word;
+  }
+
+  public List<String> findWordsByBacktrack(char[][] board, String[] words) {
+    List<String> result = new ArrayList<>();
+    if (board.length == 0) {
+      return result;
+    }
     for (String word : words) {
       boolean isFound = false;
       for (int row = 0; row < board.length; row++) {
