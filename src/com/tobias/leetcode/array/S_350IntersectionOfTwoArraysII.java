@@ -28,6 +28,11 @@ import java.util.List;
  */
 public class S_350IntersectionOfTwoArraysII {
 
+  /**
+   * Runtime: 2 ms, faster than 90.67% of Java online submissions for Intersection of Two Arrays II.
+   * Memory Usage: 36.4 MB, less than 83.87% of Java online submissions for Intersection of Two Arrays II.
+   * 由于对两个数组进行了排序，所以导致时间和空间复杂度和使用map计算出现次数相似
+   */
   public int[] intersect(int[] nums1, int[] nums2) {
     List<Integer> list = new ArrayList<>();
 
