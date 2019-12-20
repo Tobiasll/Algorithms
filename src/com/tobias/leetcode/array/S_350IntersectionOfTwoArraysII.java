@@ -29,25 +29,52 @@ import java.util.List;
 public class S_350IntersectionOfTwoArraysII {
 
   public int[] intersect(int[] nums1, int[] nums2) {
+    List<Integer> list = new ArrayList<>();
+
+    if (nums1.length == 0 || nums2.length == 0) {
+      return new int[0];
+    }
+    Arrays.sort(nums1);
+    Arrays.sort(nums2);
+    int i = 0, j = 0;
+    while (i < nums1.length && j < nums2.length) {
+      if (nums1[i] == nums2[j]) {
+        list.add(nums1[i]);
+        i++;
+        j++;
+      } else if (nums1[i] < nums2[j]) {
+        i++;
+      } else {
+        j++;
+      }
+    }
+    return converListToArray(list);
+  }
+
+  private int[] converListToArray(List<Integer> list) {
+    int[] result = new int[list.size()];
+    for (int x = 0; x < list.size(); x++) {
+      result[x] = list.get(x);
+    }
+    return result;
+  }
+
+  public int[] intersect1(int[] nums1, int[] nums2) {
     int lastNumsIndex = nums2.length - 1;
     List<Integer> list = new ArrayList<>();
-    for (int i = 0; i < nums1.length; i++) {
+    for (int i1 : nums1) {
       for (int j = 0; j <= lastNumsIndex; j++) {
-        if (nums1[i] == nums2[j]) {
+        if (i1 == nums2[j]) {
           int temp = nums2[j];
           nums2[j] = nums2[lastNumsIndex];
           nums2[lastNumsIndex] = temp;
           lastNumsIndex--;
-          list.add(nums1[i]);
+          list.add(i1);
           break;
         }
       }
     }
-    int[] result = new int[list.size()];
-    for (int i = 0; i < list.size(); i++) {
-      result[i] = list.get(i);
-    }
-    return result;
+    return converListToArray(list);
   }
 
   public static void main(String[] args) {
