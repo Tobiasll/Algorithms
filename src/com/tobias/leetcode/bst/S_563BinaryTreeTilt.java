@@ -3,8 +3,11 @@ package com.tobias.leetcode.bst;
 
 import com.tobias.rudiment.trie.BinaryTree;
 import com.tobias.rudiment.trie.BinaryTree.TreeNode;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
+import java.util.Stack;
 
 /**
  * Given a binary tree, return the tilt of the whole tree.
@@ -34,6 +37,38 @@ public class S_563BinaryTreeTilt {
   private int result;
 
   public int findTil(TreeNode root) {
+    if (root == null) {
+      return 0;
+    }
+    int result = 0;
+    Stack<TreeNode> stack = new Stack<>();
+    Map<TreeNode, Integer> map = new HashMap<>();
+    stack.push(root);
+
+    while (!stack.isEmpty()) {
+      TreeNode peek = stack.peek();
+      if ((peek.left == null || map.containsKey(peek.left)) && (peek.right == null || map.containsKey(peek.right))) {
+        TreeNode pop = stack.pop();
+        int left = map.getOrDefault(pop.left, 0);
+        int right = map.getOrDefault(pop.right, 0);
+        result += Math.abs(left - right);
+        map.put(pop, left + right + pop.val);
+      } else {
+        if (peek.left != null && !map.containsKey(peek.left)) {
+          stack.push(peek.left);
+        }
+        if (peek.right != null && !map.containsKey(peek.right)) {
+          stack.push(peek.right);
+        }
+      }
+
+    }
+
+    return result;
+  }
+
+
+  public int findTilByRecursive(TreeNode root) {
     findTiltHelper(root);
     return result;
   }
