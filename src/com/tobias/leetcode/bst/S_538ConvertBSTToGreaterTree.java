@@ -3,6 +3,7 @@ package com.tobias.leetcode.bst;
 
 import com.tobias.rudiment.trie.BinaryTree;
 import com.tobias.rudiment.trie.BinaryTree.TreeNode;
+import java.util.Stack;
 
 /**
  * Given a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus sum of all keys greater than the original key in BST.
@@ -21,9 +22,30 @@ import com.tobias.rudiment.trie.BinaryTree.TreeNode;
  */
 public class S_538ConvertBSTToGreaterTree {
 
+  public TreeNode convertBST(TreeNode root) {
+    if (root == null) {
+      return root;
+    }
+    Stack<TreeNode> stack = new Stack<>();
+    int sum = 0;
+    TreeNode curRoot = root;
+    while (curRoot != null || !stack.isEmpty()) {
+      if (curRoot != null) {
+        stack.push(curRoot);
+        curRoot = curRoot.right;
+      } else {
+        TreeNode pop = stack.pop();
+        pop.val += sum;
+        sum = pop.val;
+        curRoot = pop.left;
+      }
+    }
+    return root;
+  }
+
   private int sum = 0;
 
-  public TreeNode convertBST(TreeNode root) {
+  public TreeNode convertBSTByRecursive(TreeNode root) {
     if (root != null) {
       convertBST(root.right);
       root.val += sum;
