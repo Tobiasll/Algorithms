@@ -83,6 +83,7 @@ public class S_32LongestValidParentheses {
   public static void main(String[] args) {
     S_32LongestValidParentheses longestValidParentheses = new S_32LongestValidParentheses();
     System.out.println(longestValidParentheses.longestValidParentheses("(()"));
+
   }
 
 
