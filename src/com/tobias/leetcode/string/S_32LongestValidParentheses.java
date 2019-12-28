@@ -19,8 +19,42 @@ import java.util.Stack;
  */
 public class S_32LongestValidParentheses {
 
-
   public int longestValidParentheses(String s) {
+    int result = 0, left = 0, right = 0;
+
+    for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) == '(') {
+        left++;
+      } else {
+        right++;
+      }
+      if (left == right) {
+        result = Math.max(result, left * 2);
+      } else if (right >= left) {
+        left = right = 0;
+      }
+    }
+    left = right = 0;
+
+    for (int i = s.length() - 1; i >= 0; i--) {
+      if (s.charAt(i) == '(') {
+        left++;
+      } else {
+        right++;
+      }
+      if (left == right) {
+        result = Math.max(result, right * 2);
+      } else if (left >= right) {
+        left = right = 0;
+      }
+    }
+    return result;
+  }
+
+
+
+
+  public int longestValidParenthesesByStack(String s) {
     int result = 0;
     Stack<Integer> stack = new Stack<>();
     stack.push(-1);
@@ -101,7 +135,7 @@ public class S_32LongestValidParentheses {
 
   public static void main(String[] args) {
     S_32LongestValidParentheses longestValidParentheses = new S_32LongestValidParentheses();
-    System.out.println(longestValidParentheses.longestValidParentheses(")()())"));
+    System.out.println(longestValidParentheses.longestValidParentheses("(()"));
 
   }
 
