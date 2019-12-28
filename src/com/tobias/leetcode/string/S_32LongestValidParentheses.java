@@ -20,11 +20,30 @@ import java.util.Stack;
 public class S_32LongestValidParentheses {
 
 
+  public int longestValidParentheses(String s) {
+    int result = 0;
+    Stack<Integer> stack = new Stack<>();
+    stack.push(-1);
+    for (int i = 0; i < s.length(); i++) {
+      if (s.charAt(i) == '(') {
+        stack.push(i);
+      } else {
+        stack.pop();
+        if (stack.isEmpty()) {
+          stack.push(i);
+        } else {
+          result = Math.max(result, i - stack.peek());
+        }
+      }
+    }
+    return result;
+  }
+
   /**
    * Runtime: 290 ms, faster than 5.03% of Java online submissions for Longest Valid Parentheses.
    * Memory Usage: 37.4 MB, less than 90.20% of Java online submissions for Longest Valid Parentheses.
    */
-  public int longestValidParentheses(String s) {
+  public int longestValidParentheses2(String s) {
     int result = 0;
     for (int i = 0; i < s.length(); i++) {
       int count = 0;
@@ -82,7 +101,7 @@ public class S_32LongestValidParentheses {
 
   public static void main(String[] args) {
     S_32LongestValidParentheses longestValidParentheses = new S_32LongestValidParentheses();
-    System.out.println(longestValidParentheses.longestValidParentheses("(()"));
+    System.out.println(longestValidParentheses.longestValidParentheses(")()())"));
 
   }
 
