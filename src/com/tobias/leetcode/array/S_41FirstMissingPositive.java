@@ -42,5 +42,6 @@ public class S_41FirstMissingPositive {
   public static void main(String[] args) {
     S_41FirstMissingPositive firstMissingPositive = new S_41FirstMissingPositive();
     System.out.println(firstMissingPositive.firstMissingPositive(new int[]{1}));
+
   }
 }
