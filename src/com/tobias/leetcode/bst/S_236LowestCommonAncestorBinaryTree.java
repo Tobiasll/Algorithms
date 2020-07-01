@@ -108,8 +108,8 @@ public class S_236LowestCommonAncestorBinaryTree {
     }
 
     /**
-     * Runtime: 10 ms, faster than % of Java online submissions for Lowest Common Ancestor of a Binary Tree.
-     * Memory Usage: 40.3 MB, less than % of Java online submissions for Lowest Common Ancestor of a Binary Tree.
+     * Runtime: 10 ms, faster than ?% of Java online submissions for Lowest Common Ancestor of a Binary Tree.
+     * Memory Usage: 40.3 MB, less than ?% of Java online submissions for Lowest Common Ancestor of a Binary Tree.
      */
     public TreeNode lowestCommonAncestorWithForEach(TreeNode root, TreeNode p, TreeNode q) {
 
