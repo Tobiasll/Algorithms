@@ -35,9 +35,6 @@ public class S_240Search2DMatrixII {
         if (x1 > xMax || y1 > yMax) {
             return false;
         }
-        System.out.println(matrix[x1][y1]);
-        System.out.println(matrix[x2][y2]);
-        System.out.println(matrix[x2][y2]);
         if (x1 == x2 && y1 == y2) {
             return matrix[x1][y1] == target;
         }
