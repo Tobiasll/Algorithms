@@ -31,6 +31,27 @@ public class S_222CountCompleteTreeNodes {
         if (root == null) {
             return 0;
         }
+        int rootHeight = getHeight(root);
+        int rightHeight = getHeight(root.right);
+
+        if ((rootHeight - 1) == rightHeight) {
+            return (1 << rightHeight) + countNodes(root.right);
+        } else {
+            return countNodes(root.left) + (1 << rightHeight);
+        }
+    }
+
+    private int getHeight(TreeNode treeNode) {
+        if (treeNode != null) {
+            return getHeight(treeNode.left) + 1;
+        }
+        return 0;
+    }
+
+    public int countNodesOne(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
         TreeNode left = root;
         int leftHeight = 0;
         while (left != null) {
