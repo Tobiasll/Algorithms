@@ -39,6 +39,32 @@ public class S_152MaximumProductSubarray {
     }
 
     public int maxProduct(int[] nums) {
+
+        if (nums.length == 0) {
+            return 0;
+        }
+        int result =  nums[0];
+        int max = 1;
+        for (int num : nums) {
+            max *= num;
+            result = Math.max(max, result);
+            if (max == 0) {
+                max = 1;
+            }
+        }
+        max = 1;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            max *= nums[i];
+            result = Math.max(max, result);
+            if (max == 0) {
+                 max = 1;
+            }
+        }
+
+        return result;
+    }
+
+    public int maxProductWithDP(int[] nums) {
         int n = nums.length;
         if (n == 0) {
             return 0;
@@ -61,7 +87,9 @@ public class S_152MaximumProductSubarray {
 
     public static void main(String[] args) {
         S_152MaximumProductSubarray maximumProductSubarray = new S_152MaximumProductSubarray();
-        System.out.println(maximumProductSubarray.maxProduct(new int[]{-4,-3,-2}));
+        System.out.println(maximumProductSubarray.maxProduct(new int[]{0}));
+        System.out.println(maximumProductSubarray.maxProduct(new int[]{0,-2,0}));
+        System.out.println(maximumProductSubarray.maxProduct(new int[]{-4,-3,-2, -5}));
         System.out.println(maximumProductSubarray.maxProduct(new int[]{-2,-3,7}));
         System.out.println(maximumProductSubarray.maxProduct(new int[]{2,3,-2,4}));
 //        System.out.println(maximumProductSubarray.maxProduct(new int[]{0,2}));
