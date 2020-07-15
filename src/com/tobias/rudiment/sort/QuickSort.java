@@ -32,10 +32,8 @@ public class QuickSort {
 
     while (true) {
       while (lists.get(++i) < firstValue && i != h) {
-        ;
       }
       while (lists.get(--j) > firstValue && j != l) {
-        ;
       }
       if (i >= j) {
         break;
