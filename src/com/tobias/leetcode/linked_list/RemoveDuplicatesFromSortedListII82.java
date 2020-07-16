@@ -23,11 +23,11 @@ public class RemoveDuplicatesFromSortedListII82 {
         if (root.val != temp) {
           resultNode.next = new ListNode(root.val);
           resultNode = resultNode.next;
-        } else if (root.val == temp && count == 0) {
+        } else if (count == 0) {
           resultNode.next = new ListNode(root.val);
           resultNode = resultNode.next;
         }
-      } else if (root.next != null && root.next.val == root.val) {
+      } else {
         temp = root.val;
         count++;
       }
