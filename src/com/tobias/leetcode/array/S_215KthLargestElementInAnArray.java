@@ -2,6 +2,7 @@ package com.tobias.leetcode.array;
 
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 /**
  * Find the kth largest element in an unsorted array. Note that it is the kth largest element in the sorted order, not the kth distinct element.
@@ -20,6 +21,18 @@ import java.util.Arrays;
 public class S_215KthLargestElementInAnArray {
 
   public int findKthLargest(int[] nums, int k) {
+    PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
+    for (int num : nums) {
+      priorityQueue.add(num);
+      if (priorityQueue.size() > k) {
+        priorityQueue.remove();
+      }
+    }
+
+    return priorityQueue.remove();
+  }
+
+  public int findKthLargestBySort(int[] nums, int k) {
     Arrays.sort(nums);
     return k > nums.length ? nums[nums.length - 1] : nums[nums.length - k];
   }
