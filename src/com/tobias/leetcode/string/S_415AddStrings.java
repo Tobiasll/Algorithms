@@ -1,9 +1,6 @@
 package com.tobias.leetcode.string;
 
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.
  *
@@ -17,14 +14,21 @@ import java.util.Set;
 public class S_415AddStrings {
 
     public String addStrings(String num1, String num2) {
-        return null;
+
+        StringBuilder sb = new StringBuilder();
+        int carry = 0;
+        for (int i = num1.length() - 1, j = num2.length() - 1; i >= 0 || j >= 0; i--, j--) {
+            int a = i >= 0 ? num1.charAt(i) - '0' : 0;
+            int b = j >= 0 ? num2.charAt(j) - '0' : 0;
+            sb.insert(0, (carry + a + b) % 10);
+            carry = (carry + a + b) / 10;
+        }
+        return carry == 0 ? sb.toString() : carry + sb.toString();
     }
 
     public static void main(String[] args) {
-        Set<String> set = new HashSet<>();
-        set.add("1");
-        set.add("2");
-        System.out.println(set.stream().findFirst().orElse(null));
+        S_415AddStrings addStrings = new S_415AddStrings();
+        System.out.println(addStrings.addStrings("1", "9"));
     }
 
 }
