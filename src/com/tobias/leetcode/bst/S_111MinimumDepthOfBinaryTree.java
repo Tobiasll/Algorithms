@@ -6,7 +6,7 @@ import com.tobias.rudiment.trie.BinaryTree.TreeNode;
 import java.lang.reflect.Field;
 import java.util.LinkedList;
 import java.util.Queue;
-import sun.misc.Unsafe;
+//import sun.misc.Unsafe;
 
 /**
  * Given a binary tree, find its minimum depth.
@@ -92,23 +92,23 @@ class Test {
 
   public void test() throws NoSuchFieldException, IllegalAccessException {
     // 获取unsafe实例
-    Field field = Unsafe.class.getDeclaredField("theUnsafe");
-    field.setAccessible(true);
-    Unsafe unsafe = (Unsafe) field.get(null);
+//    Field field = Unsafe.class.getDeclaredField("theUnsafe");
+//    field.setAccessible(true);
+//    Unsafe unsafe = (Unsafe) field.get(null);
 
     // 获取count域的Field
     Field fieldCount = Test.class.getDeclaredField("count");
     fieldCount.setAccessible(true);
 
-    // 计算count的内存偏移量
-    long countOffset = (int) unsafe.objectFieldOffset(fieldCount);
-    System.out.println(countOffset);
-    System.out.println(unsafe.getInt(this, countOffset));
-    // 原子性的更新指定偏移量的值（将count的值修改为3）
-    unsafe.compareAndSwapInt(this, countOffset, count, 3);
-
-    // 获取指定偏移量的int值
-    System.out.println(unsafe.getInt(this, countOffset));
+//    // 计算count的内存偏移量
+//    long countOffset = (int) unsafe.objectFieldOffset(fieldCount);
+//    System.out.println(countOffset);
+//    System.out.println(unsafe.getInt(this, countOffset));
+//    // 原子性的更新指定偏移量的值（将count的值修改为3）
+//    unsafe.compareAndSwapInt(this, countOffset, count, 3);
+//
+//    // 获取指定偏移量的int值
+//    System.out.println(unsafe.getInt(this, countOffset));
   }
 
 }

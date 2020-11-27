@@ -37,13 +37,34 @@ public class S_151ReverseWordsInString {
 
 
     public String reverseWords(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
         char[] chars = s.toCharArray();
         reverse(chars, 0, chars.length - 1);
         reverseEachWord(chars);
-
-        System.out.println(new String(chars));
-        return null;
+        return clearSpace(chars);
     }
+
+    public String clearSpace(char[] chars) {
+        int i = 0, j = 0;
+        while (i < chars.length) {
+            while (j < chars.length && chars[j] == ' ') {
+                j++;
+            }
+            if (j == chars.length) {
+                break;
+            }
+            while (j < chars.length && chars[j] != ' ') {
+                chars[i++] = chars[j++];
+            }
+            if (i < chars.length) {
+                chars[i++] = ' ';
+            }
+        }
+        return new String(chars, 0, i).trim();
+    }
+
 
     private void reverseEachWord(char[] chars) {
         int i = 0, j = 0;
@@ -83,7 +104,7 @@ public class S_151ReverseWordsInString {
 
     public static void main(String[] args) {
         S_151ReverseWordsInString s_151ReverseWordsInString = new S_151ReverseWordsInString();
-        System.out.println(s_151ReverseWordsInString.reverseWords("a good   example"));
+        System.out.println(s_151ReverseWordsInString.reverseWords("the sky is blue"));
     }
 
 }
