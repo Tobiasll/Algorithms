@@ -70,10 +70,8 @@ public class S_56MergeIntervals {
 
     while (true) {
       while (intervals[++i][0] < firstValue && i != h) {
-        ;
       }
       while (intervals[--j][0] > firstValue && j != l) {
-        ;
       }
       if (i >= j) {
         break;
