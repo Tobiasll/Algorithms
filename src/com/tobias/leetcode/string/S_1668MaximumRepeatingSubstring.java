@@ -8,37 +8,57 @@ import java.util.List;
 
 /**
  * For a string sequence, a string word is k-repeating if word concatenated k times is a substring of sequence. The word's maximum k-repeating value is the highest value k where word is k-repeating in sequence. If word is not a substring of sequence, word's maximum k-repeating value is 0.
- *
+ * <p>
  * Given strings sequence and word, return the maximum k-repeating value of word in sequence.
- *
- *
- *
+ * <p>
+ * <p>
+ * <p>
  * Example 1:
- *
+ * <p>
  * Input: sequence = "ababc", word = "ab"
  * Output: 2
  * Explanation: "abab" is a substring in "ababc".
  * Example 2:
- *
+ * <p>
  * Input: sequence = "ababc", word = "ba"
  * Output: 1
  * Explanation: "ba" is a substring in "ababc". "baba" is not a substring in "ababc".
  * Example 3:
- *
+ * <p>
  * Input: sequence = "ababc", word = "ac"
  * Output: 0
  * Explanation: "ac" is not a substring in "ababc".
- *
- *
+ * <p>
+ * <p>
  * Constraints:
- *
+ * <p>
  * 1 <= sequence.length <= 100
  * 1 <= word.length <= 100
  * sequence and word contains only lowercase English letters.
  */
 public class S_1668MaximumRepeatingSubstring {
 
+
     public int maxRepeating(String sequence, String word) {
+        int total = 0;
+        int sLen = sequence.length();
+        int wLen = word.length();
+        for (int i = 0; i < sLen; i++) {
+            int e = 0;
+            while (e + i < sLen) {
+                if (sequence.charAt(e + i) != word.charAt(e % wLen)) {
+                    break;
+                }
+                e++;
+            }
+            total = Math.max(total, e / wLen);
+
+        }
+
+        return total;
+    }
+
+    public int maxRepeatingUseStringIndexOf(String sequence, String word) {
         int total = 0;
         int tempTotal = 0;
 
@@ -64,9 +84,9 @@ public class S_1668MaximumRepeatingSubstring {
 
     public static void main(String[] args) {
         S_1668MaximumRepeatingSubstring maximumRepeatingSubstring = new S_1668MaximumRepeatingSubstring();
-        System.out.println(maximumRepeatingSubstring.maxRepeating("acaab","a"));
-        System.out.println(maximumRepeatingSubstring.maxRepeating("bacaaaacabcaccccaacbcccccbcaaaacaabbaabbcababacca","ac"));
         System.out.println(maximumRepeatingSubstring.maxRepeating("bbaa", "ba"));
+        System.out.println(maximumRepeatingSubstring.maxRepeating("acaab", "a"));
+        System.out.println(maximumRepeatingSubstring.maxRepeating("bacaaaacabcaccccaacbcccccbcaaaacaabbaabbcababacca", "ac"));
         System.out.println(maximumRepeatingSubstring.maxRepeating("baba", "b"));
         System.out.println(maximumRepeatingSubstring.maxRepeating("aaa", "a"));
         System.out.println(maximumRepeatingSubstring.maxRepeating("ababc", "ab"));

@@ -1,6 +1,8 @@
 package com.tobias.leetcode.array;
 
 
+
+
 /**
  * Given an array of positive integers arr,  find a pattern of length m that is repeated k or more times.
  *
@@ -46,11 +48,73 @@ package com.tobias.leetcode.array;
  */
 public class S_1566DetectPatternOfLengthMRepeatedKOrMoreTimes {
 
+
     public boolean containsPattern(int[] arr, int m, int k) {
+        if(m * k > arr.length) {
+            return false;
+        }
+        for(int i = 0; i <= arr.length - m * k; ++i) {
+            int j = 0;
+            for(; j < m; ++j) {
+                int l = 1;
+                for(; l < k; ++l) {
+                    int index = i + j + l * m;
+                    if(arr[index] != arr[index - m]) {
+                        break;
+                    }
+                }
+                if(l < k) {
+                    break;
+                }
+            }
+            if(j == m) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Runtime: 11 ms, faster than 9.33% of Java online submissions for Detect Pattern of Length M Repeated K or More Times.
+     * Memory Usage: 39.3 MB, less than 7.73% of Java online submissions for Detect Pattern of Length M Repeated K or More Times.
+     */
+    public boolean containsPatternUseString(int[] arr, int m, int k) {
+        for (int i = 0; i < arr.length - m; i++) {
+            int total = 1;
+            StringBuilder firstPattern = new StringBuilder();
+            for (int j = i; j < i + m && j < arr.length; j++) {
+                firstPattern.append(arr[j]);
+            }
+            String morePattern = "";
+            for (int j = i + m; j < arr.length; j++) {
+                morePattern += arr[j];
+                if ((j - i + 1) % m == 0) {
+                    if (firstPattern.toString().equals(morePattern)) {
+                        morePattern = "";
+                        total++;
+                        if (total == k) {
+                            return true;
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            }
+            if (total == k) {
+                return true;
+            }
+        }
         return false;
     }
 
     public static void main(String[] args) {
-
+        S_1566DetectPatternOfLengthMRepeatedKOrMoreTimes detectPatternOfLengthMRepeatedKOrMoreTimes = new S_1566DetectPatternOfLengthMRepeatedKOrMoreTimes();
+        System.out.println(detectPatternOfLengthMRepeatedKOrMoreTimes.containsPattern(new int[]{3,2,2,1,2,2,1,1,1,2,3,2,2}, 3, 2));
+        System.out.println(detectPatternOfLengthMRepeatedKOrMoreTimes.containsPattern(new int[]{1,2,4,4,4,4}, 1, 3));
+        System.out.println(detectPatternOfLengthMRepeatedKOrMoreTimes.containsPattern(new int[]{1,2,1,2,1,1,1,3}, 2, 2));
+        System.out.println(detectPatternOfLengthMRepeatedKOrMoreTimes.containsPattern(new int[]{1,2,1,2,1,3}, 2, 3));
+        System.out.println(detectPatternOfLengthMRepeatedKOrMoreTimes.containsPattern(new int[]{1,2,3,1,2}, 2, 2));
+        System.out.println(detectPatternOfLengthMRepeatedKOrMoreTimes.containsPattern(new int[]{2,2,2,2}, 2, 3));
     }
 }
