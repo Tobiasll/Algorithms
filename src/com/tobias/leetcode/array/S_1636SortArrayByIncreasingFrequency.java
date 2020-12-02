@@ -1,11 +1,8 @@
 package com.tobias.leetcode.array;
 
-
-
-import javafx.collections.transformation.SortedList;
-
 import java.util.*;
-import java.util.stream.Collectors;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Given an array of integers nums, sort the array in increasing order based on the frequency of the values. If multiple values have the same frequency, sort them in decreasing order.
@@ -37,8 +34,26 @@ import java.util.stream.Collectors;
  */
 public class S_1636SortArrayByIncreasingFrequency {
 
-    public int[] frequencySort(int[] nums) {
 
+    /**
+     * Runtime: 5 ms, faster than 81.77% of Java online submissions for Sort Array by Increasing Frequency.
+     * Memory Usage: 39.5 MB, less than 37.86% of Java online submissions for Sort Array by Increasing Frequency.
+     */
+    public int[] frequencySort(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        PriorityQueue<Integer> pq = new PriorityQueue<>((o1, o2) -> map.get(o1).equals(map.get(o2)) ? o2 - o1 : map.get(o1) - map.get(o2));
+        pq.addAll(map.keySet());
+        int index = 0;
+        while (!pq.isEmpty()) {
+            // 由于pq在放入元素时排序是按照不同的规则排序的，所以这里不能正常遍历，需要不断的删除元素，让优先队列重新排序，拿到优先级最高的元素
+            Integer num = pq.remove();
+            for (int i = 0; i < map.get(num); i++) {
+                nums[index++] = num;
+            }
+        }
         return nums;
     }
 
@@ -79,8 +94,16 @@ public class S_1636SortArrayByIncreasingFrequency {
 
     public static void main(String[] args) {
         S_1636SortArrayByIncreasingFrequency sortArrayByIncreasingFrequency = new S_1636SortArrayByIncreasingFrequency();
-        System.out.println(Arrays.toString(sortArrayByIncreasingFrequency.frequencySort(new int[]{1,1,2,2,2,3})));
+//        System.out.println(Arrays.toString(sortArrayByIncreasingFrequency.frequencySort(new int[]{1,1,2,2,2,3})));
         System.out.println(Arrays.toString(sortArrayByIncreasingFrequency.frequencySort(new int[]{2,3,1,3,2})));
         System.out.println(Arrays.toString(sortArrayByIncreasingFrequency.frequencySort(new int[]{-1,1,-6,4,5,-6,1,4,1})));
+        System.out.println((1 << 16) + (1 << 16));
+
+        ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+        ReentrantReadWriteLock.ReadLock readLock = lock.readLock();
+        Condition readCondition = readLock.newCondition();
+        ReentrantReadWriteLock.WriteLock writeLock = lock.writeLock();
+        Condition writeCondition1 = writeLock.newCondition();
+        Condition writeCondition2 = writeLock.newCondition();
     }
 }
