@@ -1,8 +1,7 @@
 package com.tobias.leetcode.array;
 
 
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.*;
 
 /**
  * Given an array of integers arr, replace each element with its rank.
@@ -27,7 +26,7 @@ import java.util.Comparator;
  * Example 3:
  *
  * Input: arr = [37,12,28,9,100,56,80,5,12]
- * Output: [5,3,4,2,8,6,7,1,3]
+ * Output:      [5, 3, 4, 2, 8, 6, 7, 1,3]
  *
  *
  * Constraints:
@@ -38,10 +37,47 @@ import java.util.Comparator;
 public class S_1331RankTransformOfAnArray {
 
     public int[] arrayRankTransform(int[] arr) {
-        return null;
+        int[] result = new int[arr.length];
+        System.arraycopy(arr, 0, result, 0, arr.length);
+        Arrays.sort(result);
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int j : result) {
+            map.putIfAbsent(j, map.size() + 1);
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            result[i] = map.get(arr[i]);
+        }
+        return result;
+
+    }
+
+    public int[] arrayRankTransformUsePriorityQueue(int[] arr) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for (Integer num : arr) {
+            pq.offer(num);
+        }
+
+        Map<Integer, Integer> mapCount = new HashMap<>();
+        int rank = 0;
+        while (!pq.isEmpty()) {
+            Integer num = pq.remove();
+            Integer count = mapCount.get(num);
+            if (count == null) {
+                rank++;
+                mapCount.put(num, rank);
+            }
+        }
+        int[] result = new int[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            result[i] = mapCount.get(arr[i]);
+        }
+        return result;
     }
 
     public static void main(String[] args) {
-
+        S_1331RankTransformOfAnArray rankTransformOfAnArray = new S_1331RankTransformOfAnArray();
+        System.out.println(Arrays.toString(rankTransformOfAnArray.arrayRankTransform(new int[]{37,12,28,9,100,56,80,5,12})));
+        System.out.println(Arrays.toString(rankTransformOfAnArray.arrayRankTransform(new int[]{100,100,100})));
     }
 }
