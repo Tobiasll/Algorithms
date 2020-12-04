@@ -79,6 +79,7 @@ public class S_268MissingNumber {
 
     public static void main(String[] args) {
         S_268MissingNumber missingNumber = new S_268MissingNumber();
+        System.out.println(missingNumber.missingNumberByUseSet(new int[]{1, 2, 3, 5}));
         System.out.println(missingNumber.missingNumber(new int[]{0, 2}));
         System.out.println(missingNumber.missingNumber(new int[]{3,0,1}));
         System.out.println(missingNumber.missingNumber(new int[]{0,1}));
