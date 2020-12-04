@@ -24,8 +24,21 @@ public class S_645SetMismatch {
 
 
     public int[] findErrorNums(int[] nums) {
-
-        return null;
+        int diff = 1;
+        int duplicate = nums[0];
+        int[] arr = new int[nums.length + 1];
+        for (int num : nums) {
+            arr[num] += 1;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == 2) {
+                duplicate = i;
+            } else if (arr[i] == 0) {
+                diff = i;
+            }
+        }
+        System.out.println(Arrays.toString(arr));
+        return new int[]{duplicate, diff};
     }
 
     /**
