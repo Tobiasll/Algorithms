@@ -31,7 +31,7 @@ import java.util.Set;
  *
  * Input: head = [1], pos = -1 Output: no cycle Explanation: There is no cycle in the linked list.
  */
-public class LinkedListCycleII142 {
+public class S_142LinkedListCycle {
 
   public ListNode detectCycleBySlowAndFastPoint(ListNode head) {
     if (head == null) {
@@ -72,8 +72,7 @@ public class LinkedListCycleII142 {
   }
 
   public static void main(String[] args) {
-    LinkedListCycleII142 linkedListCycleII142 = new LinkedListCycleII142();
-    System.out.println(
-        linkedListCycleII142.detectCycleBySlowAndFastPoint(new ListNode(new int[]{3, 2, 0, -4})));
+    S_142LinkedListCycle linkedListCycle = new S_142LinkedListCycle();
+    System.out.println(linkedListCycle.detectCycleBySlowAndFastPoint(new ListNode(new int[]{3, 2, 0, -4})));
   }
 }
