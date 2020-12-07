@@ -1,6 +1,9 @@
 package com.tobias.leetcode.array;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
  *
@@ -41,13 +44,30 @@ package com.tobias.leetcode.array;
  */
 public class S_287FindTheDuplicateNumber {
 
+    public int findDuplicate(int[] nums) {
+        int tortoise = nums[0];
+        int rabbit = nums[0];
+
+        do {
+            tortoise = nums[tortoise];
+            rabbit = nums[nums[rabbit]];
+        } while (tortoise != rabbit);
+
+        tortoise = nums[0];
+        while (rabbit != tortoise) {
+            tortoise = nums[tortoise];
+            rabbit = nums[rabbit];
+        }
+        return rabbit;
+    }
+
 
     /**
      * Runtime: 271 ms, faster than 5.01% of Java online submissions for Find the Duplicate Number.
      * Memory Usage: 39.2 MB, less than 39.68% of Java online submissions for Find the Duplicate Number.
      * TODO optimizing
      */
-    public int findDuplicate(int[] nums) {
+    public int findDuplicateByForce(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
                 if (nums[i] == nums[j]) {
@@ -58,8 +78,22 @@ public class S_287FindTheDuplicateNumber {
         return 0;
     }
 
+    public int findDuplicateBySet(int[] nums) {
+        Set<Integer> set = new HashSet<>(nums.length - 1);
+        for (int num : nums) {
+            if (set.contains(num)) {
+                return num;
+            } else {
+                set.add(num);
+            }
+        }
+
+        return -1;
+    }
+
     public static void main(String[] args) {
         S_287FindTheDuplicateNumber findTheDuplicateNumber = new S_287FindTheDuplicateNumber();
+        System.out.println(findTheDuplicateNumber.findDuplicate(new int[]{2,5,9,6,9,3,8,9,7,1}));
         System.out.println(findTheDuplicateNumber.findDuplicate(new int[]{1,3,4,2,2}));
         System.out.println(findTheDuplicateNumber.findDuplicate(new int[]{3,1,3,4,2}));
         System.out.println(findTheDuplicateNumber.findDuplicate(new int[]{1,1}));
