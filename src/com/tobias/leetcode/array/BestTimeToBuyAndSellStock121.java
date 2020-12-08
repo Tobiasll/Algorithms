@@ -97,10 +97,8 @@ public class BestTimeToBuyAndSellStock121 {
 
   public static void main(String[] args) {
     BestTimeToBuyAndSellStock121 bestTimetoBuyandSellStock121 = new BestTimeToBuyAndSellStock121();
-    System.out
-        .println(bestTimetoBuyandSellStock121.maxProfitByDPWithArray(new int[]{7, 1, 5, 3, 6, 4}));
-    System.out
-        .println(bestTimetoBuyandSellStock121.maxProfitByDPWithArray(new int[]{7, 6, 4, 3, 1}));
+    System.out.println(bestTimetoBuyandSellStock121.maxProfitByDPWithArray(new int[]{7, 1, 5, 3, 6, 4}));
+    System.out.println(bestTimetoBuyandSellStock121.maxProfitByDPWithArray(new int[]{7, 6, 4, 3, 1}));
     System.out.println(bestTimetoBuyandSellStock121.maxProfitByDPWithArray(new int[]{2, 4, 1}));
     System.out.println(bestTimetoBuyandSellStock121.maxProfitByDPWithArray(new int[]{1, 2}));
   }
