@@ -39,6 +39,11 @@ import java.util.Random;
  */
 public class S_384ShuffleAnArray {
 
+
+    /**
+     * Runtime: 68 ms, faster than 98.93% of Java online submissions for Shuffle an Array.
+     * Memory Usage: 47.3 MB, less than 78.11% of Java online submissions for Shuffle an Array.
+     */
     static class Solution {
 
         private final int[] original;
@@ -46,7 +51,7 @@ public class S_384ShuffleAnArray {
 
         public Solution(int[] nums) {
             arr = nums;
-            original = Arrays.copyOf(nums,  nums.length);
+            original = nums.clone();
         }
 
         /** Resets the array to its original configuration and return it. */
