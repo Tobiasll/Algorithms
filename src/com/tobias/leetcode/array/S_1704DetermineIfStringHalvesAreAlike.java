@@ -48,6 +48,8 @@ public class S_1704DetermineIfStringHalvesAreAlike {
     /**
      * Runtime: 3 ms, faster than 81.24% of Java online submissions for Determine if String Halves Are Alike.
      * Memory Usage: 37.4 MB, less than 84.70% of Java online submissions for Determine if String Halves Are Alike.
+     *
+     * todo: use (case:) statement to improve the method
      */
     public boolean halvesAreAlikeUseSet(String s) {
         int half = s.length() / 2;
