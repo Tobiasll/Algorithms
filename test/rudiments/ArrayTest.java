@@ -3,12 +3,13 @@ package rudiments;
 import com.tobias.rudiment.array.MyArray;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.LockSupport;
@@ -202,6 +203,21 @@ public class ArrayTest {
 
     }
   }
+  
+  @Test
+  public void test7() {
+    final int COUNT_BITS = Integer.SIZE - 3;
+    final int RUNNING    = -1 << COUNT_BITS;
+    final AtomicInteger ctl = new AtomicInteger(ctlOf(RUNNING, 1));
+    System.out.println(Integer.toBinaryString(-1));
+    System.out.println(Integer.toBinaryString(RUNNING));
+    System.out.println(COUNT_BITS);
+
+    System.out.println(Integer.toBinaryString(ctl.get()));
+  }
+
+
+  private static int ctlOf(int rs, int wc) { return rs | wc; }
 
 
 

@@ -181,7 +181,8 @@ public class CombinationSum39 {
 
   public static void main(String[] args) {
     CombinationSum39 combinationSum39 = new CombinationSum39();
-    List<List<Integer>> list = combinationSum39.combinationSumByDynamic(new int[]{2, 3, 5}, 8);
+    List<List<Integer>> list = combinationSum39.combinationSumByDynamic(new int[]{1, 2, 3}, 4);
+//    List<List<Integer>> list = combinationSum39.combinationSumByDynamic(new int[]{2, 3, 5}, 8);
     for (List<Integer> integers : list) {
       System.out.println(integers);
     }
