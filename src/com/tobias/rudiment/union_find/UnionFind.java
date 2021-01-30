@@ -2,8 +2,8 @@ package com.tobias.rudiment.union_find;
 
 public class UnionFind implements UF {
 
-  private int[] parent;
-  private int[] rank;
+  private final int[] parent;
+  private final int[] rank;
 
   public UnionFind(int size) {
     parent = new int[size];

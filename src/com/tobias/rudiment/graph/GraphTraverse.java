@@ -14,9 +14,9 @@ import java.util.Stack;
 /**
  *
  */
-public class Test {
+public class GraphTraverse {
 
-  private static Map<String, List<String>> graph = new HashMap<>();
+  private static final Map<String, List<String>> graph = new HashMap<>();
   static {
     graph.put("A", Arrays.asList("B", "C"));
     graph.put("B", Arrays.asList("A", "C", "D"));

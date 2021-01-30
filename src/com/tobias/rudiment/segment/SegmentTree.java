@@ -2,18 +2,16 @@ package com.tobias.rudiment.segment;
 
 public class SegmentTree<E> {
 
-  private E[] tree;
-  private E[] data;
-  private Merger<E> merger;
+  private final E[] tree;
+  private final E[] data;
+  private final Merger<E> merger;
 
   public SegmentTree(E[] arr, Merger<E> merger) {
 
     this.merger = merger;
 
     data = (E[]) new Object[arr.length];
-    for (int i = 0; i < arr.length; i++) {
-      data[i] = arr[i];
-    }
+      System.arraycopy(arr, 0, data, 0, arr.length);
 
     tree = (E[]) new Object[4 * arr.length];
     buildSegmentTree(0, 0, arr.length - 1);

@@ -229,7 +229,7 @@ public class BinaryTree {
         boolean addBar = true;
         for (int i = 0; i < queueSize; i++) {
           root = queue.poll();
-          if (root.val != Integer.MIN_VALUE) {
+          if (root != null && root.val != Integer.MIN_VALUE) {
             insideList.add(root.val + "");
           } else {
             insideList.add("n");
@@ -240,13 +240,13 @@ public class BinaryTree {
             insideList.add(" ");
           }
           addBar = !addBar;
-          if (root.left != null) {
+          if (root != null && root.left != null) {
             isAllNull = false;
             queue.add(root.left);
           } else {
             queue.offer(new TreeNode(Integer.MIN_VALUE));
           }
-          if (root.right != null) {
+          if (root != null && root.right != null) {
             isAllNull = false;
             queue.add(root.right);
           } else {

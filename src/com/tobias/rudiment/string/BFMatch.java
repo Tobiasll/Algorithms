@@ -19,10 +19,11 @@ public class BFMatch {
         if (originText.charAt(i + j) != keyword.charAt(j)) {
           break;
         }
-        if (j == keyword.length() - 1) {
-          index = i;
-          flag = true;
-        }
+          if (j == keyword.length() - 1) {
+              index = i;
+              flag = true;
+              break;
+          }
       }
       if (flag) {
         break;

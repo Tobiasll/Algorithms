@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.LockSupport;
 
-public class ArrayTest {
+public class ArrayGraphTraverse {
 
   @Test
   public void test1() {

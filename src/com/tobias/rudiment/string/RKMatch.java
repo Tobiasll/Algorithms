@@ -22,9 +22,10 @@ public class RKMatch {
           if (subString.charAt(j) != keyword.charAt(j)) {
             break;
           }
-          if (j == keyword.length() - 1) {
-            index = i;
-          }
+            if (j == keyword.length() - 1) {
+                index = i;
+                break;
+            }
         }
       }
 

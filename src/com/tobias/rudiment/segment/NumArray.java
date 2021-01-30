@@ -13,7 +13,7 @@ class NumArray {
       for (int i = 0; i < nums.length; i++) {
         data[i] = nums[i];
       }
-      segTree = new SegmentTree<>(data, (a, b) -> a + b);
+      segTree = new SegmentTree<>(data, Integer::sum);
     }
   }
 

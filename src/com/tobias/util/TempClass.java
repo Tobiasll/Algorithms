@@ -7,9 +7,7 @@ package com.tobias.util;
 public class TempClass {
 
   public static void main(String[] args) {
-    int a = 10;
-    Integer b = a;
-    int c = b;
+
 
   }
 }

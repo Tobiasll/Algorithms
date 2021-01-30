@@ -9,7 +9,7 @@ public class BMMatch {
       bc[i] = -1; // 初始化 bc
     }
     for (int i = 0; i < m; ++i) {
-      int ascii = (int) b[i]; // 计算 b[i] 的 ASCII 值
+      int ascii = b[i]; // 计算 b[i] 的 ASCII 值
       bc[ascii] = i;
     }
   }
@@ -54,7 +54,7 @@ public class BMMatch {
       if (j < 0) {
         return i; // 匹配成功，返回主串与模式串第一个匹配的字符的位置
       }
-      int x = j - bc[(int) a[i + j]];
+      int x = j - bc[a[i + j]];
       int y = 0;
       if (j < m - 1) { // 如果有好后缀的话
         y = moveByGS(j, m, suffix, prefix);

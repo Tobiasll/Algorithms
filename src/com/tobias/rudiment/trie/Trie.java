@@ -4,7 +4,7 @@ import java.util.TreeMap;
 
 public class Trie {
 
-  class Node {
+  static class Node {
 
     boolean isWord;
     TreeMap<Character, Node> next;
@@ -23,7 +23,7 @@ public class Trie {
     this.root = new Node();
   }
 
-  private Node root;
+  private final Node root;
   private int size;
 
   public int getSize() {
