@@ -346,8 +346,9 @@ public class BinaryTree {
   public static void main(String[] args) {
     BinaryTree binaryTree = new BinaryTree(new int[]{6, 4, 8, 2, 5, 7, 9, 1, 3});
     StringBuilder sb = new StringBuilder();
-    binaryTree.postOrderTraversalByIterator(binaryTree.getRoot(), sb);
+    binaryTree.midOrderTraversalByIterator(binaryTree.getRoot(), sb);
     System.out.println(binaryTree);
+    System.out.println(sb);
 
   }
 }
