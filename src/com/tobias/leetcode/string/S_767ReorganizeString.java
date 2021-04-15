@@ -32,11 +32,17 @@ import java.util.TreeMap;
 public class S_767ReorganizeString {
 
 
+
+    public String reorganizeString(String S) {
+
+        return "";
+    }
+
     /**
      * Runtime: 4 ms, faster than 46.96% of Java online submissions for Reorganize String.
      * Memory Usage: 38.8 MB, less than 21.75% of Java online submissions for Reorganize String.
      */
-    public String reorganizeString(String S) {
+    public String reorganizeStringByList(String S) {
         Map<Character, Integer> map = new HashMap<>();
         for (int i = 0; i < S.length(); i++) {
             map.put(S.charAt(i), map.getOrDefault(S.charAt(i), 0) + 1);
